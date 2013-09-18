@@ -24,7 +24,7 @@ cd bundle || exit 1
 
 # clone all plugins using git
 for URL in $PLUGINS; do
-    # remove path from url 
+    # remove path from url
     DIR=${URL##*/}
     # remove extension from dir
     DIR=${DIR%.*}
@@ -34,7 +34,7 @@ for URL in $PLUGINS; do
         git pull
         cd ..
     else
-        echo git clone $URL $DIR
+        git clone $URL $DIR
     fi
 done
 
