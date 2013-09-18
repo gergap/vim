@@ -21,15 +21,15 @@ Requirements
 Installation
 ------------
 
-cd ~
-# backup any existing vim configuration and remove your .vim folder and .vimrc file.
-rm -rf .vim .vimrc
-# clone this repository
-git clone git@github.com:gergap/vim.git
-# symlink your new config
-ln -s vim/.vimrc
-ln -s vim/.vim
-# install used plugins
-cd vim/.vim
-./install_plugins.sh
+    cd ~
+    # backup any existing vim configuration and remove your .vim folder and .vimrc file.
+    rm -rf .vim .vimrc
+    # clone this repository
+    git clone git@github.com:gergap/vim.git
+    # symlink your new config
+    ln -s vim/.vimrc
+    ln -s vim/.vim
+    # install used plugins
+    cd vim/.vim
+    ./install_plugins.sh
 
