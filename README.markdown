@@ -2,10 +2,10 @@ gergap's Vim Configuration
 ==========================
 
 With vim you can really do everything. I'm using it for C/C++ development,
-writing BASH scripts, and for all kind of adminstration tasks. TMux and SSH are
+writing BASH scripts, and for all kinds of administration tasks. TMux and SSH are
 your best friends ;-)
 
-I'm using vim on Gentoo Linux running in Konsole (KDE's awsome terminal application).
+I'm using vim on Gentoo Linux running in Konsole (KDE's awesome terminal application).
 My config may work on other systems too, but I've not tested it.
 Anyway my .vimrc may contain some nice features the you can integrate into yours.
 
