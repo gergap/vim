@@ -49,6 +49,8 @@ set comments=sl:/*,mb:\ *,elx:\ */
 " use intelligent file completion like in the bash
 set wildmode=longest:full
 set wildmenu
+" allow changeing buffers without saving them
+set hidden
 
 " It happens so oftern that I type :Q instead of :q that it makes sense to make :Q just working. :Q is not used
 " anyway by vim.
