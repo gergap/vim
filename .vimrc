@@ -184,7 +184,10 @@ iab forl for(i=0; i<; i++) {<CR><CR>}<UP><RIGHT><RIGHT><RIGHT><C-R>=EatChar('\s'
 let Tlist_WinWidth = 40
 
 " airline
+" use powerline fonts to show beautiful symbols
 let g:airline_powerline_fonts = 1
+" enable tab bar with buffers
+let g:airline#extensions#tabline#enabled = 1
 
 " pathogen
 execute pathogen#infect()
