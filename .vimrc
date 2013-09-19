@@ -56,6 +56,11 @@ set hidden
 " anyway by vim.
 command Q q
 
+" superTab
+" uncomment the next line to disable superTab
+"let loaded_supertab = 1
+let g:SuperTabNoCompleteAfter = ['^', '\s']
+
 " clang-complete
 filetype plugin on
 let g:clang_complete_copen = 1
