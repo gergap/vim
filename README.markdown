@@ -22,7 +22,7 @@ Now some optional parts:
 
 * clang - for clang_complete plugin (See https://github.com/Rip-Rip/clang_complete/wiki)
 * python - for some plugins like clang_complete
-* powerline fonts - for vim-airline to display nice symbols
+* powerline fonts - for vim-airline to display nice symbols (See https://github.com/Lokaltog/powerline-fonts)
 
 Installation
 ------------
