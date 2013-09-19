@@ -1,5 +1,12 @@
 gergap's Vim Configuration
 ==========================
+                                       /\        ____   ____.__
+       ____   ___________  _________  _____)/ ______ \   \ /   /|__| _____
+      / ___\_/ __ \_  __ \/ ___\__  \ \____ \/  ___/  \   Y   / |  |/     \
+     / /_/  >  ___/|  | \/ /_/  > __ \|  |_> >___ \    \     /  |  |  Y Y  \
+     \___  / \___  >__|  \___  (____  /   __/____  >    \___/   |__|__|_|  /
+    /_____/      \/     /_____/     \/|__|       \/                      \/
+
 
 With vim you can really do everything. I'm using it for C/C++ development,
 writing BASH scripts, and for all kinds of administration tasks. TMux and SSH are
@@ -11,6 +18,9 @@ Anyway my .vimrc may contain some nice features that you can integrate into your
 
 You can use my config as-is, or better read my .vimrc, understand it, and as
 Bruce Lee would say: "Absorb what is useful, discard what is not."
+
+And this is what my config looks like:
+![gergap's Vim example screenshot][vim-gergap]
 
 Requirements
 ------------
@@ -41,4 +51,6 @@ Installation
     cd vim/.vim
     ./install_plugins.sh
     # Now enjoy the best editor on earth - vim :-)
+
+[vim-gergap]: https://raw.github.com/gergap/vim/master/vim-gergap.png
 
