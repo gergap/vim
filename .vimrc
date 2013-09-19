@@ -92,6 +92,7 @@ nmap <S-F3> :setlocal spell spelllang=<CR>
 imap <S-F3> <ESC>:setlocal spell spelllang=<CR>i
 " switch between header/source with F4 in C/C++ using a.vim
 map <F4> :A<CR>
+map <S-F4> :AV<CR>
 " recreate tags file with F5
 map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " create doxygen comment
