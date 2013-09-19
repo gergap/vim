@@ -23,7 +23,11 @@ set textwidth=120
 " turn syntax highlighting on
 set t_Co=256
 syntax on
-colorscheme wombat256
+if has("gui_running")
+    colorscheme wombat
+else
+    colorscheme wombat256
+endif
 " show textwidth line
 set colorcolumn=120
 highlight ColorColumn ctermbg=236
