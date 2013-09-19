@@ -86,10 +86,8 @@ nmap <F3> :setlocal spell spelllang=en<CR>
 imap <F3> <ESC>:setlocal spell spelllang=en<CR>i
 nmap <S-F3> :setlocal spell spelllang=<CR>
 imap <S-F3> <ESC>:setlocal spell spelllang=<CR>i
-" switch between header/source with F4 C++
-"map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
-" switch between header/source with F4 C
-map <F4> :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR>
+" switch between header/source with F4 in C/C++ using a.vim
+map <F4> :A<CR>
 " recreate tags file with F5
 map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " create doxygen comment
