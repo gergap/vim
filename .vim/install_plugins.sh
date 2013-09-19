@@ -15,6 +15,8 @@ PLUGINS="$PLUGINS https://github.com/scrooloose/nerdtree"
 PLUGINS="$PLUGINS https://github.com/Townk/vim-autoclose.git"
 # Autoclose
 PLUGINS="$PLUGINS https://github.com/Rip-Rip/clang_complete"
+# snipMate
+PLUGINS="$PLUGINS https://github.com/msanders/snipmate.vim"
 
 # create bundle dir for pathogen
 [ -d bundle ] || mkdir bundle
