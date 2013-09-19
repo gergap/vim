@@ -21,18 +21,25 @@ set expandtab        " expand tabs to spaces
 " wrap lines at 120 chars. 80 is somewaht antiquated with nowadays displays.
 set textwidth=120
 " turn syntax highlighting on
-set t_Co=256
 syntax on
 if has("gui_running")
     colorscheme wombat
+    set gfn=DejaVu_Sans_Mono:h10:cANSI
 else
+    set t_Co=256
     colorscheme wombat256
+endif
+" Make backspace working on Windows
+if has("win32")
+    set bs=2
 endif
 " show textwidth line
 set colorcolumn=120
 highlight ColorColumn ctermbg=236
 " show trailing whitespaces
 match ExtraWS /\s\+$/
+" highlight all search results
+set hlsearch
 " turn line numbers on
 set number
 " highlight matching braces
