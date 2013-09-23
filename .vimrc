@@ -194,6 +194,15 @@ let Tlist_WinWidth = 40
 let g:airline_powerline_fonts = 1
 " enable tab bar with buffers
 let g:airline#extensions#tabline#enabled = 1
+" fix the timout when leaving insert mode (see http://usevim.com/2013/07/24/powerline-escape-fix)
+if ! has('gui_running')
+  set ttimeoutlen=10
+  augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=10
+  augroup END
+endif
 
 " pathogen
 execute pathogen#infect()
