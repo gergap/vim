@@ -20,6 +20,8 @@ set shiftwidth=4     " indent also with 4 spaces
 set expandtab        " expand tabs to spaces
 " wrap lines at 120 chars. 80 is somewaht antiquated with nowadays displays.
 set textwidth=120
+" define ',' is leader key
+let mapleader = ","
 " turn syntax highlighting on
 syntax on
 if has("gui_running")
