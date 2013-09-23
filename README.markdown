@@ -48,6 +48,23 @@ Special keys in vimdiff mode
 * M-Left: diffget
 * M-Right: diffput
 
+Plugins
+-------
+
+My config makes use of some great vim plugins for coders. Just call the `install_plugins.sh` script to install 'em
+all.
+
+* `clang_complete`: C/C++ autocompletion using clang compiler frontend.
+* UltiSnips: Awesome snippts support. This is a must have!
+* SuperTabs: Use <tab> to complete various things (vim <c-p>, `clang_complete`, ...)
+* vim-fugitve: Git support
+* vim-airline: Powerline based on vim-script (no python)
+* Autoclose: Closes corresponding brackets ("()", "[]", "{}") without getting annoyed.
+* NerdTree: File tree for accessing files interactively
+* CtrlP: Fuzzy file open support
+* TagList: List functions, variable and macros of the current file.
+
+
 Requirements
 ------------
 
