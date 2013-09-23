@@ -22,6 +22,32 @@ Bruce Lee would say: "Absorb what is useful, discard what is not."
 And this is what my config looks like:
 ![gergap's Vim example screenshot][vim-gergap]
 
+Important shortctus
+-------------------
+
+F2: Saves file. Works in normal mode and insert mode.
+F3: Enables spellcheck.
+S-F3: Disables spellcheck.
+F4: Switches between header and corresponding source file.
+S-F4: Like F4, but opens the counterpart in a vertical split.
+F5: Creates/updates ctags file in the current directory.
+F6: Creates doxygen comment for the current function.
+F7: Builds using :make
+S-F7: Clean build using :make clean all
+F10: Removes trailing whitespaces of the complete file.
+F12: Goto definition
+S-F12: Opens definition in vertical split view.
+M-Down: Next typo (spellchecking)
+M-Up:   Previous typo (spellchecking)
+
+Special keys in vimdiff mode
+----------------------------
+
+M-Down: jump next difference
+M-Up:   jump to previous difference
+M-Left: diffget
+M-Right: diffput
+
 Requirements
 ------------
 
@@ -51,6 +77,11 @@ Installation
     cd vim/.vim
     ./install_plugins.sh
     # Now enjoy the best editor on earth - vim :-)
+
+Known Issues
+------------
+
+* S-F4 mapping does not work. I believe this is intercepted by KDE or Konsole, It may work in other terminals.
 
 [vim-gergap]: https://raw.github.com/gergap/vim/master/vim-gergap.png
 
