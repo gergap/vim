@@ -133,9 +133,6 @@ nmap <F7> :make<CR>
 imap <F7> <ESC>:w<CR>:make<CR>
 " build using makeprg with <S-F7>
 map <S-F7> :make clean all<CR>
-" macro recording
-nmap <S-F8> qq
-nmap <F8> @q
 " remove trailing spaces
 map <F10> :%s/\s\+$//<CR>
 " goto definition with F12
