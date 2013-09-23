@@ -1,0 +1,29 @@
+From 6d5f382907f1d7770602654b3f02299eca59e55e Mon Sep 17 00:00:00 2001
+From: Gerhard Gappmeier <gerhard.gappmeier@ascolab.com>
+Date: Mon, 23 Sep 2013 10:57:50 +0200
+Subject: [PATCH] Fix issue with SuperTab.
+
+See https://github.com/ervandew/supertab/issues/60
+---
+ plugin/UltiSnips/__init__.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/plugin/UltiSnips/__init__.py b/plugin/UltiSnips/__init__.py
+index 34f6b9a..d6b318b 100644
+--- a/plugin/UltiSnips/__init__.py
++++ b/plugin/UltiSnips/__init__.py
+@@ -769,9 +769,9 @@ class SnippetManager(object):
+         for idx, sttrig in enumerate(self._supertab_keys):
+             if trigger.lower() == sttrig.lower():
+                 if idx == 0:
+-                    feedkey= r"\<c-n>"
++                    feedkey= r"\<Plug>SuperTabForward"
+                 elif idx == 1:
+-                    feedkey = r"\<c-p>"
++                    feedkey = r"\<Plug>SuperTabBackward"
+                 # Use remap mode so SuperTab mappings will be invoked.
+                 mode = "m"
+                 break
+-- 
+1.8.1.5
+

@@ -59,7 +59,9 @@ command Q q
 " superTab
 " uncomment the next line to disable superTab
 "let loaded_supertab = 1
-let g:SuperTabNoCompleteAfter = ['^', '\s']
+let g:SuperTabNoCompleteAfter = ['^', '\s', ',', ';', ':']
+" SuperTab completion fall-back 
+let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
 
 " clang-complete
 filetype plugin on

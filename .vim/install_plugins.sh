@@ -17,7 +17,8 @@ PLUGINS="$PLUGINS https://github.com/Townk/vim-autoclose.git"
 PLUGINS="$PLUGINS https://github.com/Rip-Rip/clang_complete"
 # snipMate
 #PLUGINS="$PLUGINS https://github.com/msanders/snipmate.vim"
-PLUGINS="$PLUGINS https://github.com/ervandew/snipmate.vim"
+#PLUGINS="$PLUGINS https://github.com/ervandew/snipmate.vim"
+PLUGINS="$PLUGINS https://github.com/vim-scripts/UltiSnips"
 # superTab
 PLUGINS="$PLUGINS https://github.com/ervandew/supertab"
 
