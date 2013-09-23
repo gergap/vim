@@ -71,25 +71,22 @@ let g:clang_complete_copen = 1
 let g:clang_use_library = 1
 let g:clang_library_path = "/usr/lib64/llvm"
 let g:clang_snippets = 1
-let g:clang_snippets_engine = 'clang_complete'
-let g:clang_auto_select=1
-let g:clang_complete_auto=1
-let g:clang_hl_errors=1
-let g:clang_periodic_quickfix=0
 let g:clang_conceal_snippets=1
-let g:clang_exec="clang"
-let g:clang_user_options=""
-let g:clang_auto_user_options="path, .clang_complete"
-let g:clang_sort_algo="priority"
-let g:clang_complete_macros=1
-let g:clang_complete_patterns=1
+let g:clang_snippets_engine = 'clang_complete'
+"let g:clang_auto_select=1
+let g:clang_complete_auto=1
+"let g:clang_hl_errors=1
+let g:clang_periodic_quickfix=0
+"let g:clang_exec="clang"
+"let g:clang_user_options=""
+"let g:clang_auto_user_options="path, .clang_complete"
+"let g:clang_sort_algo="priority"
+"let g:clang_complete_macros=1
+"let g:clang_complete_patterns=1
 set conceallevel=2
 set concealcursor=vin
-
-" Complete options (disable preview scratch window, longest removed to aways
-" show menu)
+" Complete options (disable preview scratch window, longest removed to always show menu)
 set completeopt=menu,menuone
-
 " Limit popup menu height
 set pumheight=20
 
