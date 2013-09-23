@@ -118,8 +118,11 @@ imap <F3> <ESC>:setlocal spell spelllang=en<CR>i
 nmap <S-F3> :setlocal spell spelllang=<CR>
 imap <S-F3> <ESC>:setlocal spell spelllang=<CR>i
 " switch between header/source with F4 in C/C++ using a.vim
-map <F4> :A<CR>
-map <S-F4> :AV<CR>
+nmap <F4> :A<CR>
+imap <F4> <ESC>:A<CR>i
+" currently S-F4 does not work in KDE konsole. Don't know why.
+nmap <S-F4> :AV<CR>
+imap <S-F4> <ESC>:AV<CR>i
 " recreate tags file with F5
 map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " create doxygen comment
