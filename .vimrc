@@ -64,6 +64,14 @@ command Q q
 let g:SuperTabNoCompleteAfter = ['^', '\s', ',', ';', ':']
 " SuperTab completion fall-back 
 let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabLongestEnhanced = 1
+
+autocmd FileType *
+  \ if &omnifunc != '' |
+  \ call SuperTabChain(&omnifunc, "<c-p>") |
+  \ call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+  \ endif
 
 " clang-complete
 filetype plugin on
