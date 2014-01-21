@@ -58,6 +58,11 @@ set hidden
 " anyway by vim.
 command Q q
 
+" Set ultisnips triggers
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
 " superTab
 " uncomment the next line to disable superTab
 "let loaded_supertab = 1
