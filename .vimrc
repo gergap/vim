@@ -66,17 +66,12 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " superTab
 " uncomment the next line to disable superTab
 "let loaded_supertab = 1
-let g:SuperTabNoCompleteAfter = ['^', '\s', ',', ';', ':']
-" SuperTab completion fall-back 
-let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabLongestEnhanced = 1
 
-autocmd FileType *
-  \ if &omnifunc != '' |
-  \ call SuperTabChain(&omnifunc, "<c-p>") |
-  \ call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-  \ endif
+set completeopt=menu,longest
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabLongestHighlight=1
+let g:SuperTabLongestEnhanced=1
 
 " clang-complete
 filetype plugin on
@@ -86,20 +81,10 @@ let g:clang_library_path = "/usr/lib64/llvm"
 let g:clang_snippets = 1
 let g:clang_conceal_snippets=1
 let g:clang_snippets_engine = 'clang_complete'
-"let g:clang_auto_select=1
 let g:clang_complete_auto=1
-"let g:clang_hl_errors=1
 let g:clang_periodic_quickfix=0
-"let g:clang_exec="clang"
-"let g:clang_user_options=""
-"let g:clang_auto_user_options="path, .clang_complete"
-"let g:clang_sort_algo="priority"
-"let g:clang_complete_macros=1
-"let g:clang_complete_patterns=1
 set conceallevel=2
 set concealcursor=vin
-" Complete options (disable preview scratch window, longest removed to always show menu)
-set completeopt=menu,menuone
 " Limit popup menu height
 set pumheight=20
 
@@ -165,39 +150,13 @@ else
   " spell settings
 "  :setlocal spell spelllang=en
   " set the spellfile - folders must exist
+  " global wordlist, press zg to add a word to the list
   set spellfile=~/.vim/spellfile.add
+  " project specific ignore list, press 2zg to add a word to this ignore list
+  set spellfile+=ignore.utf-8.add
   map <M-Down> ]s
   map <M-Up> [s
 endif
-
-" template functionality
-function! CreateHeaderFile()
-    silent! 0r ~/.vim/skel/templ.h
-    silent! exe "%s/%INCLUDEPROTECTION%/__".toupper(expand("<afile>:r"))."_H__/g"
-endfunction
-
-function! CreateCSourceFile()
-    if expand("<afile>") == "main.c"
-        return
-    endif
-    silent! 0r ~/.vim/skel/templ.c
-    " :r removes file extension
-    silent! exe "%s/%FILE%/".expand("<afile>:r").".h/g"
-endfunction
-
-autocmd BufNewFile main.c 0r ~/.vim/skel/main.c
-autocmd BufNewFile main.cpp 0r ~/.vim/skel/main.cpp
-autocmd BufNewFile *.c call CreateCSourceFile()
-autocmd BufNewFile *.h call CreateHeaderFile()
-
-" Abbreviations
-function! EatChar(pat)
-    let c = nr2char(getchar(0))
-    return (c =~ a:pat) ? '' : c
-endfunc
-iab #i #include <><left><C-R>=EatChar('\s')<CR>
-iab #I #include ""<left><C-R>=EatChar('\s')<CR>
-iab forl for(i=0; i<; i++) {<CR><CR>}<UP><RIGHT><RIGHT><RIGHT><C-R>=EatChar('\s')<CR>
 
 " Taglist
 let Tlist_WinWidth = 40
@@ -224,5 +183,6 @@ execute pathogen#infect()
 " surround variable name with ${...}
 let @s='bi${ea}'
 " implement method. Turns 'int foo();' into 'int foo()\n{\n}\n'
-let @i='A€kb{}j'
+
+"au! Syntax mixed  so $vim/syntax/cmix.vim
 
