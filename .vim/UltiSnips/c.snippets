@@ -1,0 +1,98 @@
+
+snippet encoderdef "Encoder Definitions"
+#ifndef _UAENCODER_${1/.*/\U$0\E/g}_H_
+#define _UAENCODER_${1/.*/\U$0\E/g}_H_
+
+#include <stdint.h>
+
+/* forward declarations */
+struct ua_encoder_context;
+struct ua_decoder_context;
+struct ua_buffer;
+struct ua_${1:typename};
+
+int ua_encode_$1(struct ua_encoder_context *ctx, const struct ua_$1 *val);
+int ua_decode_$1(struct ua_decoder_context *ctx, struct ua_$1 *val);
+$0
+#endif /* _UAENCODER_${1/.*/\U$0\E/g}_H_ */
+endsnippet
+
+snippet encoderimpl "Encoder Implementation"
+#include "$1.h"
+#include "encoder.h"
+#include <uabase/memory.h>
+#include <uabase/$1.h>
+#include <uabase/buffer.h>
+#include <stddef.h>
+
+/**
+ * Encodes the given ${1:typename} \c val in little endian format.
+ * @param ctx the encoder context containing the buffers where serialized network data will be stored.
+ * @param val the $1 to encode
+ * @return Zero on success, -1 on error.
+ */
+int ua_encode_$1(struct ua_encoder_context *ctx, const struct ua_$1 *val)
+{
+    int ret = 0;
+
+    return ret;
+}
+
+/**
+ * Decodes a $1 into \c val.
+ * @param ctx the decoder context containing the buffers with serialized network data.
+ * @param val the $1 where the decoder result will be stored.
+ * @return Zero on success, -1 on error.
+ */
+int ua_decode_$1(struct ua_decoder_context *ctx, struct ua_$1 *val)
+{
+    int ret = 0;
+
+    return 0;
+}
+endsnippet
+
+snippet uatypedef "UA datatype definition header file" !b
+#ifndef _UABASE_${1/.*/\U$0\E/g}_H_
+#define _UABASE_${1/.*/\U$0\E/g}_H_
+
+struct ua_${1:typename} {
+    $0
+};
+
+void ua_$1_init(struct ua_$1 *${2:t});
+void ua_$1_clear(struct ua_$1 *$2);
+
+int ua_$1_compare(const struct ua_$1 *a, const struct ua_$1 *b);
+int ua_$1_copy(const struct ua_$1 *dst, const struct ua_$1 *src);
+
+#endif /* _UABASE_${1/.*/\U$0\E/g}_H_ */
+endsnippet
+
+snippet uatypeimpl "UA datatype definition implementation" !b
+#include "$1.h"
+#include <string.h>
+
+void ua_${1:typename}_init(struct ua_$1 *${2:t})
+{
+    memset($2, 0, sizeof(*$2));
+}
+
+void ua_$1_clear(struct ua_$1 *$2)
+{
+    ${0:/* TODO */}
+}
+
+int ua_$1_compare(const struct ua_$1 *a, const struct ua_$1 *b)
+{
+    /* TODO */
+    return 0;
+}
+
+int ua_$1_copy(const struct ua_$1 *dst, const struct ua_$1 *src)
+{
+    /* TODO */
+    return 0;
+}
+
+endsnippet
