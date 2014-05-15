@@ -7,3 +7,14 @@ add_executable($1 main.c)
 $0
 endsnippet
 
+snippet exe "CMake add_executable"
+add_executable(${1:${PROJECT_NAME}} ${2:sources})
+endsnippet
+
+snippet lib "CMake add_library"
+add_library(${1:${PROJECT_NAME}} ${2:sources})
+endsnippet
+
+snippet link "CMake target_link_libraries"
+target_link_libraries(${1:${PROJECT_NAME}} ${2:libs})
+

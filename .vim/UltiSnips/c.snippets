@@ -1,3 +1,50 @@
+snippet realloc "realloc memory" b
+void *${3:tmp} = realloc(${1:data}, ${2:size});
+if ($3) {
+    /* realloc succeeded, assign new pointer */
+    $1 = $3;
+} else {
+    ${0:/* handle error */}
+}
+endsnippet
+
+snippet getopt "getopt example structure" b
+int opt;
+int flags;
+while ((opt = getopt(argc, argv, "nt:")) != -1) {
+    switch (opt) {
+    case 'n':
+        flags = 1;
+        break;
+    case 't':
+        nsecs = atoi(optarg);
+        break;
+    default: /* '?' */
+        fprintf(stderr, "Usage: %s [-t nsecs] [-n] name\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+}
+endsnippet
+
+snippet gpl "GPL License Header" b
+/* Copyright (C) 2014 Gerhard Gappmeier
+ *
+ * This file is part of ${1:programname}.
+ *
+ * $1 is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * $1 is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with $1. If not, see <http://www.gnu.org/licenses/>.
+ */
+endsnippet
 
 snippet encoderdef "Encoder Definitions"
 #ifndef _UAENCODER_${1/.*/\U$0\E/g}_H_
