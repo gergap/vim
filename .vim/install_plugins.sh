@@ -21,6 +21,8 @@ PLUGINS="$PLUGINS https://github.com/Rip-Rip/clang_complete"
 PLUGINS="$PLUGINS https://github.com/vim-scripts/UltiSnips"
 # superTab
 PLUGINS="$PLUGINS https://github.com/ervandew/supertab"
+# multiple cursors - See https://github.com/terryma/vim-multiple-cursors
+PLUGINS="$PLUGINS https://github.com/terryma/vim-multiple-cursors"
 
 # create bundle dir for pathogen
 [ -d bundle ] || mkdir bundle
