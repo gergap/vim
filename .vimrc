@@ -1,9 +1,12 @@
-" VIM Configuration File
-" Description: Optimized for C/C++ development, but useful also for other things.
-" Author: Gerhard Gappmeier
-"
-" auto reload .vimrc when changed, this avoids reopening vim
-autocmd! bufwritepost .vimrc source %
+"====[ gergap's Vim Configuration ]==================================
+" note, that I'm working on German keyboard
+" change this to your needs
+"====================================================================
+
+"====[ some basic editor settings ]==================================
+set expandtab       " always use spaces instead of tabs
+set tabstop=4       " if there are tabs display them with 4 spaces
+set shiftwidth=4    " intend with 4 spaces
 " set UTF-8 encoding
 set enc=utf-8
 set fenc=utf-8
@@ -14,16 +17,13 @@ set nocompatible
 set autoindent
 " use intelligent indentation for C
 set smartindent
-" configure tabwidth and insert spaces instead of tabs
-set tabstop=4        " tab width is 4 spaces
-set shiftwidth=4     " indent also with 4 spaces
-set expandtab        " expand tabs to spaces
-" wrap lines at 120 chars. 80 is somewaht antiquated with nowadays displays.
-set textwidth=120
-" define ',' is leader key
-let mapleader = ","
-" turn syntax highlighting on
+" enable line numbers
+set number
+" enable syntax highlighting
 syntax on
+" enable filetype
+filetype plugin indent on
+" font selection
 if has("gui_running")
     colorscheme wombat
     set gfn=DejaVu_Sans_Mono:h10:cANSI
@@ -31,53 +31,189 @@ else
     set t_Co=256
     colorscheme wombat256
 endif
-" Make backspace working on Windows
-if has("win32")
-    set bs=2
-endif
-" show textwidth line
-set colorcolumn=120
-highlight ColorColumn ctermbg=236
-" show trailing whitespaces
-match ExtraWS /\s\+$/
-" highlight all search results
-set hlsearch
-" turn line numbers on
-set number
-" highlight matching braces
-set showmatch
-" intelligent comments
-set comments=sl:/*,mb:\ *,elx:\ */
 " use intelligent file completion like in the bash
 set wildmode=longest:full
 set wildmenu
 " allow changeing buffers without saving them
 set hidden
 
-" It happens so oftern that I type :Q instead of :q that it makes sense to make :Q just working. :Q is not used
-" anyway by vim.
-command Q q
+"====[ map leader ]==================================================
+let mapleader="-"
+let maplocalleader="-"
 
-" Set ultisnips triggers
+"====[ make edit vim config easys ]==================================
+nnoremap <leader>ev :split $MYVIMRC<cr>
+" auto reload when config has changed
+augroup VimReload
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
+
+"====[ make naughty characters visible ]=============================
+exec "set listchars=tab:>-,trail:\uB7,nbsp:~"
+set list
+
+"====[ highlight 81 column ]=========================================
+" but only for lines that are too long.
+" this is less intrusive than showing it for all lines
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+
+"====[ enable higlight search ]======================================
+set hlsearch
+" This rewires n and N to do the highlighting...
+nnoremap <silent> n   n:call HLNext(0.4)<cr>
+nnoremap <silent> N   N:call HLNext(0.4)<cr>
+
+" this makes the current selected word better visible
+function! HLNext (blinktime)
+    highlight WhiteOnRed ctermfg=white ctermbg=red
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#'.@/
+    let ring = matchadd('WhiteOnRed', target_pat, 101)
+    redraw
+endfunction
+
+"====[ Esc insert mode by pressing jk ]==============================
+" this avoids moving my left hand to the esc key which is far away.
+" jk is not used normally in english or german language and I key leave my
+" hand on the navigation keys.
+:inoremap jk <esc>
+
+"====[ surround word with quotes ]===================================
+:nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+
+"====[ comment out current line ]====================================
+augroup Comment
+    autocmd!
+    autocmd FileType vim nnoremap <buffer> <localleader>c I"<esc>
+    autocmd FileType c nnoremap <buffer> <localleader>c I//<esc>
+augroup END
+
+"====[ Damian Convay's vmath plugin ]================================
+vnoremap <expr> ++  VMATH_YankAndAnalyse()
+nmap            ++  vip++
+set noshowmode
+
+"====[ Damian Convay's digraph plugin ]================================
+" disable betterdigraph
+"let loaded_betterdigraphs = 1
+"inoremap <expr>  <C-K>   HUDG_GetDigraph()
+inoremap <expr>  <C-K>   BDG_GetDigraph()
+
+"=====[ Make arrow keys move visual blocks around ]==================
+runtime plugin/dragvisuals.vim
+
+vmap  <expr>  <LEFT>   DVB_Drag('left')
+vmap  <expr>  <RIGHT>  DVB_Drag('right')
+vmap  <expr>  <DOWN>   DVB_Drag('down')
+vmap  <expr>  <UP>     DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
+vmap  <expr>  <C-D>    DVB_Duplicate()
+
+" Remove any introduced trailing whitespace after moving...
+let g:DVB_TrimWS = 1
+
+"=====[ make widow switching possible with autoswap ]================
+augroup KDE
+    autocmd!
+    autocmd BufReadPost * :silent !qdbus org.kde.konsole $KONSOLE_DBUS_SESSION org.kde.konsole.Session.setTitle 1 %
+    autocmd VimLeavePre * :silent !qdbus org.kde.konsole $KONSOLE_DBUS_SESSION org.kde.konsole.Session.setTitle 1 $PWD
+augroup END
+
+set title titlestring=
+
+"=====[ enable pathogen vim package manager ]========================
+execute pathogen#infect()
+
+"=====[ tabularize plugin ]==========================================
+"if exists(":Tabularize")
+if 1
+    nnoremap <leader>a= :Tabularize /=<cr>
+    vnoremap <leader>a= :Tabularize /=<cr>
+    nnoremap <leader>a: :Tabularize /:\zs<cr>
+    vnoremap <leader>a: :Tabularize /:\zs=<cr>
+    nnoremap <leader>a& :Tabularize /&<cr>
+    vnoremap <leader>a& :Tabularize /&<cr>
+else
+    echom "Tabularize not available"
+endif
+
+" automatically invoke s:align when | is typed
+inoremap <bar> <bar><esc>:call <sid>align()<cr>a
+" automatically indend latex tabular envireonments
+augroup MyLaTeX
+    autocmd!
+    autocmd FileType tex inoremap <buffer> & &<esc>:call <sid>align_tabular()<cr>a
+augroup END
+
+" tabularize | helper function
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize')
+    if getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+        let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+        let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+        Tabularize/|/l1
+        normal! 0
+        call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+    endif
+  else
+    echom "no tabularize"
+  endif
+endfunction
+
+" tabularize latex tabular helper
+" this is the same idea as above, but for & instead of |
+function! s:align_tabular()
+  let p = '^.*&.*&*$'
+  if exists(':Tabularize')
+    if getline('.') =~# '^[^&]*&' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+        let column = strlen(substitute(getline('.')[0:col('.')],'[^&]','','g'))
+        let position = strlen(matchstr(getline('.')[0:col('.')],'.*&\s*\zs.*'))
+        echom position
+        Tabularize/&/l1
+        normal! 0
+        call search(repeat('[^&]*&',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+    endif
+  else
+    echom "no tabularize"
+  endif
+endfunction
+
+"====[ learn hjkl the hard way ;-) ]=================================
+nmap <Left> <Nop>
+nmap <Right> <Nop>
+nmap <Up> <Nop>
+nmap <Down> <Nop>
+
+"====[ use my own make script ]======================================
+set makeprg=mk
+
+"====[ map :Q to :q ]================================================
+" It happens so often that I type :Q instead of :q that it makes sense to make
+" :Q just working. :Q is not used anyway by vim.
+command! Q q
+
+"====[ UltiSnips plugin ]============================================
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-" superTab
+"====[ superTab plugin ]=============================================
 " uncomment the next line to disable superTab
 "let loaded_supertab = 1
-
 set completeopt=menu,longest
 let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 let g:SuperTabLongestHighlight=1
 let g:SuperTabLongestEnhanced=1
 
-" clang-complete
-filetype plugin on
+"====[ clang plugin ]=============================================
 let g:clang_complete_copen = 1
 let g:clang_use_library = 1
-let g:clang_library_path = "/usr/lib64/llvm"
+let g:clang_library_path = "/usr/lib"
 let g:clang_snippets = 1
 let g:clang_conceal_snippets=1
 let g:clang_snippets_engine = 'clang_complete'
@@ -88,28 +224,48 @@ set concealcursor=vin
 " Limit popup menu height
 set pumheight=20
 
-" vim-git plugin
+"====[ Taglist plugin ]==============================================
+let Tlist_WinWidth = 40
+
+"====[ airline ]=====================================================
+" use powerline fonts to show beautiful symbols
+let g:airline_powerline_fonts = 1
+" enable tab bar with buffers
+let g:airline#extensions#tabline#enabled = 1
+" fix the timout when leaving insert mode (see
+" http://usevim.com/2013/07/24/powerline-escape-fix)
+if ! has('gui_running')
+  set ttimeoutlen=100
+  augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=100
+    au InsertLeave * set timeoutlen=1000
+  augroup END
+endif
+
+"====[ fugitive vim plugin ]=========================================
 set laststatus=2
 "set statusline=%{GitBranch()}
 
+"====[ DoxygenToolKit ]==============================================
 " Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
 let g:DoxygenToolkit_briefTag_pre=""
 let g:DoxygenToolkit_paramTag_pre="@param "
 let g:DoxygenToolkit_returnTag="@return "
+let g:DoxygenToolkit_startCommentTag = "/**"
+let g:DoxygenToolkit_startCommentBlock = "/*"
 "let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
 "let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
 let g:DoxygenToolkit_authorName="Gerhard Gappmeier <gerhard.gappmeier@ascolab.com>"
 "let g:DoxygenToolkit_licenseTag="My own license"
 let g:DoxygenToolkit_interCommentTag = "*"
 
-" Enhanced keyboard mappings
-"
+"====[ make use of F-keys ]==========================================
 " unindent with Shift-Tab
 imap <S-Tab> <C-o><<
-" in normal mode F2 will save the file
-nmap <F2> :w<CR>
-" in insert mode F2 will exit insert, save, enters insert again
-imap <F2> <ESC>:w<CR>i
+" use F2 for saving
+nnoremap <F2> :w<cr>
+inoremap <F2> <esc>:w<cr>i
 " map F3 and SHIFT-F3 to toggle spell checking
 nmap <F3> :setlocal spell spelllang=en<CR>
 imap <F3> <ESC>:setlocal spell spelllang=en<CR>i
@@ -125,11 +281,11 @@ imap <S-F4> <ESC>:AV<CR>i
 map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " create doxygen comment
 map <F6> :Dox<CR>
+nnoremap <F7> :make<cr>
 " build using makeprg with <F7>
 nmap <F7> :make<CR>
-" build using makeprg with <F7>, in insert mode exit to command mode, save and compile
 imap <F7> <ESC>:w<CR>:make<CR>
-" build using makeprg with <S-F7>
+" clean build using makeprg with <S-F7>
 map <S-F7> :make clean all<CR>
 " remove trailing spaces
 map <F10> :%s/\s\+$//<CR>
@@ -158,31 +314,5 @@ else
   map <M-Up> [s
 endif
 
-" Taglist
-let Tlist_WinWidth = 40
 
-" airline
-" use powerline fonts to show beautiful symbols
-let g:airline_powerline_fonts = 1
-" enable tab bar with buffers
-let g:airline#extensions#tabline#enabled = 1
-" fix the timout when leaving insert mode (see http://usevim.com/2013/07/24/powerline-escape-fix)
-if ! has('gui_running')
-  set ttimeoutlen=10
-  augroup FastEscape
-    autocmd!
-    au InsertEnter * set timeoutlen=0
-    au InsertLeave * set timeoutlen=10
-  augroup END
-endif
-
-" pathogen
-execute pathogen#infect()
-
-" my macros
-" surround variable name with ${...}
-let @s='bi${ea}'
-" implement method. Turns 'int foo();' into 'int foo()\n{\n}\n'
-
-"au! Syntax mixed  so $vim/syntax/cmix.vim
 

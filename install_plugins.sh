@@ -23,6 +23,14 @@ PLUGINS="$PLUGINS https://github.com/vim-scripts/UltiSnips"
 PLUGINS="$PLUGINS https://github.com/ervandew/supertab"
 # multiple cursors - See https://github.com/terryma/vim-multiple-cursors
 PLUGINS="$PLUGINS https://github.com/terryma/vim-multiple-cursors"
+# tabularize plugin
+PLUGINS="$PLUGINS https://github.com/godlygeek/tabular.git"
+# vim-commentary
+PLUGINS="$PLUGINS git://github.com/tpope/vim-commentary.git"
+# vim-exchange
+PLUGINS="$PLUGINS git://github.com/tommcdo/vim-exchange.git"
+# vim-speeddating
+PLUGINS="$PLUGINS git://github.com/tpope/vim-speeddating.git"
 
 # create bundle dir for pathogen
 [ -d bundle ] || mkdir bundle

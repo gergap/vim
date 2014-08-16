@@ -1,12 +1,22 @@
 " DoxygenToolkit.vim
 " Brief: Usefull tools for Doxygen (comment, author, license).
-" Version: 0.2.4
-" Date: 03/26/09
+" Version: 0.2.7
+" Date: 12/06/09
 " Author: Mathias Lorente
 "
 " TODO: add automatically (option controlled) in/in out flags to function
 "       parameters
 " TODO: (Python) Check default paramareters defined as list/dictionnary/tuple
+"
+" Note: Solve almost all compatibility problem with c/c++ IDE
+"
+" Note: Bug correction and improve compatibility with c/c++ IDE
+"   - Documentation of function with struct parameters are now allowed.
+"   - Comments are written in two steps to avoid conflicts with c/c++ IDE.
+"
+" Note: Bug correction (thanks to Jhon Do)
+"   - DoxygenToolkit_briefTag_funcName and other xxx_xxName parameters 
+"     should work properly now.
 "
 " Note: Bug correction (thanks to Anders Bo Rasmussen)
 "   - C++: now functions like  void foo(type &bar); are correctly documented.
@@ -222,7 +232,7 @@
 "endif
 let loaded_DoxygenToolkit = 1
 "echo 'Loading DoxygenToolkit...'
-let s:licenseTag = "Copyright (C) \<enter>"
+let s:licenseTag = "Copyright (C) \<enter>\<enter>"
 let s:licenseTag = s:licenseTag . "This program is free software; you can redistribute it and/or\<enter>"
 let s:licenseTag = s:licenseTag . "modify it under the terms of the GNU General Public License\<enter>"
 let s:licenseTag = s:licenseTag . "as published by the Free Software Foundation; either version 2\<enter>"
@@ -237,81 +247,81 @@ let s:licenseTag = s:licenseTag . "Foundation, Inc., 59 Temple Place - Suite 330
 
 " Common standard constants
 if !exists("g:DoxygenToolkit_briefTag_pre")
-	let g:DoxygenToolkit_briefTag_pre = "@brief "
+  let g:DoxygenToolkit_briefTag_pre = "@brief "
 endif
 if !exists("g:DoxygenToolkit_briefTag_post")
-	let g:DoxygenToolkit_briefTag_post = ""
+  let g:DoxygenToolkit_briefTag_post = ""
 endif
 if !exists("g:DoxygenToolkit_paramTag_pre")
-	let g:DoxygenToolkit_paramTag_pre = "@param "
+  let g:DoxygenToolkit_paramTag_pre = "@param "
 endif
 if !exists("g:DoxygenToolkit_paramTag_post")
-	let g:DoxygenToolkit_paramTag_post = ""
+  let g:DoxygenToolkit_paramTag_post = ""
 endif
 if !exists("g:DoxygenToolkit_returnTag")
-	let g:DoxygenToolkit_returnTag = "@return "
+  let g:DoxygenToolkit_returnTag = "@return "
 endif
 if !exists("g:DoxygenToolkit_blockHeader")
-	let g:DoxygenToolkit_blockHeader = ""
+  let g:DoxygenToolkit_blockHeader = ""
 endif
 if !exists("g:DoxygenToolkit_blockFooter")
-	let g:DoxygenToolkit_blockFooter = ""
+  let g:DoxygenToolkit_blockFooter = ""
 endif
 if !exists("g:DoxygenToolkit_licenseTag")
-	let g:DoxygenToolkit_licenseTag = s:licenseTag
+  let g:DoxygenToolkit_licenseTag = s:licenseTag
 endif
 if !exists("g:DoxygenToolkit_fileTag")
-	let g:DoxygenToolkit_fileTag = "@file "
+  let g:DoxygenToolkit_fileTag = "@file "
 endif
 if !exists("g:DoxygenToolkit_authorTag")
-	let g:DoxygenToolkit_authorTag = "@author "
+  let g:DoxygenToolkit_authorTag = "@author "
 endif
 if !exists("g:DoxygenToolkit_dateTag")
-	let g:DoxygenToolkit_dateTag = "@date "
+  let g:DoxygenToolkit_dateTag = "@date "
 endif
 if !exists("g:DoxygenToolkit_versionTag")
   let g:DoxygenToolkit_versionTag = "@version "
 endif
 if !exists("g:DoxygenToolkit_undocTag")
-	let g:DoxygenToolkit_undocTag = "DOX_SKIP_BLOCK"
+  let g:DoxygenToolkit_undocTag = "DOX_SKIP_BLOCK"
 endif
 if !exists("g:DoxygenToolkit_blockTag")
-	let g:DoxygenToolkit_blockTag = "@name "
+  let g:DoxygenToolkit_blockTag = "@name "
 endif
 if !exists("g:DoxygenToolkit_classTag")
-	let g:DoxygenToolkit_classTag = "@class "
+  let g:DoxygenToolkit_classTag = "@class "
 endif
 
 if !exists("g:DoxygenToolkit_cinoptions")
     let g:DoxygenToolkit_cinoptions = "c1C1"
 endif
 if !exists("g:DoxygenToolkit_startCommentTag ")
-	let g:DoxygenToolkit_startCommentTag = "/** "
-	let g:DoxygenToolkit_startCommentBlock = "/* "
+  let g:DoxygenToolkit_startCommentTag = "/** "
+  let g:DoxygenToolkit_startCommentBlock = "/* "
 endif
 if !exists("g:DoxygenToolkit_interCommentTag ")
-	let g:DoxygenToolkit_interCommentTag = "* "
+  let g:DoxygenToolkit_interCommentTag = "* "
 endif
 if !exists("g:DoxygenToolkit_interCommentBlock ")
-	let g:DoxygenToolkit_interCommentBlock = "* "
+  let g:DoxygenToolkit_interCommentBlock = "* "
 endif
 if !exists("g:DoxygenToolkit_endCommentTag ")
-	let g:DoxygenToolkit_endCommentTag = "*/"
-	let g:DoxygenToolkit_endCommentBlock = "*/"
+  let g:DoxygenToolkit_endCommentTag = "*/"
+  let g:DoxygenToolkit_endCommentBlock = "*/"
 endif
 if exists("g:DoxygenToolkit_commentType")
-	if ( g:DoxygenToolkit_commentType == "C++" )
-		let g:DoxygenToolkit_startCommentTag = "/// "
-		let g:DoxygenToolkit_interCommentTag = "/// "
-		let g:DoxygenToolkit_endCommentTag = ""
-		let g:DoxygenToolkit_startCommentBlock = "// "
-		let g:DoxygenToolkit_interCommentBlock = "// "
-		let g:DoxygenToolkit_endCommentBlock = ""
+  if ( g:DoxygenToolkit_commentType == "C++" )
+    let g:DoxygenToolkit_startCommentTag = "/// "
+    let g:DoxygenToolkit_interCommentTag = "/// "
+    let g:DoxygenToolkit_endCommentTag = ""
+    let g:DoxygenToolkit_startCommentBlock = "// "
+    let g:DoxygenToolkit_interCommentBlock = "// "
+    let g:DoxygenToolkit_endCommentBlock = ""
   else
     let g:DoxygenToolkit_commentType = "C"
-	endif
+  endif
 else
-	let g:DoxygenToolkit_commentType = "C"
+  let g:DoxygenToolkit_commentType = "C"
 endif
 
 " Compact documentation
@@ -333,34 +343,34 @@ if !exists("g:DoxygenToolkit_compactDoc")
 endif
 
 " Necessary '\<' and '\>' will be added to each item of the list.
-let s:ignoreForReturn = ['template', 'explicit', 'inline', 'static', 'virtual', 'void\([[:blank:]]*\*\)\@!', 'const', 'volatile', 'EMB_VOID']
+let s:ignoreForReturn = ['template', 'explicit', 'inline', 'static', 'virtual', 'void\([[:blank:]]*\*\)\@!', 'const', 'volatile', 'struct']
 if !exists("g:DoxygenToolkit_ignoreForReturn")
-	let g:DoxygenToolkit_ignoreForReturn = s:ignoreForReturn[:]
+  let g:DoxygenToolkit_ignoreForReturn = s:ignoreForReturn[:]
 else
-	let g:DoxygenToolkit_ignoreForReturn += s:ignoreForReturn
+  let g:DoxygenToolkit_ignoreForReturn += s:ignoreForReturn
 endif
 unlet s:ignoreForReturn
 
 " Maximum number of lines to check for function parameters
 if !exists("g:DoxygenToolkit_maxFunctionProtoLines")
-	let g:DoxygenToolkit_maxFunctionProtoLines = 10
+  let g:DoxygenToolkit_maxFunctionProtoLines = 10
 endif
 
 " Add name of function/class/struct... after pre brief tag if you want
 if !exists("g:DoxygenToolkit_briefTag_className")
-	let g:DoxygenToolkit_briefTag_className = "no"
+  let g:DoxygenToolkit_briefTag_className = "no"
 endif
 if !exists("g:DoxygenToolkit_briefTag_structName")
-	let g:DoxygenToolkit_briefTag_structName = "no"
+  let g:DoxygenToolkit_briefTag_structName = "no"
 endif
 if !exists("g:DoxygenToolkit_briefTag_enumName")
-	let g:DoxygenToolkit_briefTag_enumName = "no"
+  let g:DoxygenToolkit_briefTag_enumName = "no"
 endif
 if !exists("g:DoxygenToolkit_briefTag_namespaceName")
-	let g:DoxygenToolkit_briefTag_namespaceName = "no"
+  let g:DoxygenToolkit_briefTag_namespaceName = "no"
 endif
 if !exists("g:DoxygenToolkit_briefTag_funcName")
-	let g:DoxygenToolkit_briefTag_funcName = "no"
+  let g:DoxygenToolkit_briefTag_funcName = "no"
 endif
 
 " Keep empty line (if any) between comment and function/class/...
@@ -386,22 +396,23 @@ endif
 function! <SID>DoxygenLicenseFunc()
   call s:InitializeParameters()
 
-	" Test authorName variable
-	if !exists("g:DoxygenToolkit_authorName")
-		let g:DoxygenToolkit_authorName = input("Enter name of the author (generally yours...) : ")
-	endif
-	mark d
-	let l:date = strftime("%Y")
-	exec "normal O".s:startCommentBlock.substitute( g:DoxygenToolkit_licenseTag, "\<enter>", "\<enter>".s:interCommentBlock, "g" )
+  " Test authorName variable
+  if !exists("g:DoxygenToolkit_authorName")
+    let g:DoxygenToolkit_authorName = input("Enter name of the author (generally yours...) : ")
+  endif
+  mark d
+  let l:date = strftime("%Y")
+  exec "normal O".strpart( s:startCommentBlock, 0, 1 )
+  exec "normal A".strpart( s:startCommentBlock, 1 ).substitute( g:DoxygenToolkit_licenseTag, "\<enter>", "\<enter>".s:interCommentBlock, "g" )
   if( s:endCommentBlock != "" )
     exec "normal o".s:endCommentBlock
   endif
-	if( g:DoxygenToolkit_licenseTag == s:licenseTag )
-		exec "normal %jA".l:date." - ".g:DoxygenToolkit_authorName
-	endif
-	exec "normal `d"
+  if( g:DoxygenToolkit_licenseTag == s:licenseTag )
+    exec "normal %jA".l:date." - ".g:DoxygenToolkit_authorName
+  endif
+  exec "normal `d"
 
-	call s:RestoreParameters()
+  call s:RestoreParameters()
 endfunction
 
 
@@ -411,37 +422,37 @@ endfunction
 function! <SID>DoxygenAuthorFunc()
   call s:InitializeParameters()
 
-	" Test authorName variable
-	if !exists("g:DoxygenToolkit_authorName")
-		let g:DoxygenToolkit_authorName = input("Enter name of the author (generally yours...) : ")
-	endif
+  " Test authorName variable
+  if !exists("g:DoxygenToolkit_authorName")
+    let g:DoxygenToolkit_authorName = input("Enter name of the author (generally yours...) : ")
+  endif
 
   " Test versionString variable
   if !exists("g:DoxygenToolkit_versionString")
     let g:DoxygenToolkit_versionString = input("Enter version string : ")
   endif
 
-	" Get file name
-	let l:fileName = expand('%:t')
+  " Get file name
+  let l:fileName = expand('%:t')
 
-	" Begin to write skeleton
+  " Begin to write skeleton
   let l:insertionMode = s:StartDocumentationBlock()
-	exec "normal ".l:insertionMode.s:interCommentTag.g:DoxygenToolkit_fileTag.l:fileName
-	exec "normal o".s:interCommentTag.g:DoxygenToolkit_briefTag_pre
-	mark d
-	exec "normal o".s:interCommentTag.g:DoxygenToolkit_authorTag.g:DoxygenToolkit_authorName
+  exec "normal ".l:insertionMode.s:interCommentTag.g:DoxygenToolkit_fileTag.l:fileName
+  exec "normal o".s:interCommentTag.g:DoxygenToolkit_briefTag_pre
+  mark d
+  exec "normal o".s:interCommentTag.g:DoxygenToolkit_authorTag.g:DoxygenToolkit_authorName
   exec "normal o".s:interCommentTag.g:DoxygenToolkit_versionTag.g:DoxygenToolkit_versionString
-	let l:date = strftime("%Y-%m-%d")
-	exec "normal o".s:interCommentTag.g:DoxygenToolkit_dateTag.l:date
-	if ( g:DoxygenToolkit_endCommentTag != "" )
-		exec "normal o".s:endCommentTag
-	endif
+  let l:date = strftime("%Y-%m-%d")
+  exec "normal o".s:interCommentTag.g:DoxygenToolkit_dateTag.l:date
+  if ( g:DoxygenToolkit_endCommentTag != "" )
+    exec "normal o".s:endCommentTag
+  endif
 
-	" Move the cursor to the rigth position
-	exec "normal `d"
+  " Move the cursor to the rigth position
+  exec "normal `d"
 
   call s:RestoreParameters()
-	startinsert!
+  startinsert!
 endfunction
 
 
@@ -450,22 +461,24 @@ endfunction
 " C/C++ only!
 """"""""""""""""""""""""""
 function! <SID>DoxygenUndocumentFunc(blockTag)
-	let l:search = "#ifdef " . a:blockTag
-	" Save cursor position and go to the begining of the file
-	mark d
-	exec "normal gg"
+  call s:InitializeParameters()
+  let l:search = "#ifdef " . a:blockTag
+  " Save cursor position and go to the begining of the file
+  mark d
+  exec "normal gg"
 
-	while ( search(l:search, 'W') != 0 )
-		exec "normal O#ifndef " . g:DoxygenToolkit_undocTag
-		exec "normal j^%"
-		if ( g:DoxygenToolkit_endCommentTag == "" )
-			exec "normal o#endif // " . g:DoxygenToolkit_undocTag 
-		else
-			exec "normal o#endif /* " . g:DoxygenToolkit_undocTag . " */"
-		endif
-	endwhile
+  while ( search(l:search, 'W') != 0 )
+    exec "normal O#ifndef " . g:DoxygenToolkit_undocTag
+    exec "normal j^%"
+    if ( g:DoxygenToolkit_endCommentTag == "" )
+      exec "normal o#endif // " . g:DoxygenToolkit_undocTag 
+    else
+      exec "normal o#endif /* " . g:DoxygenToolkit_undocTag . " */"
+    endif
+  endwhile
 
-	exec "normal `d"
+  exec "normal `d"
+  call s:RestoreParameters()
 endfunction
 
 
@@ -477,14 +490,15 @@ function! <SID>DoxygenBlockFunc()
   call s:InitializeParameters()
 
   let l:insertionMode = s:StartDocumentationBlock()
-	exec "normal ".l:insertionMode.s:interCommentTag.g:DoxygenToolkit_blockTag
-	mark d
-	exec "normal o".s:interCommentTag."@{ ".s:endCommentTag
-	exec "normal o".s:startCommentTag." @} ".s:endCommentTag
-	exec "normal `d"
+  exec "normal ".l:insertionMode.s:interCommentTag.g:DoxygenToolkit_blockTag
+  mark d
+  exec "normal o".s:interCommentTag."@{ ".s:endCommentTag
+  exec "normal o".strpart( s:startCommentTag, 0, 1 )
+  exec "normal A".strpart( s:startCommentTag, 1 )." @} ".s:endCommentTag
+  exec "normal `d"
 
-	call s:RestoreParameters()
-	startinsert!
+  call s:RestoreParameters()
+  startinsert!
 endfunction
 
 
@@ -505,7 +519,7 @@ function! <SID>DoxygenCommentFunc()
     let l:templateParameterPattern = "<[^<>]*>"
 
     let l:classPattern     = '\<class\>[[:blank:]]\+\zs'.l:someNameWithNamespacePattern.'\ze.*\%('.l:endDocPattern.'\)'
-    let l:structPattern    = '\<struct\>[[:blank:]]\+\zs'.l:someNameWithNamespacePattern.'\ze.*\%('.l:endDocPattern.'\)'
+    let l:structPattern    = '\<struct\>[[:blank:]]\+\zs'.l:someNameWithNamespacePattern.'\ze[^(),]*\%('.l:endDocPattern.'\)'
     let l:enumPattern      = '\<enum\>\%(\%([[:blank:]]\+\zs'.l:someNamePattern.'\ze[[:blank:]]*\)\|\%(\zs\ze[[:blank:]]*\)\)\%('.l:endDocPattern.'\)'
     let l:namespacePattern = '\<namespace\>[[:blank:]]\+\zs'.l:someNamePattern.'\ze[[:blank:]]*\%('.l:endDocPattern.'\)'
 
@@ -570,13 +584,11 @@ function! <SID>DoxygenCommentFunc()
     if( match( l:lineBuffer, l:emptyLinePattern ) != -1 )
       " Fall here when only comments have been found.
       call s:WarnMsg( "Nothing to document here!" )
-      exec "normal `d" 
-      return
     else
       call s:WarnMsg( "Cannot reach end of function/class/... declaration!" )
-      exec "normal `d" 
-      return
     endif
+    exec "normal `d" 
+    return
   endif
 
   " Trim the buffer
@@ -634,7 +646,7 @@ function! <SID>DoxygenCommentFunc()
   endif
 
   " Remove the function/class/... name when it is not necessary
-  if( ( key == "class" && g:DoxygenToolkit_briefTag_className != "yes" ) || ( key == "struct" && g:DoxygenToolkit_briefTag_structName != "yes" ) || ( key == "enum" && g:DoxygenToolkit_briefTag_enumName != "yes" ) || ( key == "namespace" && g:DoxygenToolkit_briefTag_namespaceName != "yes" ) || ( l:doc.type == "function" && g:DoxygenToolkit_briefTag_funcName != "yes" ) )
+  if( ( l:doc.type == "class" && g:DoxygenToolkit_briefTag_className != "yes" ) || ( l:doc.type == "struct" && g:DoxygenToolkit_briefTag_structName != "yes" ) || ( l:doc.type == "enum" && g:DoxygenToolkit_briefTag_enumName != "yes" ) || ( l:doc.type == "namespace" && g:DoxygenToolkit_briefTag_namespaceName != "yes" ) || ( l:doc.type == "function" && g:DoxygenToolkit_briefTag_funcName != "yes" ) )
     let l:doc.name = "None"
 
   " Remove namespace from the name of the class/function...
@@ -651,16 +663,19 @@ function! <SID>DoxygenCommentFunc()
   endif
 
   " Header
-	exec "normal `d" 
-	if( g:DoxygenToolkit_blockHeader != "" )
-		exec "normal O".s:startCommentBlock.g:DoxygenToolkit_blockHeader.s:endCommentBlock
+  exec "normal `d" 
+  if( g:DoxygenToolkit_blockHeader != "" )
+    exec "normal O".strpart( s:startCommentBlock, 0, 1 )
+    exec "normal A".strpart( s:startCommentBlock, 1 ).g:DoxygenToolkit_blockHeader.s:endCommentBlock
     exec "normal `d" 
-	endif
+  endif
  
   " Brief
   if( g:DoxygenToolkit_compactOneLineDoc =~ "yes" && l:doc.returns != "yes" && len( l:doc.params ) == 0 )
     let s:compactOneLineDoc = "yes"
-    exec "normal O".s:startCommentTag.g:DoxygenToolkit_briefTag_pre.g:DoxygenToolkit_briefTag_post
+    "exec "normal O".s:startCommentTag.g:DoxygenToolkit_briefTag_pre.g:DoxygenToolkit_briefTag_post
+    exec "normal O".strpart( s:startCommentTag, 0, 1 )
+    exec "normal A".strpart( s:startCommentTag, 1 ).g:DoxygenToolkit_briefTag_pre.g:DoxygenToolkit_briefTag_post
   else
     let s:compactOneLineDoc = "no"
     let l:insertionMode = s:StartDocumentationBlock()
@@ -671,7 +686,7 @@ function! <SID>DoxygenCommentFunc()
   endif
 
   " Mark the line where the cursor will be positionned.
-	mark d
+  mark d
 
   " Arguments/parameters
   if( g:DoxygenToolkit_compactDoc =~ "yes" )
@@ -684,7 +699,7 @@ function! <SID>DoxygenCommentFunc()
       exec "normal o".s:interCommentTag
       let s:insertEmptyLine = 0
     endif
-    exec "normal o".s:interCommentTag." ".g:DoxygenToolkit_paramTag_pre.g:DoxygenToolkit_paramTag_post.param
+    exec "normal o".s:interCommentTag.g:DoxygenToolkit_paramTag_pre.g:DoxygenToolkit_paramTag_post.param
   endfor
 
   " Returned value
@@ -692,24 +707,25 @@ function! <SID>DoxygenCommentFunc()
     if( g:DoxygenToolkit_compactDoc != "yes" )
       exec "normal o".s:interCommentTag
     endif
-    exec "normal o".s:interCommentTag." ".g:DoxygenToolkit_returnTag
+    exec "normal o".s:interCommentTag.g:DoxygenToolkit_returnTag
   endif
 
   " End (if any) of documentation block.
-	if( s:endCommentTag != "" )
+  if( s:endCommentTag != "" )
     if( s:compactOneLineDoc =~ "yes" )
       let s:execCommand = "A "
     else
       let s:execCommand = "o"
     endif
-		exec "normal ".s:execCommand.s:endCommentTag
-	endif
+    exec "normal ".s:execCommand.s:endCommentTag
+  endif
 
   " Footer
-	if ( g:DoxygenToolkit_blockFooter != "" )
-		exec "normal o".s:startCommentBlock.g:DoxygenToolkit_blockFooter.s:endCommentBlock
-	endif
-	exec "normal `d"
+  if ( g:DoxygenToolkit_blockFooter != "" )
+    exec "normal o".strpart( s:startCommentBlock, 0, 1 )
+    exec "normal A".strpart( s:startCommentBlock, 1 ).g:DoxygenToolkit_blockFooter.s:endCommentBlock
+  endif
+  exec "normal `d"
 
   call s:RestoreParameters()
   startinsert!
@@ -742,7 +758,9 @@ endfunction
 function! s:StartDocumentationBlock()
   " For C++ documentation format we do not need first empty line
   if( s:startCommentTag != s:interCommentTag )
-    exec "normal O".s:startCommentTag
+    "exec "normal O".s:startCommentTag
+    exec "normal O".strpart( s:startCommentTag, 0, 1 )
+    exec "normal A".strpart( s:startCommentTag, 1 )
     let l:insertionMode = "o"
   else
     let l:insertionMode = "O"
@@ -944,11 +962,14 @@ function! s:InitializeParameters()
     let s:endCommentBlock   = ""
   endif
 
-	" Backup standard comment expension and indentation
-	let s:commentsBackup = &comments
-	let &comments        = ""
-	let s:cinoptionsBackup = &cinoptions
-	let &cinoptions        = g:DoxygenToolkit_cinoptions
+  " Backup standard comment expension and indentation
+  let s:commentsBackup = &comments
+  let &comments        = ""
+  let s:cinoptionsBackup = &cinoptions
+  let &cinoptions        = g:DoxygenToolkit_cinoptions
+  " Compatibility with c/c++ IDE plugin
+  let s:timeoutlenBackup = &timeoutlen
+  let &timeoutlen = 0
 endfunction
 
 
@@ -956,9 +977,11 @@ endfunction
 " Restore previously backuped parameters.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:RestoreParameters()
-	" Restore standard comment expension and indentation
-	let &comments = s:commentsBackup
-	let &cinoptions = s:cinoptionsBackup
+  " Restore standard comment expension and indentation
+  let &comments = s:commentsBackup
+  let &cinoptions = s:cinoptionsBackup
+  " Compatibility with c/c++ IDE plugin
+  let &timeoutlen = s:timeoutlenBackup
 endfunction
 
 
