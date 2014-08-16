@@ -88,8 +88,8 @@ Installation
     # Note: backup any existing vim configuration before you remove your .vim folder and .vimrc file.
     rm -rf .vim .vimrc
     # symlink your new config
-    ln -s vim/.vimrc
-    ln -s vim/.vim
+    ln -s vim .vim
+    ln -s .vim/.vimrc
     # install used plugins
     cd vim/.vim
     ./install_plugins.sh
