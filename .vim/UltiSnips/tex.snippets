@@ -60,3 +60,50 @@ $0
 \end{frame}
 endsnippet
 
+snippet lst "lstlisting" !b
+\begin{lstlisting}[style=${1:algebra},caption=${2:title},label=lst:${3:label}]
+    $0
+\end{lstlisting}
+endsnippet
+
+snippet alg "Algebra" !b
+algebra ${3:name}
+sorts $3, elem, pos
+ops empty:                  -> $3
+    front, last: $3       -> pos
+sets
+    $3 = #$\{(a_1 \dots a_n, p_0 \dots p_n) | n \geq 0, a_i \in elem, p_i \in POS, p_i \neq p_j falls i \neq j\}$#
+    pos  = POS
+functions
+    empty = (<>, <p0>)
+end $3.
+endsnippet
+
+snippet if "if ... then ... end if" !b
+if ${1:condition} then ${2:statement} end if;
+endsnippet
+
+snippet for "for i:=1 to n do" !b
+for ${1:i}:=${2:1} to ${3:n} do
+    $0
+end for;
+endsnippet
+
+snippet rec "record" !b
+${1:name} = record
+  $0
+end record;
+endsnippet
+
+snippet e "emph" w
+\emph{${1:${VISUAL:text}}}
+endsnippet
+
+snippet lorem "lorum pisum" !b
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
+elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+amet.
+endsnippet
