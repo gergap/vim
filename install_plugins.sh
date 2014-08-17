@@ -32,6 +32,11 @@ PLUGINS="$PLUGINS git://github.com/tpope/vim-commentary.git"
 PLUGINS="$PLUGINS git://github.com/tommcdo/vim-exchange.git"
 # vim-speeddating
 PLUGINS="$PLUGINS git://github.com/tpope/vim-speeddating.git"
+# vim-textobj-function
+# this provides textobjects for functions and supports C, JAVA, and Vim script
+# Note: vim-textobj-function depends on vim-textobj-user
+PLUGINS="$PLUGINS git://github.com/kana/vim-textobj-user"
+PLUGINS="$PLUGINS git://github.com/kana/vim-textobj-function"
 
 # create bundle dir for pathogen
 [ -d bundle ] || mkdir bundle
