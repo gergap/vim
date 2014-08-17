@@ -63,3 +63,31 @@ endsnippet
 snippet latex "latex"
 \LaTeX
 endsnippet
+
+snippet em "emphasize" w
+\emph{${1:${VISUAL}}}$0
+endsnippet
+
+snippet bf "font bold face" w
+\textbf{${1:${VISUAL}}}$0
+endsnippet
+
+snippet fb "textbf" w
+\textbf{${1:${VISUAL}}}$0
+endsnippet
+
+snippet it "textit" w
+\textit{${1:${VISUAL}}}$0
+endsnippet
+
+snippet btab "tabular booktab style" b
+\begin{${1:t}${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${2:c}}
+\toprule
+$0${2/((?<=.)c|l|r)|./(?1:caption & )/g} \\\\
+\midrule
+$0${2/((?<=.)c|l|r)|./(?1: & )/g} \\\\
+\bottomrule
+\end{$1${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
+endsnippet
+
+
