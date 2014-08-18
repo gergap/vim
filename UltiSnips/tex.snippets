@@ -91,3 +91,76 @@ $0${2/((?<=.)c|l|r)|./(?1: & )/g} \\\\
 endsnippet
 
 
+snippet paramtable "parameter table"
+\begin{table}[ht]
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Name} & \textbf{Type} & \textbf{Description} \\
+k\midrule
+\textbf{Request} & & \\
+header   & RequestHeader & The \code{RequestHeader} as described in section
+\ref{sub:request_header}. \\
+${3:name}   & ${4:type} & ${5:description}.  \\
+\midrule
+\textbf{Response} & & \\
+header   & ResponseHeader & The \code{ResponseHeader} as described in section
+\ref{sub:response_header}. \\
+\bottomrule
+\end{tabularx}
+\caption{${1:title}}
+\label{tbl:${2:${1/(\w+)|\W+/(?1:\L$0\E:_)/g}}}
+\end{table}
+endsnippet
+
+snippet service "add service sections"
+\subsection{${1:Service Name} Service}
+\label{sub:${1/(\w+)|\W+/(?1:\L$0\E:_)/g}}
+
+\subsubsection{Description}
+
+This service ${2:...}.
+
+\subsubsection{Parameters}
+
+Table \ref{tbl:${1/(\w+)|\W+/(?1:\L$0\E:_)/g}_service_parameters} defines the parameters for the service.
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Name} & \textbf{Type} & \textbf{Description} \\\\
+\midrule
+\textbf{Request} & & \\\\
+header   & RequestHeader & The \code{RequestHeader} as described in section
+\ref{sub:request_header}. \\\\
+${3:name}   & ${4:type} & ${5:description}.  \\\\
+\midrule
+\textbf{Response} & & \\\\
+header   & ResponseHeader & The \code{ResponseHeader} as described in section
+\ref{sub:response_header}. \\\\
+\bottomrule
+\end{tabularx}
+\caption{$1 Service Parameters}
+\label{tbl:${1/(\w+)|\W+/(?1:\L$0\E:_)/g}_service_parameters}
+\end{table}
+
+\subsubsection{Examples}
+
+Listings \ref{lst:req_${1/(\w+)|\W+/(?1:\L$0\E:_)/g}} and \ref{lst:res_${1/(\w+)|\W+/(?1:\L$0\E:_)/g}} show example requests and
+responses for this service.
+
+\begin{lstlisting}[caption=$1 Request Example,label=lst:req_${1/(\w+)|\W+/(?1:\L$0\E:_)/g}]
+{
+    "header": { "rqid": 1, "op": "${1/.*/\l$0/g}" },
+    "collection": "contacts",
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption=$1 Response Example,label=lst:res_${1/(\w+)|\W+/(?1:\L$0\E:_)/g}]
+{
+    "header": { "result": 0, "rqid": 1 }
+}
+\end{lstlisting}
+
+% subsection $1 (end)
+endsnippet
+
