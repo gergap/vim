@@ -37,6 +37,11 @@ set wildmenu
 " allow changeing buffers without saving them
 set hidden
 
+"====[ setup my CUPS printer ]=======================================
+" you can simply print using :ha(rdcopy)
+" this also supports an optional range argument, see :h ha
+set pdev=HP_Officejet_Pro_8600
+
 "====[ map leader ]==================================================
 let mapleader="-"
 let maplocalleader="-"
