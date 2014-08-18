@@ -54,6 +54,12 @@ set wildmenu
 " allow changeing buffers without saving them
 set hidden
 
+" use our own intelligent make command
+set makeprg=mk
+
+" configure printer
+set pdev=HP_Officejet_Pro_8600
+
 " It happens so oftern that I type :Q instead of :q that it makes sense to make :Q just working. :Q is not used
 " anyway by vim.
 command Q q
