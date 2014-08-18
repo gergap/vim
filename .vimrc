@@ -17,6 +17,9 @@ set nocompatible
 set autoindent
 " use intelligent indentation for C
 set smartindent
+" enable cindent
+set cindent
+set cinoptions+=:0,g0
 " enable line numbers
 set number
 " enable syntax highlighting
