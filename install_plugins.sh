@@ -39,6 +39,7 @@ PLUGINS="$PLUGINS git://github.com/kana/vim-textobj-user"
 PLUGINS="$PLUGINS git://github.com/kana/vim-textobj-function"
 # gergap's vim-konsole plugin
 PLUGINS="$PLUGINS git://github.com/gergap/vim-konsole"
+PLUGINS="$PLUGINS git://github.com/gergap/vim-latexview"
 
 # create bundle dir for pathogen
 [ -d bundle ] || mkdir bundle
