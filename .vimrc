@@ -58,7 +58,7 @@ augroup VimReload
 augroup END
 
 "====[ make naughty characters visible ]=============================
-exec "set listchars=tab:>-,trail:\uB7,nbsp:~"
+exec "set listchars=tab:\u21A6\\ ,trail:\uB7,nbsp:~"
 set list
 
 "====[ highlight 81 column ]=========================================
