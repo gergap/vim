@@ -43,6 +43,17 @@ set hidden
 "=====[ enable pathogen vim package manager ]========================
 execute pathogen#infect()
 
+"=====[ enable solarized colorscheme        ]========================
+colorscheme solarized
+nnoremap <leader><F12> :call <sid>togglebackground()<cr>
+function! s:togglebackground()
+    if &background == "light"
+        let &background = "dark"
+    else
+        let &background = "light"
+    endif
+endfunction
+
 "====[ setup my CUPS printer ]=======================================
 " you can simply print using :ha(rdcopy)
 " this also supports an optional range argument, see :h ha

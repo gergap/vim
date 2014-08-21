@@ -40,6 +40,8 @@ PLUGINS="$PLUGINS git://github.com/kana/vim-textobj-function"
 # gergap's vim-konsole plugin
 PLUGINS="$PLUGINS git://github.com/gergap/vim-konsole"
 PLUGINS="$PLUGINS git://github.com/gergap/vim-latexview"
+# solarized colorscheme
+PLUGINS="$PLUGINS https://github.com/altercation/vim-colors-solarized"
 
 # create bundle dir for pathogen
 [ -d bundle ] || mkdir bundle
