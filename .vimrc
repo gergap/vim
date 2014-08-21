@@ -82,6 +82,7 @@ highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
 "====[ enable higlight search ]======================================
+set incsearch
 set hlsearch
 " This rewires n and N to do the highlighting...
 nnoremap <silent> n   n:call HLNext(0.4)<cr>
