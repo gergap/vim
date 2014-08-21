@@ -29,7 +29,7 @@ filetype plugin indent on
 " font selection
 if has("gui_running")
     colorscheme wombat
-    set gfn=DejaVu_Sans_Mono:h10:cANSI
+    set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ Bold\ 11
 else
     set t_Co=256
     colorscheme wombat256
