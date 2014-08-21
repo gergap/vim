@@ -40,6 +40,9 @@ set wildmenu
 " allow changeing buffers without saving them
 set hidden
 
+"=====[ enable pathogen vim package manager ]========================
+execute pathogen#infect()
+
 "====[ setup my CUPS printer ]=======================================
 " you can simply print using :ha(rdcopy)
 " this also supports an optional range argument, see :h ha
@@ -122,9 +125,6 @@ vmap  <expr>  <C-D>    DVB_Duplicate()
 
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
-
-"=====[ enable pathogen vim package manager ]========================
-execute pathogen#infect()
 
 "=====[ tabularize plugin ]==========================================
 "if exists(":Tabularize")
