@@ -34,6 +34,8 @@ PLUGINS="$PLUGINS git://github.com/tommcdo/vim-exchange.git"
 PLUGINS="$PLUGINS git://github.com/tpope/vim-speeddating.git"
 # vim-surround
 PLUGINS="$PLUGINS git://github.com/tpope/vim-surround.git"
+# vim-taglist
+PLUGINS="$PLUGINS https://github.com/vim-scripts/taglist.vim"
 # vim-textobj-function
 # this provides textobjects for functions and supports C, JAVA, and Vim script
 # Note: vim-textobj-function depends on vim-textobj-user
