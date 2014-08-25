@@ -28,7 +28,15 @@ syntax on
 " enable filetype
 filetype plugin indent on
 " font selection
-if has("gui_running")
+if has("win32")
+    " Notes on Windows: You need to install gvim74.exe, python2.7.8 and ctags.
+    " ctags zip contains a pre-built ctags.exe. Just put it into next to
+    " gvim.exe, so it will be found.
+    " make backspace working as expected
+    set backspace=2
+    colorscheme wombat
+    set gfn=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
+elseif has("gui_running")
     colorscheme wombat
     set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ Bold\ 11
 else
