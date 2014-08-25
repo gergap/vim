@@ -356,3 +356,6 @@ function! s:ToggleFocusMode()
 endfunc
 nnoremap <buffer> <F1> :call <sid>ToggleFocusMode()<cr>
 
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+
