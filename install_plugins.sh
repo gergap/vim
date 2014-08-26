@@ -19,7 +19,7 @@ PLUGINS="$PLUGINS https://github.com/Rip-Rip/clang_complete"
 #PLUGINS="$PLUGINS https://github.com/msanders/snipmate.vim"
 #PLUGINS="$PLUGINS https://github.com/ervandew/snipmate.vim"
 PLUGINS="$PLUGINS https://github.com/vim-scripts/UltiSnips"
-PLUGINS="$PLUGINS https://github.com/honza/vim-snippets"
+PLUGINS="$PLUGINS git://github.com/gergap/vim-snippets"
 # superTab
 PLUGINS="$PLUGINS https://github.com/ervandew/supertab"
 # multiple cursors - See https://github.com/terryma/vim-multiple-cursors
