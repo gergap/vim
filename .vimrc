@@ -120,6 +120,11 @@ endfunction
 "====[ surround word with quotes ]===================================
 :nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 
+"====[ map Y to y$ ]===================================
+" from the help: If you like "Y" to work from the cursor to the end of line
+" (which is more logical, but not Vi-compatible) use ":map Y y$".
+:nnoremap Y y$
+
 "====[ comment out current line ]====================================
 augroup Comment
     autocmd!
