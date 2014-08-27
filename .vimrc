@@ -374,3 +374,8 @@ nnoremap <buffer> <F1> :call <sid>ToggleFocusMode()<cr>
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
+function! Unittest()
+    set makeprg=./bin/test_list
+    set efm=\%EFAIL!\ \ :\ %m,%-GPASS%.%#,%+C\ \ \ Actual%.%#,%+C\ \ \ Expected%.%#,%+Z\ \ \ Loc:\ %[%f(%l%.%.
+endfunction
+
