@@ -344,6 +344,9 @@ else
   set spellfile+=ignore.utf-8.add
   map <M-Down> ]s
   map <M-Up> [s
+  " buffer switching with Alt-Left/Right
+  nnoremap <M-Left> :bp<cr>
+  nnoremap <M-Right> :bn<cr>
 endif
 
 
