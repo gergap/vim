@@ -100,6 +100,8 @@ set hlsearch
 " This rewires n and N to do the highlighting...
 nnoremap <silent> n   n:call HLNext(0.4)<cr>
 nnoremap <silent> N   N:call HLNext(0.4)<cr>
+" clear last search to remove all highlightings
+nnoremap <leader>c :let @/ = ""<cr>
 
 " this makes the current selected word better visible
 function! HLNext (blinktime)
