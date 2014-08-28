@@ -329,11 +329,11 @@ map <S-F12> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " in diff mode we use the spell check keys for merging
 if &diff
   " diff settings
-  map <M-Down> ]c
-  map <M-Up> [c
-  map <M-Left> do
-  map <M-Right> dp
-  map <F9> :new<CR>:read !svn diff<CR>:set syntax=diff buftype=nofile<CR>gg
+  nnoremap <M-Down> ]c
+  nnoremap <M-Up> [c
+  nnoremap <M-Left> do
+  nnoremap <M-Right> dp
+  nnoremap <F9> :new<CR>:read !svn diff<CR>:set syntax=diff buftype=nofile<CR>gg
 else
   " spell settings
 "  :setlocal spell spelllang=en
@@ -342,8 +342,8 @@ else
   set spellfile=~/.vim/spellfile.add
   " project specific ignore list, press 2zg to add a word to this ignore list
   set spellfile+=ignore.utf-8.add
-  map <M-Down> ]s
-  map <M-Up> [s
+  nnoremap <M-Down> ]s
+  nnoremap <M-Up> [s
   " buffer switching with Alt-Left/Right
   nnoremap <M-Left> :bp<cr>
   nnoremap <M-Right> :bn<cr>
