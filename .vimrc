@@ -301,8 +301,8 @@ inoremap <F2> <esc>:w<cr>i
 " map F3 and SHIFT-F3 to toggle spell checking
 nmap <F3> :setlocal spell spelllang=en<CR>
 imap <F3> <ESC>:setlocal spell spelllang=en<CR>i
-nmap <S-F3> :setlocal spell spelllang=<CR>
-imap <S-F3> <ESC>:setlocal spell spelllang=<CR>i
+nmap <S-F3> :setlocal nospell<CR>
+imap <S-F3> <ESC>:setlocal nospell<CR>i
 " switch between header/source with F4 in C/C++ using a.vim
 nmap <F4> :A<CR>
 imap <F4> <ESC>:A<CR>i
@@ -342,12 +342,31 @@ else
   set spellfile=~/.vim/spellfile.add
   " project specific ignore list, press 2zg to add a word to this ignore list
   set spellfile+=ignore.utf-8.add
-  nnoremap <M-Down> ]s
-  nnoremap <M-Up> [s
+  nnoremap <M-Down> :call <sid>NextError()<cr>
+  nnoremap <M-Up> :call <sid>PreviousError()<cr>
   " buffer switching with Alt-Left/Right
   nnoremap <M-Left> :bp<cr>
   nnoremap <M-Right> :bn<cr>
 endif
+
+" jump to next (spell|quickfix) error
+function! s:NextError()
+  if (&spell)
+      normal ]s
+  else
+      cNext
+  endif
+endfunction
+
+" jump to previous (spell|quickfix) error
+function! s:PreviousError()
+  if (&spell)
+      normal [s
+  else
+      cprevious
+  endif
+endfunction
+
 
 "====[ Ctrl-P plugin         ]=============================================
 nnoremap <leader>t :CtrlPTag<cr>
