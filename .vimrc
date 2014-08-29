@@ -349,6 +349,8 @@ else
   nnoremap <M-Right> :bn<cr>
 endif
 
+"====[ Ctrl-P plugin         ]=============================================
+nnoremap <leader>t :CtrlPTag<cr>
 
 "====[ distraction free mode ]=============================================
 " a primitive approach to create a distraction free mode
