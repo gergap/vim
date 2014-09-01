@@ -410,3 +410,9 @@ function! Unittest()
     set efm=\%EFAIL!\ \ :\ %m,%-GPASS%.%#,%+C\ \ \ Actual%.%#,%+C\ \ \ Expected%.%#,%+Z\ \ \ Loc:\ %[%f(%l%.%.
 endfunction
 
+"====[ add convenince function for underlining text ]==================
+function! Underline()
+    normal yypv$r=
+endfunction
+nnoremap <silent> <Leader>u :call Underline()<CR>
+
