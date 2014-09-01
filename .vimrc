@@ -8,6 +8,9 @@ set expandtab       " always use spaces instead of tabs
 set tabstop=4       " if there are tabs display them with 4 spaces
 set softtabstop=4   " this way backspace will remove the 'virtual' tab
 set shiftwidth=4    " intend with 4 spaces
+" intend wrapped text and show the ">" symbol. The three spaces intend
+" the text, which often fits text that I write.
+set showbreak=>\ \ \ 
 " set UTF-8 encoding
 set enc=utf-8
 set fenc=utf-8
