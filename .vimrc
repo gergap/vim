@@ -1,9 +1,9 @@
-"====[ gergap's Vim Configuration ]==================================
+"====[ gergap's Vim Configuration ]======================================
 " note, that I'm working on German keyboard
 " change this to your needs
-"====================================================================
+"========================================================================
 
-"====[ some basic editor settings ]==================================
+"====[ some basic editor settings ]======================================
 set expandtab       " always use spaces instead of tabs
 set tabstop=4       " if there are tabs display them with 4 spaces
 set softtabstop=4   " this way backspace will remove the 'virtual' tab
@@ -56,10 +56,10 @@ set hidden
 " configur external text formatter
 set formatprg=par-format
 
-"=====[ enable pathogen vim package manager ]========================
+"=====[ enable pathogen vim package manager ]============================
 execute pathogen#infect()
 
-"=====[ enable solarized colorscheme        ]========================
+"=====[ enable solarized colorscheme        ]============================
 colorscheme solarized
 nnoremap <leader><F12> :call <sid>togglebackground()<cr>
 function! s:togglebackground()
@@ -70,16 +70,16 @@ function! s:togglebackground()
     endif
 endfunction
 
-"====[ setup my CUPS printer ]=======================================
+"====[ setup my CUPS printer ]===========================================
 " you can simply print using :ha(rdcopy)
 " this also supports an optional range argument, see :h ha
 set pdev=HP_Officejet_Pro_8600
 
-"====[ map leader ]==================================================
+"====[ map leader ]======================================================
 let mapleader="-"
 let maplocalleader="-"
 
-"====[ make edit vim config easys ]==================================
+"====[ make edit vim config easys ]======================================
 nnoremap <leader>ev :split $MYVIMRC<cr>
 " auto reload when config has changed
 augroup VimReload
@@ -87,17 +87,17 @@ augroup VimReload
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
 
-"====[ make naughty characters visible ]=============================
+"====[ make naughty characters visible ]=================================
 exec "set listchars=tab:\u21A6\\ ,trail:\uB7,nbsp:~"
 set list
 
-"====[ highlight 81 column ]=========================================
+"====[ highlight 81 column ]=============================================
 " but only for lines that are too long.
 " this is less intrusive than showing it for all lines
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
-"====[ enable higlight search ]======================================
+"====[ enable higlight search ]==========================================
 set incsearch
 set hlsearch
 " This rewires n and N to do the highlighting...
@@ -116,39 +116,39 @@ function! HLNext (blinktime)
     redraw
 endfunction
 
-"====[ Esc insert mode by pressing jk ]==============================
+"====[ Esc insert mode by pressing jk ]==================================
 " this avoids moving my left hand to the esc key which is far away.
 " jk is not used normally in english or german language and I key leave my
 " hand on the navigation keys.
 :inoremap jk <esc>
 
-"====[ surround word with quotes ]===================================
+"====[ surround word with quotes ]=======================================
 :nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 
-"====[ map Y to y$ ]===================================
+"====[ map Y to y$ ]=====================================================
 " from the help: If you like "Y" to work from the cursor to the end of line
 " (which is more logical, but not Vi-compatible) use ":map Y y$".
 :nnoremap Y y$
 
-"====[ comment out current line ]====================================
+"====[ comment out current line ]========================================
 augroup Comment
     autocmd!
     autocmd FileType vim nnoremap <buffer> <localleader>c I"<esc>
     autocmd FileType c nnoremap <buffer> <localleader>c I//<esc>
 augroup END
 
-"====[ Damian Convay's vmath plugin ]================================
+"====[ Damian Convay's vmath plugin ]====================================
 vnoremap <expr> ++  VMATH_YankAndAnalyse()
 nmap            ++  vip++
 set noshowmode
 
-"====[ Damian Convay's digraph plugin ]================================
+"====[ Damian Convay's digraph plugin ]==================================
 " disable betterdigraph
 "let loaded_betterdigraphs = 1
 "inoremap <expr>  <C-K>   HUDG_GetDigraph()
 inoremap <expr>  <C-K>   BDG_GetDigraph()
 
-"=====[ Make arrow keys move visual blocks around ]==================
+"=====[ Make arrow keys move visual blocks around ]======================
 runtime plugin/dragvisuals.vim
 
 vmap  <expr>  <LEFT>   DVB_Drag('left')
@@ -161,7 +161,7 @@ vmap  <expr>  <C-D>    DVB_Duplicate()
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
 
-"=====[ tabularize plugin ]==========================================
+"=====[ tabularize plugin ]==============================================
 "if exists(":Tabularize")
 if 1
     nnoremap <leader>a= :Tabularize /=<cr>
@@ -216,27 +216,27 @@ function! s:align_tabular()
   endif
 endfunction
 
-"====[ learn hjkl the hard way ;-) ]=================================
+"====[ learn hjkl the hard way ;-) ]=====================================
 nmap <Left> <Nop>
 nmap <Right> <Nop>
 nmap <Up> <Nop>
 nmap <Down> <Nop>
 
-"====[ use my own make script ]======================================
+"====[ use my own make script ]==========================================
 set makeprg=mk
 
-"====[ map :Q to :q ]================================================
+"====[ map :Q to :q ]====================================================
 " It happens so often that I type :Q instead of :q that it makes sense to make
 " :Q just working. :Q is not used anyway by vim.
 command! Q q
 
-"====[ UltiSnips plugin ]============================================
+"====[ UltiSnips plugin ]================================================
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="horizontal"
 
-"====[ superTab plugin ]=============================================
+"====[ superTab plugin ]=================================================
 " uncomment the next line to disable superTab
 "let loaded_supertab = 1
 set completeopt=menu,longest
@@ -245,7 +245,7 @@ let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 let g:SuperTabLongestHighlight=1
 let g:SuperTabLongestEnhanced=1
 
-"====[ clang plugin ]=============================================
+"====[ clang plugin ]====================================================
 let g:clang_complete_copen = 1
 let g:clang_use_library = 1
 let g:clang_library_path = "/usr/lib"
@@ -259,10 +259,10 @@ set concealcursor=vin
 " Limit popup menu height
 set pumheight=20
 
-"====[ Taglist plugin ]==============================================
+"====[ Taglist plugin ]==================================================
 let Tlist_WinWidth = 40
 
-"====[ airline ]=====================================================
+"====[ airline ]=========================================================
 " use powerline fonts to show beautiful symbols
 let g:airline_powerline_fonts = 1
 " enable tab bar with buffers
@@ -278,11 +278,11 @@ if ! has('gui_running')
   augroup END
 endif
 
-"====[ fugitive vim plugin ]=========================================
+"====[ fugitive vim plugin ]=============================================
 set laststatus=2
 "set statusline=%{GitBranch()}
 
-"====[ DoxygenToolKit ]==============================================
+"====[ DoxygenToolKit ]==================================================
 " Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
 let g:DoxygenToolkit_briefTag_pre=""
 let g:DoxygenToolkit_paramTag_pre="@param "
@@ -295,7 +295,7 @@ let g:DoxygenToolkit_authorName="Gerhard Gappmeier <gerhard.gappmeier@ascolab.co
 "let g:DoxygenToolkit_licenseTag="My own license"
 let g:DoxygenToolkit_interCommentTag = "*"
 
-"====[ make use of F-keys ]==========================================
+"====[ make use of F-keys ]==============================================
 " unindent with Shift-Tab
 imap <S-Tab> <C-o><<
 " use F2 for saving
@@ -371,10 +371,10 @@ function! s:PreviousError()
 endfunction
 
 
-"====[ Ctrl-P plugin         ]=============================================
+"====[ Ctrl-P plugin         ]===========================================
 nnoremap <leader>t :CtrlPTag<cr>
 
-"====[ distraction free mode ]=============================================
+"====[ distraction free mode ]===========================================
 " a primitive approach to create a distraction free mode
 " this can be helpful e.g. when writing prosa like Markdown files.
 " augroup DFM
@@ -400,17 +400,17 @@ function! s:ToggleFocusMode()
 endfunc
 nnoremap <buffer> <F1> :call <sid>ToggleFocusMode()<cr>
 
-"====[ resize split windows ]==========================================
+"====[ resize split windows ]============================================
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
-"====[ add function to add support for unit test output ]==============
+"====[ add function to add support for unit test output ]================
 function! Unittest()
     set makeprg=./bin/test_list
     set efm=\%EFAIL!\ \ :\ %m,%-GPASS%.%#,%+C\ \ \ Actual%.%#,%+C\ \ \ Expected%.%#,%+Z\ \ \ Loc:\ %[%f(%l%.%.
 endfunction
 
-"====[ add convenince function for underlining text ]==================
+"====[ add convenience function for underlining text ]===================
 function! Underline()
     normal yypv$r=
 endfunction
