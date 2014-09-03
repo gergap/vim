@@ -54,7 +54,7 @@ set wildmenu
 " allow changeing buffers without saving them
 set hidden
 " configur external text formatter
-set formatprg=par-format
+set formatprg=par-format\ -w78
 
 "=====[ enable pathogen vim package manager ]============================
 execute pathogen#infect()
