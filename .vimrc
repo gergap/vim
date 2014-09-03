@@ -411,8 +411,13 @@ function! Unittest()
 endfunction
 
 "====[ add convenience function for underlining text ]===================
-function! Underline()
+" this is useful for markdown headers level 1 and 2
+function! Header1()
     normal yypv$r=
 endfunction
-nnoremap <silent> <Leader>u :call Underline()<CR>
+function! Header2()
+    normal yypv$r-
+endfunction
+nnoremap <silent> <Leader>U :call Header1()<CR>
+nnoremap <silent> <Leader>u :call Header2()<CR>
 
