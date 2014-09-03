@@ -10,7 +10,7 @@ set softtabstop=4   " this way backspace will remove the 'virtual' tab
 set shiftwidth=4    " intend with 4 spaces
 " intend wrapped text and show the ">" symbol. The three spaces intend
 " the text, which often fits text that I write.
-set showbreak=>\ \ \ 
+exec "set showbreak=\u21AA\\ \\ \\ "
 " set UTF-8 encoding
 set enc=utf-8
 set fenc=utf-8
@@ -88,7 +88,7 @@ augroup VimReload
 augroup END
 
 "====[ make naughty characters visible ]=================================
-exec "set listchars=tab:\u21A6\\ ,trail:\uB7,nbsp:~"
+exec "set listchars=tab:\u25B6\\ ,trail:\uB7,nbsp:~"
 set list
 
 "====[ highlight 81 column ]=============================================
