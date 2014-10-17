@@ -60,6 +60,31 @@ $0
 \end{frame}
 endsnippet
 
+snippet frame2 "a two column beamer frame" b
+\begin{frame}{${1:Two Column Frame}}
+    \begin{columns}
+        \column[t]{5cm}
+        \begin{itemize}
+            \item ${2:one}
+            \item ${3:two}
+			\item $0
+			\end{itemize}
+        \column[t]{5cm}
+        \begin{center}
+            \includegraphics[width=\textwidth,height=.75\textheight,keepaspectratio]{example.png}
+        \end{center}
+    \end{columns}
+\end{frame}
+endsnippet
+
+snippet frame3 "a full picture beamer frame" b
+\begin{frame}{${1:Picture Frame}}
+	\begin{center}
+		\includegraphics[width=\textwidth,height=.75\textheight,keepaspectratio]{example.png}
+	\end{center}
+\end{frame}
+endsnippet
+
 snippet latex "latex"
 \LaTeX
 endsnippet
