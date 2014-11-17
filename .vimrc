@@ -322,6 +322,8 @@ nmap <F7> :make<CR>
 imap <F7> <ESC>:w<CR>:make<CR>
 " clean build using makeprg with <S-F7>
 map <S-F7> :make clean all<CR>
+" Simple hexify/unhexify
+noremap <F8> :call <sid>Hexify()<CR>
 " remove trailing spaces
 map <F10> :%s/\s\+$//<CR>
 " goto definition with F12
@@ -420,4 +422,18 @@ function! Header2()
 endfunction
 nnoremap <silent> <Leader>U :call Header1()<CR>
 nnoremap <silent> <Leader>u :call Header2()<CR>
+
+"====[ hexify/unhexify using Vim's built-in xxd commend ]================
+function! s:Hexify()
+    " we need to ensure that Vim doesn't add garbage to the binary file
+    set binary "use binary mode
+    set noeol  "disable adding EOL
+    if $in_hex>0
+        :%!xxd -r
+        let $in_hex=0
+    else
+        :%!xxd
+        let $in_hex=1
+    endif
+endfunc
 
