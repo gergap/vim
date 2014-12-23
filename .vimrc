@@ -56,6 +56,9 @@ set hidden
 " configur external text formatter
 set formatprg=par-format\ -w78
 
+"=====[ Allow saving of files with sudo ]================================
+cmap w!! w !sudo tee > /dev/null %
+
 "=====[ enable pathogen vim package manager ]============================
 execute pathogen#infect()
 
