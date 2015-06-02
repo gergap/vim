@@ -4,5 +4,6 @@ augroup filetypedetect
     autocmd BufNewFile,BufRead *.dis set filetype=mixed
     autocmd BufNewFile,BufRead *.md  set filetype=markdown
     autocmd BufNewFile,BufRead *.markdown  set filetype=markdown
+    autocmd BufNewFile,BufRead *.iec  set filetype=iec
 augroup END
 
