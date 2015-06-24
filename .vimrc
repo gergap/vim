@@ -65,7 +65,7 @@ cmap w!! w !sudo tee > /dev/null %
 execute pathogen#infect()
 
 "=====[ enable solarized colorscheme        ]============================
-colorscheme solarized
+" colorscheme solarized
 nnoremap <leader><F12> :call <sid>togglebackground()<cr>
 function! s:togglebackground()
     if &background == "light"
