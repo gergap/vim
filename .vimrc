@@ -39,12 +39,14 @@ if has("win32")
     set backspace=2
     colorscheme wombat
     set gfn=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
-    " diable clang_complete on Windows
+    " disable clang_complete on Windows
     let g:clang_complete_loaded = 1
 elseif has("gui_running")
+    " gvim
     colorscheme wombat
     set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ Bold\ 11
 else
+    " console vim in 256 color terminal
     set t_Co=256
     colorscheme wombat256
 endif
