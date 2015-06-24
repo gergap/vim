@@ -44,7 +44,7 @@ if has("win32")
 elseif has("gui_running")
     " gvim
     colorscheme wombat
-    set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ Bold\ 11
+    set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ Bold\ 12
 else
     " console vim in 256 color terminal
     set t_Co=256
