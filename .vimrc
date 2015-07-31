@@ -346,46 +346,17 @@ map <S-F12> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " prefer vertical diff
 set diffopt+=vertical
 " in diff mode we use the spell check keys for merging
-if &diff
-  " diff settings
-  nnoremap <M-Down> ]c
-  nnoremap <M-Up> [c
-  nnoremap <M-Left> do
-  nnoremap <M-Right> dp
-  nnoremap <F9> :new<CR>:read !svn diff<CR>:set syntax=diff buftype=nofile<CR>gg
-else
-  " spell settings
+nnoremap <expr> <M-Down>  &diff ? ']c' : &spell ? ']s' : ':cn<cr>'
+nnoremap <expr> <M-Up>    &diff ? '[c' : &spell ? '[s' : ':cp<cr>'
+nnoremap <expr> <M-Left>  &diff ? 'do' : ':bp<cr>'
+nnoremap <expr> <M-Right> &diff ? 'dp' : ':bn<cr>'
+" spell settings
 "  :setlocal spell spelllang=en
-  " set the spellfile - folders must exist
-  " global wordlist, press zg to add a word to the list
-  set spellfile=~/.vim/spellfile.add
-  " project specific ignore list, press 2zg to add a word to this ignore list
-  set spellfile+=ignore.utf-8.add
-  nnoremap <M-Down> :call <sid>NextError()<cr>
-  nnoremap <M-Up> :call <sid>PreviousError()<cr>
-  " buffer switching with Alt-Left/Right
-  nnoremap <M-Left> :bp<cr>
-  nnoremap <M-Right> :bn<cr>
-endif
-
-" jump to next (spell|quickfix) error
-function! s:NextError()
-  if (&spell)
-      normal ]s
-  else
-      cNext
-  endif
-endfunction
-
-" jump to previous (spell|quickfix) error
-function! s:PreviousError()
-  if (&spell)
-      normal [s
-  else
-      cprevious
-  endif
-endfunction
-
+" set the spellfile - folders must exist
+" global wordlist, press zg to add a word to the list
+set spellfile=~/.vim/spellfile.add
+" project specific ignore list, press 2zg to add a word to this ignore list
+set spellfile+=ignore.utf-8.add
 
 "====[ Ctrl-P plugin         ]===========================================
 nnoremap <leader>t :CtrlPTag<cr>
