@@ -58,6 +58,13 @@ set hidden
 " configur external text formatter
 set formatprg=par-format\ -w78
 
+" add custom tags files
+set tags+=/home/gergap/work/uasdkc/.git/tags
+set tags+=/home/gergap/work/uasdkc/.git/modules/src/uaclient/uaclientc/tags
+set tags+=/home/gergap/work/uasdkc/.git/modules/src/uastack/tags
+set tags+=/home/gergap/work/uasdkc/.git/modules/src/uabase/uabasec/tags
+set tags+=/home/gergap/work/uasdkc/.git/modules/src/uaserver/uaserverc/tags
+
 "=====[ Allow saving of files with sudo ]================================
 cmap w!! w !sudo tee > /dev/null %
 
@@ -336,6 +343,8 @@ map <F12> <C-]>
 " open definition in new split
 "map <S-F12> <C-W> <C-]>
 map <S-F12> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+" prefer vertical diff
+set diffopt+=vertical
 " in diff mode we use the spell check keys for merging
 if &diff
   " diff settings
