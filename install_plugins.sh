@@ -48,8 +48,6 @@ PLUGINS="$PLUGINS git://github.com/gergap/vim-latexview"
 # solarized colorscheme
 PLUGINS="$PLUGINS https://github.com/altercation/vim-colors-solarized"
 
-cd .vim || exit 1
-
 # create bundle dir for pathogen
 [ -d bundle ] || mkdir bundle
 
