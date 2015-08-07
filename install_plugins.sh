@@ -13,8 +13,10 @@ PLUGINS="$PLUGINS https://github.com/peterhoeg/vim-qml.git"
 PLUGINS="$PLUGINS https://github.com/scrooloose/nerdtree"
 # Autoclose
 PLUGINS="$PLUGINS https://github.com/Townk/vim-autoclose.git"
-# Autoclose
-PLUGINS="$PLUGINS https://github.com/Rip-Rip/clang_complete"
+# clang_complete
+#PLUGINS="$PLUGINS https://github.com/Rip-Rip/clang_complete"
+# YouCompletMe
+PLUGINS="$PLUGINS https://github.com/Valloric/YouCompleteMe.git"
 # snipMate
 #PLUGINS="$PLUGINS https://github.com/msanders/snipmate.vim"
 #PLUGINS="$PLUGINS https://github.com/ervandew/snipmate.vim"

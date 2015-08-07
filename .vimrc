@@ -58,6 +58,8 @@ set hidden
 " configur external text formatter
 set formatprg=par-format\ -w78
 
+" disable clang_complete
+let g:clang_complete_loaded = 1
 " add custom tags files
 set tags+=/home/gergap/work/devel/uasdkc/.git/tags
 set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uaclient/uaclientc/tags
@@ -241,6 +243,15 @@ set makeprg=mk
 " It happens so often that I type :Q instead of :q that it makes sense to make
 " :Q just working. :Q is not used anyway by vim.
 command! Q q
+
+"====[ YCM plugin ]======================================================
+let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-Tab>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-Tab>'
+" use ctags files
+let g:ycm_collect_identifiers_from_tags_files = 1
+" only show popup when hitting (super)tab, this is less intrusive
+let g:ycm_auto_trigger = 0
 
 "====[ UltiSnips plugin ]================================================
 let g:UltiSnipsExpandTrigger="<tab>"
