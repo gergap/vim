@@ -251,7 +251,13 @@ let g:SuperTabDefaultCompletionType = '<C-Tab>'
 " use ctags files
 let g:ycm_collect_identifiers_from_tags_files = 1
 " only show popup when hitting (super)tab, this is less intrusive
-let g:ycm_auto_trigger = 0
+let g:ycm_auto_trigger = 1
+" disable confirmation for loading extra conf
+let g:ycm_confirm_extra_conf = 0
+" debug output
+"let g:ycm_server_keep_logfiles = 1
+"let g:ycm_server_log_level = 'debug'
+"let g:ycm_server_use_vim_stdout = 1
 
 "====[ UltiSnips plugin ]================================================
 let g:UltiSnipsExpandTrigger="<tab>"

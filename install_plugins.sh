@@ -72,3 +72,9 @@ for URL in $PLUGINS; do
     fi
 done
 
+# setup YouCompletMe
+cd YouCompleteMe
+git submodule update --init --recursive
+./install.sh --clang-completer
+cd -
+
