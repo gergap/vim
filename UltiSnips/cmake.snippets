@@ -7,19 +7,19 @@ add_executable($1 main.c)
 $0
 endsnippet
 
-snippet exe "CMake add_executable"
+snippet "(add_)exe" "CMake add_executable"
 add_executable(${1:${PROJECT_NAME}} ${2:sources})
 endsnippet
 
-snippet lib "CMake add_library"
+snippet "(add_)lib" "CMake add_library"
 add_library(${1:${PROJECT_NAME}} ${2:sources})
 endsnippet
 
-snippet link "CMake target_link_libraries"
+snippet "(target_)link" "CMake target_link_libraries"
 target_link_libraries(${1:${PROJECT_NAME}} ${2:libs})
 endsnippet
 
-snippet sub "CMake add_subdirectory"
+snippet "(add_)sub" "CMake add_subdirectory"
 add_subdirectory(${1:directory})
 endsnippet
 
