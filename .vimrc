@@ -259,6 +259,11 @@ let g:ycm_confirm_extra_conf = 0
 "let g:ycm_server_log_level = 'debug'
 "let g:ycm_server_use_vim_stdout = 1
 
+"====[ Autoclose plugin ]================================================
+" fix issue of autoclose with YCM. See
+" https://github.com/Valloric/YouCompleteMe/issues/9
+let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
+
 "====[ UltiSnips plugin ]================================================
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
