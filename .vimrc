@@ -254,6 +254,8 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_auto_trigger = 1
 " disable confirmation for loading extra conf
 let g:ycm_confirm_extra_conf = 0
+" always populate location list
+let g:ycm_always_populate_location_list = 1
 " debug output
 "let g:ycm_server_keep_logfiles = 1
 "let g:ycm_server_log_level = 'debug'
