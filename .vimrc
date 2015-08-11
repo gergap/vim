@@ -279,20 +279,6 @@ let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 let g:SuperTabLongestHighlight=1
 let g:SuperTabLongestEnhanced=1
 
-"====[ clang plugin ]====================================================
-let g:clang_complete_copen = 1
-let g:clang_use_library = 1
-let g:clang_library_path = "/usr/lib"
-let g:clang_snippets = 1
-let g:clang_conceal_snippets=1
-let g:clang_snippets_engine = 'clang_complete'
-let g:clang_complete_auto=1
-let g:clang_periodic_quickfix=0
-set conceallevel=2
-set concealcursor=vin
-" Limit popup menu height
-set pumheight=20
-
 "====[ Taglist plugin ]==================================================
 let Tlist_WinWidth = 40
 
