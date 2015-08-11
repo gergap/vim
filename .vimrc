@@ -345,6 +345,8 @@ imap <F7> <ESC>:w<CR>:make<CR>
 map <S-F7> :make clean all<CR>
 " Simple hexify/unhexify
 noremap <F8> :call <sid>Hexify()<CR>
+" Apply YCM FixIt
+map <F9> :YcmCompleter FixIt<CR>
 " remove trailing spaces
 map <F10> :%s/\s\+$//<CR>
 " goto definition with F12
