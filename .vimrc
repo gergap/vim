@@ -517,3 +517,10 @@ endfunction
 nmap <Leader>P :call PasteEscapedRegister("before")<cr>
 nmap <Leader>p :call PasteEscapedRegister("after")<cr>
 
+augroup logger
+    autocmd VimEnter * :call system('/home/gergap/vim/enable_logger')
+    autocmd VimLeave * :call system('/home/gergap/vim/disable_logger')
+    autocmd InsertEnter * :call system('/home/gergap/vim/insert_enter')
+    autocmd InsertLeave * :call system('/home/gergap/vim/insert_leave')
+augroup end
+
