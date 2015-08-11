@@ -5,6 +5,9 @@
 PLUGINS="git://github.com/tpope/vim-fugitive.git"
 # vim-airline - lightweight powerline alternative (pure vim, no python)
 PLUGINS="$PLUGINS https://github.com/bling/vim-airline.git"
+# vim-airline-loclist allows to disable loclist error in vim-airline statusline
+# This makes YCM (syntastic like) errors appear in the statusline
+PLUGINS="$PLUGINS https://github.com/asenac/vim-airline-loclist.git"
 # CTRLP - Fuzzy file open
 PLUGINS="$PLUGINS https://github.com/kien/ctrlp.vim.git"
 # QML syntax support
