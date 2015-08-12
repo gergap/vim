@@ -26,7 +26,7 @@ PLUGINS="$PLUGINS https://github.com/Valloric/YouCompleteMe.git"
 PLUGINS="$PLUGINS https://github.com/vim-scripts/UltiSnips"
 PLUGINS="$PLUGINS git://github.com/gergap/vim-snippets"
 # superTab
-PLUGINS="$PLUGINS https://github.com/ervandew/supertab"
+#PLUGINS="$PLUGINS https://github.com/ervandew/supertab"
 # multiple cursors - See https://github.com/terryma/vim-multiple-cursors
 PLUGINS="$PLUGINS https://github.com/terryma/vim-multiple-cursors"
 # tabularize plugin

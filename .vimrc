@@ -245,9 +245,9 @@ set makeprg=mk
 command! Q q
 
 "====[ YCM plugin ]======================================================
-let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-Tab>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-Tab>'
+"let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-Tab>', '<Up>']
+"let g:SuperTabDefaultCompletionType = '<C-Tab>'
 " use ctags files
 let g:ycm_collect_identifiers_from_tags_files = 1
 " only show popup when hitting (super)tab, this is less intrusive
@@ -275,11 +275,11 @@ let g:UltiSnipsEditSplit="horizontal"
 "====[ superTab plugin ]=================================================
 " uncomment the next line to disable superTab
 "let loaded_supertab = 1
-set completeopt=menu,longest
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-let g:SuperTabLongestHighlight=1
-let g:SuperTabLongestEnhanced=1
+"set completeopt=menu,longest
+"let g:SuperTabDefaultCompletionType = 'context'
+"let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+"let g:SuperTabLongestHighlight=1
+"let g:SuperTabLongestEnhanced=1
 
 "====[ Taglist plugin ]==================================================
 let Tlist_WinWidth = 40
