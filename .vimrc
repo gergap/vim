@@ -245,8 +245,8 @@ set makeprg=mk
 command! Q q
 
 "====[ YCM plugin ]======================================================
-"let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
-"let g:ycm_key_list_previous_completion = ['<C-Tab>', '<Up>']
+let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-Tab>', '<Up>']
 "let g:SuperTabDefaultCompletionType = '<C-Tab>'
 " use ctags files
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -260,6 +260,24 @@ let g:ycm_always_populate_location_list = 1
 "let g:ycm_server_keep_logfiles = 1
 "let g:ycm_server_log_level = 'debug'
 "let g:ycm_server_use_vim_stdout = 1
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+augroup mycm
+    au!
+    au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+augroup end
 
 "====[ Autoclose plugin ]================================================
 " fix issue of autoclose with YCM. See
