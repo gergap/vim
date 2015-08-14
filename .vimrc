@@ -392,6 +392,9 @@ set spellfile+=ignore.utf-8.add
 "====[ Ctrl-P plugin         ]===========================================
 nnoremap <leader>t :CtrlPTag<cr>
 
+"====[ NERDTree plugin       ]===========================================
+nnoremap <leader>n :NERDTreeToggle<cr>
+
 "====[ distraction free mode ]===========================================
 " a primitive approach to create a distraction free mode
 " this can be helpful e.g. when writing prosa like Markdown files.
