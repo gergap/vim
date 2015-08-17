@@ -52,6 +52,10 @@ PLUGINS="$PLUGINS git://github.com/gergap/vim-konsole"
 PLUGINS="$PLUGINS git://github.com/gergap/vim-latexview"
 # solarized colorscheme
 PLUGINS="$PLUGINS https://github.com/altercation/vim-colors-solarized"
+# vim wiki plugin
+PLUGINS="$PLUGINS https://github.com/vimwiki/vimwiki.git"
+# showmarks plugin
+PLUGINS="$PLUGINS https://github.com/vim-scripts/ShowMarks.git"
 
 # create bundle dir for pathogen
 [ -d bundle ] || mkdir bundle
