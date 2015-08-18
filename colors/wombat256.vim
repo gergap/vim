@@ -39,6 +39,11 @@ hi DiffChange   ctermfg=0    ctermbg=175     cterm=none
 hi DiffDelete   ctermfg=0    ctermbg=17      cterm=none
 hi SpellBad     ctermfg=0    ctermbg=161     cterm=none
 hi ExtraWS      ctermfg=0    ctermbg=161     cterm=none
+hi ShowMarksHLl ctermfg=192  ctermbg=0       cterm=none
+hi ShowMarksHLu ctermfg=192  ctermbg=0       cterm=none
+hi ShowMarksHLo ctermfg=192  ctermbg=0       cterm=none
+hi ShowMarksHLm ctermfg=192  ctermbg=0       cterm=none
+hi SignColumn   ctermfg=192  ctermbg=0       cterm=none
 
 " Syntax highlighting
 hi Comment 		ctermfg=144	 ctermbg=0
