@@ -274,9 +274,18 @@ function! g:UltiSnips_Complete()
     endif
     return ""
 endfunction
+function! g:UltiSnips_Reverse()
+  call UltiSnips#JumpBackwards()
+  if g:ulti_jump_backwards_res == 0
+    return "\<C-P>"
+  endif
+
+  return ""
+endfunction
 augroup mycm
     au!
     au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+    au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 augroup end
 
 "====[ Autoclose plugin ]================================================
@@ -289,6 +298,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="horizontal"
+let g:UltiSnipsListSnippets="<c-e>"
 
 "====[ superTab plugin ]=================================================
 " uncomment the next line to disable superTab
