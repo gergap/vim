@@ -1,8 +1,17 @@
-snippet project "CMake project" !b
+snippet project "CMake C project" !b
 project(${1:name} C)
 cmake_minimum_required(VERSION 2.8)
 
 add_executable($1 main.c)
+
+$0
+endsnippet
+
+snippet cppproject "CMake C++ project" !b
+project(${1:name})
+cmake_minimum_required(VERSION 2.8)
+
+add_executable($1 main.cpp)
 
 $0
 endsnippet
