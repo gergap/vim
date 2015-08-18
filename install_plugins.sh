@@ -54,6 +54,7 @@ PLUGINS="$PLUGINS git://github.com/gergap/vim-latexview"
 PLUGINS="$PLUGINS https://github.com/altercation/vim-colors-solarized"
 # vim wiki plugin
 PLUGINS="$PLUGINS https://github.com/vimwiki/vimwiki.git"
+PLUGINS="$PLUGINS https://github.com/vim-scripts/calendar.vim--Matsumoto.git"
 # showmarks plugin
 PLUGINS="$PLUGINS https://github.com/vim-scripts/ShowMarks.git"
 
