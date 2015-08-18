@@ -357,9 +357,9 @@ imap <S-F4> <ESC>:AV<CR>i
 map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " create doxygen comment
 map <F6> :Dox<CR>
-nnoremap <F7> :make<cr>
+nnoremap <F7> :w<cr>:make<cr>
 " build using makeprg with <F7>
-nmap <F7> :make<CR>
+nmap <F7> :w<CR>:make<CR>
 imap <F7> <ESC>:w<CR>:make<CR>
 " clean build using makeprg with <S-F7>
 map <S-F7> :make clean all<CR>
