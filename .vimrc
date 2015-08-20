@@ -37,18 +37,15 @@ if has("win32")
     " gvim.exe, so it will be found.
     " make backspace working as expected
     set backspace=2
-    colorscheme wombat
     set gfn=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
     " disable clang_complete on Windows
     let g:clang_complete_loaded = 1
 elseif has("gui_running")
     " gvim
-    colorscheme wombat
     set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ Bold\ 12
 else
     " console vim in 256 color terminal
     set t_Co=256
-    colorscheme wombat256
 endif
 " use intelligent file completion like in the bash
 set wildmode=longest:full
@@ -72,6 +69,9 @@ cmap w!! w !sudo tee > /dev/null %
 
 "=====[ enable pathogen vim package manager ]============================
 execute pathogen#infect()
+
+" configure colorscheme
+colorscheme wombat256
 
 "=====[ enable solarized colorscheme        ]============================
 " colorscheme solarized

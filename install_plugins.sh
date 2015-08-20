@@ -1,8 +1,10 @@
 #!/bin/bash
 # This script install some useful plugins for you.
 
+# wombat256 - My default colorscheme
+PLUGINS="https://github.com/gergap/wombat256.git"
 # vim-fugitive - Awesome git plugin
-PLUGINS="git://github.com/tpope/vim-fugitive.git"
+PLUGINS="$PLUGINS git://github.com/tpope/vim-fugitive.git"
 # vim-airline - lightweight powerline alternative (pure vim, no python)
 PLUGINS="$PLUGINS https://github.com/bling/vim-airline.git"
 # vim-airline-loclist allows to disable loclist error in vim-airline statusline
