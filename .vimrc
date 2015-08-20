@@ -289,6 +289,22 @@ augroup mycm
     au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 augroup end
 
+"====[ Multiple-Cursors plugin ]=========================================
+" There is a conflict of Multiple-Cursors and YCM. When using multiple
+" cursors YCM tries to complete every cursor, which slows down MC a lot.
+" So we simply disable YCM autotrigger as long as editing with multiple
+" cursors.
+" slow multiple_cursors &amp; YCM
+function! Multiple_cursors_before()
+    let g:ycm_auto_trigger = 0
+    echo "off"
+endfunction
+
+function! Multiple_cursors_after()
+    let g:ycm_auto_trigger = 1
+    echo "on"
+endfunction
+
 "====[ Autoclose plugin ]================================================
 " fix issue of autoclose with YCM. See
 " https://github.com/Valloric/YouCompleteMe/issues/9
