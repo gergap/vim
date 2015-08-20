@@ -69,6 +69,7 @@ cmap w!! w !sudo tee > /dev/null %
 
 "=====[ enable pathogen vim package manager ]============================
 execute pathogen#infect()
+Helptags
 
 " configure colorscheme
 colorscheme wombat256
