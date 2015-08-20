@@ -287,23 +287,7 @@ augroup mycm
     au!
     au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
     au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
-augroup end
-
-"====[ Multiple-Cursors plugin ]=========================================
-" There is a conflict of Multiple-Cursors and YCM. When using multiple
-" cursors YCM tries to complete every cursor, which slows down MC a lot.
-" So we simply disable YCM autotrigger as long as editing with multiple
-" cursors.
-" slow multiple_cursors &amp; YCM
-function! Multiple_cursors_before()
-    let g:ycm_auto_trigger = 0
-    echo "off"
-endfunction
-
-function! Multiple_cursors_after()
-    let g:ycm_auto_trigger = 1
-    echo "on"
-endfunction
+augroup END
 
 "====[ Autoclose plugin ]================================================
 " fix issue of autoclose with YCM. See
@@ -574,13 +558,13 @@ function! KeyLoggerEnable()
         autocmd VimLeave * :call system('$HOME/vim/disable_logger')
         autocmd InsertEnter * :call system('$HOME/vim/insert_enter')
         autocmd InsertLeave * :call system('$HOME/vim/insert_leave')
-    augroup end
+    augroup END
 endfunction
 
 function! KeyLoggerDisable()
     augroup logger
         autocmd!
-    augroup end
+    augroup END
 endfunction
 
 " change cursor shape in KDE4 konsole
