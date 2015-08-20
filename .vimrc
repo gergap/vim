@@ -551,13 +551,21 @@ endfunction
 nmap <Leader>P :call PasteEscapedRegister("before")<cr>
 nmap <Leader>p :call PasteEscapedRegister("after")<cr>
 
-augroup logger
-    autocmd!
-    autocmd VimEnter * :call system('$HOME/vim/enable_logger')
-    autocmd VimLeave * :call system('$HOME/vim/disable_logger')
-    autocmd InsertEnter * :call system('$HOME/vim/insert_enter')
-    autocmd InsertLeave * :call system('$HOME/vim/insert_leave')
-augroup end
+function! KeyLoggerEnable()
+    augroup logger
+        autocmd!
+        autocmd VimEnter * :call system('$HOME/vim/enable_logger')
+        autocmd VimLeave * :call system('$HOME/vim/disable_logger')
+        autocmd InsertEnter * :call system('$HOME/vim/insert_enter')
+        autocmd InsertLeave * :call system('$HOME/vim/insert_leave')
+    augroup end
+endfunction
+
+function! KeyLoggerDisable()
+    augroup logger
+        autocmd!
+    augroup end
+endfunction
 
 " change cursor shape in KDE4 konsole
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
