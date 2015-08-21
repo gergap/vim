@@ -94,6 +94,16 @@ set pdev=HP_Officejet_Pro_8600
 let mapleader="-"
 let maplocalleader="-"
 
+"====[ hotkey for toggling relative line numbers ]=======================
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <leader>r :call NumberToggle()<cr>
+
 "====[ make edit vim config easys ]======================================
 nnoremap <leader>ev :split $MYVIMRC<cr>
 " auto reload when config has changed
