@@ -88,7 +88,7 @@ endfunction
 "====[ setup my CUPS printer ]===========================================
 " you can simply print using :ha(rdcopy)
 " this also supports an optional range argument, see :h ha
-set pdev=HP_Officejet_Pro_8600
+set pdev=HP_LaserJet_5200
 
 "====[ map leader ]======================================================
 let mapleader="-"
