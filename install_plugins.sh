@@ -3,6 +3,8 @@
 
 # wombat256 - My default colorscheme
 PLUGINS="https://github.com/gergap/wombat256.git"
+# vim-touchpad - My new touchpad disabling plugin
+PLUGINS="$PLUGINS git://github.com/gergap/touchpad.git"
 # vim-gitgutter
 PLUGINS="$PLUGINS https://github.com/airblade/vim-gitgutter.git"
 # vim-fugitive - Awesome git plugin
