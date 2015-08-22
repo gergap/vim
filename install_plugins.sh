@@ -3,6 +3,8 @@
 
 # wombat256 - My default colorscheme
 PLUGINS="https://github.com/gergap/wombat256.git"
+# vim-gitgutter
+PLUGINS="$PLUGINS https://github.com/airblade/vim-gitgutter.git"
 # vim-fugitive - Awesome git plugin
 PLUGINS="$PLUGINS git://github.com/tpope/vim-fugitive.git"
 # vim-airline - lightweight powerline alternative (pure vim, no python)
