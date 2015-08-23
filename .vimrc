@@ -28,6 +28,16 @@ set cinoptions+=:0,g0
 set number
 " enable syntax highlighting
 syntax on
+" Always show at least one line above and below cursor
+if !&scrolloff
+    set scrolloff=1
+endif
+" The same for side scrolling
+if !&sidescrolloff
+    set sidescrolloff=5
+endif
+" See :h 'display' for an explanation of this
+set display+=lastline
 " enable filetype
 filetype plugin indent on
 " font selection
