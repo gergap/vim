@@ -7,8 +7,18 @@ PLUGINS="https://github.com/gergap/wombat256.git"
 PLUGINS="$PLUGINS git://github.com/gergap/touchpad.git"
 # vim-gitgutter
 PLUGINS="$PLUGINS https://github.com/airblade/vim-gitgutter.git"
+# StartTimPope: Tim Pope is a Vim Hero: let's use some of his awsome plugins
 # vim-fugitive - Awesome git plugin
 PLUGINS="$PLUGINS git://github.com/tpope/vim-fugitive.git"
+# vim-commentary
+PLUGINS="$PLUGINS git://github.com/tpope/vim-commentary.git"
+# vim-speeddating
+PLUGINS="$PLUGINS git://github.com/tpope/vim-speeddating.git"
+# vim-surround
+PLUGINS="$PLUGINS git://github.com/tpope/vim-surround.git"
+# vim-abolish
+PLUGINS="$PLUGINS git://github.com/tpope/vim-abolish.git"
+# EndTimPope
 # vim-airline - lightweight powerline alternative (pure vim, no python)
 PLUGINS="$PLUGINS https://github.com/bling/vim-airline.git"
 # vim-airline-loclist allows to disable loclist error in vim-airline statusline
@@ -37,14 +47,8 @@ PLUGINS="$PLUGINS git://github.com/gergap/vim-snippets"
 PLUGINS="$PLUGINS https://github.com/terryma/vim-multiple-cursors"
 # tabularize plugin
 PLUGINS="$PLUGINS https://github.com/godlygeek/tabular.git"
-# vim-commentary
-PLUGINS="$PLUGINS git://github.com/tpope/vim-commentary.git"
 # vim-exchange
 PLUGINS="$PLUGINS git://github.com/tommcdo/vim-exchange.git"
-# vim-speeddating
-PLUGINS="$PLUGINS git://github.com/tpope/vim-speeddating.git"
-# vim-surround
-PLUGINS="$PLUGINS git://github.com/tpope/vim-surround.git"
 # vim-taglist
 PLUGINS="$PLUGINS https://github.com/vim-scripts/taglist.vim"
 # vim-textobj-function
