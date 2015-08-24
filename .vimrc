@@ -325,6 +325,9 @@ let g:showmarks_include="abcdefghijklmnopqrstuvwxyz."
 " fix issue of autoclose with YCM. See
 " https://github.com/Valloric/YouCompleteMe/issues/9
 let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
+" Disable expand space, I don't need it and this would overload <SPACE>
+" which conflicts with Vim abbreviation
+let g:AutoCloseExpandSpace = 0
 
 "====[ UltiSnips plugin ]================================================
 let g:UltiSnipsExpandTrigger="<tab>"
