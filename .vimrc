@@ -26,6 +26,8 @@ set cindent
 set cinoptions+=:0,g0
 " enable line numbers
 set number
+set relativenumber
+set cursorline
 " enable syntax highlighting
 syntax on
 " Always show at least one line above and below cursor
