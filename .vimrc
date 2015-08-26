@@ -84,7 +84,8 @@ execute pathogen#infect()
 Helptags
 
 " configure colorscheme
-colorscheme wombat256
+"colorscheme wombat256
+colorscheme gergap
 
 "=====[ enable solarized colorscheme        ]============================
 " colorscheme solarized
