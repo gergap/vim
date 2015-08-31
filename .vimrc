@@ -619,3 +619,12 @@ function! AppendModeline()
   call append(line("$"), l:modeline)
 endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
+" Syntax highlight debugging: this function is from the Vim Manual
+function! ShowSyntaxStack()
+    for id in synstack(line("."), col("."))
+        echo synIDattr(id, "name")
+    endfor
+endfunction
+map <leader>s :call ShowSyntaxStack()<cr>
+
