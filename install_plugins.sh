@@ -4,9 +4,11 @@
 # wombat256 - My default colorscheme
 PLUGINS="https://github.com/gergap/wombat256.git"
 # gergap - My new colorscheme created from scratch
-PLUGINS="https://github.com/gergap/gergap.git"
+PLUGINS="$PLUGINS https://github.com/gergap/gergap.git"
 # vim-touchpad - My new touchpad disabling plugin
 PLUGINS="$PLUGINS git://github.com/gergap/touchpad.git"
+# vim-kanban - My kanban and pomodoro plugin
+PLUGINS="$PLUGINS git://github.com/gergap/vim-kanban.git"
 # vim-gitgutter
 PLUGINS="$PLUGINS https://github.com/airblade/vim-gitgutter.git"
 # StartTimPope: Tim Pope is a Vim Hero: let's use some of his awsome plugins
