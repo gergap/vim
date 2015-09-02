@@ -628,3 +628,10 @@ function! ShowSyntaxStack()
 endfunction
 map <leader>s :call ShowSyntaxStack()<cr>
 
+" Make views automatic: http://vim.wikia.com/wiki/VimTip991
+augroup MakeViewAutomatic
+    autocmd!
+    autocmd BufWinLeave *.* mkview
+    autocmd BufWinEnter *.* silent loadview 
+augroup end
+
