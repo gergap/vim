@@ -444,6 +444,10 @@ nnoremap <leader>t :CtrlPTag<cr>
 "====[ NERDTree plugin       ]===========================================
 nnoremap <leader>n :NERDTreeToggle<cr>
 
+"====[ indentLines plugin    ]===========================================
+let g:indentLine_color_term = 239
+let g:indentLine_char = '┆'
+
 "====[ distraction free mode ]===========================================
 " a primitive approach to create a distraction free mode
 " this can be helpful e.g. when writing prosa like Markdown files.
