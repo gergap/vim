@@ -31,7 +31,7 @@ PLUGINS="$PLUGINS https://github.com/bling/vim-airline.git"
 # This makes YCM (syntastic like) errors appear in the statusline
 PLUGINS="$PLUGINS https://github.com/asenac/vim-airline-loclist.git"
 # CTRLP - Fuzzy file open
-PLUGINS="$PLUGINS https://github.com/kien/ctrlp.vim.git"
+PLUGINS="$PLUGINS https://github.com/ctrlpvim/ctrlp.vim.git"
 # QML syntax support
 PLUGINS="$PLUGINS https://github.com/peterhoeg/vim-qml.git"
 # Nerdtree
