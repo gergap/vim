@@ -445,6 +445,7 @@ nnoremap <leader>t :CtrlPTag<cr>
 nnoremap <leader>n :NERDTreeToggle<cr>
 
 "====[ indentLines plugin    ]===========================================
+let g:indentLine_enabled = 0
 let g:indentLine_color_term = 239
 let g:indentLine_char = '┆'
 
