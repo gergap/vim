@@ -322,7 +322,7 @@ augroup END
 "====[ ShowMarks plugin ]================================================
 " reduce shows marks to I need. The default is
 "let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.'`^<>[]{}()\""
-let g:showmarks_include="abcdefghijklmnopqrstuvwxyz."
+let g:showmarks_include="abcdefghijklmnopqrstuvwxyz.[]<>"
 
 "====[ Autoclose plugin ]================================================
 " fix issue of autoclose with YCM. See
