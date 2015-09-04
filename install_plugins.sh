@@ -13,6 +13,8 @@ PLUGINS="$PLUGINS git://github.com/gergap/vim-kanban.git"
 PLUGINS="$PLUGINS https://github.com/airblade/vim-gitgutter.git"
 # indentation Lines
 PLUGINS="$PLUGINS https://github.com/Yggdroot/indentLine.git"
+# dirdiff plugin
+PLUGINS="$PLUGINS https://github.com/will133/vim-dirdiff.git"
 # StartTimPope: Tim Pope is a Vim Hero: let's use some of his awsome plugins
 # vim-fugitive - Awesome git plugin
 PLUGINS="$PLUGINS git://github.com/tpope/vim-fugitive.git"
