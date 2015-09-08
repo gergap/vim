@@ -144,3 +144,11 @@ int ua_$1_copy(const struct ua_$1 *dst, const struct ua_$1 *src)
 }
 
 endsnippet
+
+snippet #ifdef "#if ... #endif" b
+#ifdef ${1:DEFINE}
+${0:${VISUAL}}
+#endif /* $1 */
+endsnippet
+
+
