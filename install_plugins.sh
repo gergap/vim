@@ -26,6 +26,8 @@ PLUGINS="$PLUGINS git://github.com/tpope/vim-commentary.git"
 PLUGINS="$PLUGINS git://github.com/tpope/vim-speeddating.git"
 # vim-surround
 PLUGINS="$PLUGINS git://github.com/tpope/vim-surround.git"
+# vim-repeat
+PLUGINS="$PLUGINS git://github.com/tpope/vim-repeat.git"
 # vim-abolish
 PLUGINS="$PLUGINS git://github.com/tpope/vim-abolish.git"
 # EndTimPope
@@ -66,6 +68,7 @@ PLUGINS="$PLUGINS https://github.com/vim-scripts/taglist.vim"
 # Note: vim-textobj-function depends on vim-textobj-user
 PLUGINS="$PLUGINS git://github.com/kana/vim-textobj-user"
 PLUGINS="$PLUGINS git://github.com/kana/vim-textobj-function"
+PLUGINS="$PLUGINS git://github.com/kana/vim-textobj-line.git"
 # gergap's vim-konsole plugin
 PLUGINS="$PLUGINS git://github.com/gioele/vim-autoswap"
 PLUGINS="$PLUGINS git://github.com/gergap/vim-konsole"
