@@ -85,6 +85,7 @@ Helptags
 
 " configure colorscheme
 "colorscheme wombat256
+set background=dark
 colorscheme gergap
 
 "=====[ enable solarized colorscheme        ]============================
