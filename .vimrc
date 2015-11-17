@@ -387,7 +387,7 @@ let g:DoxygenToolkit_startCommentBlock = "/*"
 "let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
 let g:DoxygenToolkit_authorName="Gerhard Gappmeier <gerhard.gappmeier@ascolab.com>"
 "let g:DoxygenToolkit_licenseTag="My own license"
-let g:DoxygenToolkit_interCommentTag = "*"
+let g:DoxygenToolkit_interCommentTag = "* "
 
 "====[ make use of F-keys ]==============================================
 " unindent with Shift-Tab
