@@ -282,6 +282,9 @@ let g:ycm_key_list_previous_completion = ['<C-Tab>', '<Up>']
 "let g:SuperTabDefaultCompletionType = '<C-Tab>'
 " use ctags files
 let g:ycm_collect_identifiers_from_tags_files = 1
+" When set to 1, the OmniSharp server will be automatically started (once per
+" Vim session) when you open a C# file.
+let g:ycm_auto_start_csharp_server = 0
 " only show popup when hitting (super)tab, this is less intrusive
 let g:ycm_auto_trigger = 1
 " disable confirmation for loading extra conf
