@@ -70,11 +70,11 @@ set formatprg=par-format\ -w78
 " disable clang_complete
 let g:clang_complete_loaded = 1
 " add custom tags files
-set tags+=/home/gergap/work/devel/uasdkc/.git/tags
-set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uaclient/uaclientc/tags
-set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uastack/tags
-set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uabase/uabasec/tags
-set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uaserver/uaserverc/tags
+"set tags+=/home/gergap/work/devel/uasdkc/.git/tags
+"set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uaclient/uaclientc/tags
+"set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uastack/tags
+"set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uabase/uabasec/tags
+"set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uaserver/uaserverc/tags
 
 "=====[ Allow saving of files with sudo ]================================
 cmap w!! w !sudo tee > /dev/null %
