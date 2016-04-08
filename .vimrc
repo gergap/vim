@@ -372,6 +372,25 @@ if ! has('gui_running')
   augroup END
 endif
 
+"====[ KDbg launcher ]===================================================
+" run target in debugger
+function! g:ExecuteKDbg()
+    if exists("g:target")
+        execute "!kdbg ".g:target
+    else
+        echo "No target is defined. Please execute 'let g:target=\"<your target>\"'"
+    endif
+endfunction
+
+" run target without debugging
+function! g:RunTarget()
+    if exists("g:target")
+        execute "!".g:target
+    else
+        echo "No target is defined. Please execute 'let g:target=\"<your target>\"'"
+    endif
+endfunction
+
 "====[ fugitive vim plugin ]=============================================
 set laststatus=2
 "set statusline=%{GitBranch()}
@@ -422,6 +441,9 @@ noremap <F8> :call <sid>Hexify()<CR>
 map <F9> :YcmCompleter FixIt<CR>
 " remove trailing spaces
 map <F10> :%s/\s\+$//<CR>
+" run kdbg
+nmap <leader>d :call ExecuteKDbg()<CR>
+nmap <leader>x :call RunTarget()<CR>
 " goto definition with F12
 map <F12> <C-]>
 " open definition in new split
