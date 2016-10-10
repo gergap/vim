@@ -8,6 +8,7 @@ set expandtab       " always use spaces instead of tabs
 set tabstop=4       " if there are tabs display them with 4 spaces
 set softtabstop=4   " this way backspace will remove the 'virtual' tab
 set shiftwidth=4    " intend with 4 spaces
+set backspace=2     " make backspace working as expected
 " intend wrapped text and show the ">" symbol. The three spaces intend
 " the text, which often fits text that I write.
 exec "set showbreak=\u21AA\\ \\ \\ "
@@ -47,8 +48,6 @@ if has("win32")
     " Notes on Windows: You need to install gvim74.exe, python2.7.8 and ctags.
     " ctags zip contains a pre-built ctags.exe. Just put it into next to
     " gvim.exe, so it will be found.
-    " make backspace working as expected
-    set backspace=2
     set gfn=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
     " disable clang_complete on Windows
     let g:clang_complete_loaded = 1
