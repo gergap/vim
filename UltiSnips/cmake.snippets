@@ -16,23 +16,43 @@ add_executable($1 main.cpp)
 $0
 endsnippet
 
-snippet "(add_)exe" "CMake add_executable"
+snippet qtproj "CMake Qt project" b
+project(${1:name})
+cmake_minimum_required(VERSION 2.8)
+
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+# Instruct CMake to run moc automatically when needed.
+set(CMAKE_AUTOMOC ON)
+
+# Find the QtWidgets library
+find_package(Qt5Widgets)
+
+# Create Qt executable
+add_executable($1 main.cpp)
+# Link Qt libraries
+target_link_libraries($1 Qt5::Widgets)
+
+$0
+endsnippet
+
+snippet exe "CMake add_executable" b
 add_executable(${1:${PROJECT_NAME}} ${2:sources})
 endsnippet
 
-snippet "(add_)lib" "CMake add_library"
+snippet lib "CMake add_library" b
 add_library(${1:${PROJECT_NAME}} ${2:sources})
 endsnippet
 
-snippet "(target_)link" "CMake target_link_libraries"
+snippet link "CMake target_link_libraries" b
 target_link_libraries(${1:${PROJECT_NAME}} ${2:libs})
 endsnippet
 
-snippet "(add_)sub" "CMake add_subdirectory"
+snippet sub "CMake add_subdirectory" b
 add_subdirectory(${1:directory})
 endsnippet
 
-snippet inc "CMake include_directories"
+snippet inc "CMake include_directories" b
 include_directories(${1:directory})
 endsnippet
 
