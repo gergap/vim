@@ -1,3 +1,13 @@
+snippet hello "hello world demo" b
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    printf("Hello ${1:World}!\n");
+    return 0;
+}
+endsnippet
+
 snippet realloc "realloc memory" b
 void *${3:tmp} = realloc(${1:data}, ${2:size});
 if ($3) {
