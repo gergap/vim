@@ -639,3 +639,25 @@ augroup MakeViewAutomatic
     autocmd BufWinEnter *.* silent loadview 
 augroup end
 
+function! Enum2Array()
+    let l:autoclose=b:AutoCloseOn
+    " disable autoclose
+    let b:AutoCloseOn=0
+    exe "normal! :'<,'>g/^\\s*$/d\n"
+    exe "normal! :'<,'>s/\\(\\s*\\)\\([[:alnum:]_]*\\).*/\\1[\\2] = \"\\2\",/\n"
+    normal `>
+    exe "normal a\n};\n"
+    normal ==
+    normal `<
+    exe "normal iconst char *[] =\n{\n"
+    " try some indentation
+    exe ":'<,'>normal =="
+    normal `>j==
+    " set the cursor at the top
+    normal `<
+    " restore autoclose
+    let b:AutoCloseOn=l:autoclose
+    normal f[
+endfunction
+map <leader>e <esc>:call Enum2Array()<cr>
+
