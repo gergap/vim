@@ -82,13 +82,20 @@ cmap w!! w !sudo tee > /dev/null %
 execute pathogen#infect()
 Helptags
 
-" configure colorscheme
-"colorscheme wombat256
-set background=dark
-colorscheme gergap
+" configure colorscheme: autodected correct colorscheme depending on env
+" variable that is set in KDE Konsole Profile
+let cs=$colorscheme
+if cs == "SolarizedDark"
+    colorscheme solarized
+    set background=dark
+elseif cs == "SolarizedLight"
+    colorscheme solarized
+    set background=light
+else
+    set background=dark
+    colorscheme gergap
+endif
 
-"=====[ enable solarized colorscheme        ]============================
-" colorscheme solarized
 nnoremap <leader><F12> :call <sid>togglebackground()<cr>
 function! s:togglebackground()
     if &background == "light"
