@@ -360,6 +360,9 @@ let g:UltiSnipsListSnippets="<c-e>"
 
 "====[ Taglist plugin ]==================================================
 let Tlist_WinWidth = 40
+let Tlist_Auto_Open = 1
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_Use_Right_Window = 1
 
 "====[ airline ]=========================================================
 " use powerline fonts to show beautiful symbols
