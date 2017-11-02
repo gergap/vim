@@ -394,6 +394,12 @@ if ! has('gui_running')
 endif
 
 "====[ KDbg launcher ]===================================================
+let g:workdir="/home/gergap/work/devel/embeddedstack-file/bin"
+"let g:target="/home/gergap/work/devel/embeddedstack-file/bin/xml2bin"
+"let g:args="-i0:ua -o ns0.ua Opc.Ua.NodeSet2.xml"
+let g:target="/home/gergap/work/devel/embeddedstack-file/bin/uaserverhp"
+let g:args="-d254"
+
 " run target in debugger
 function! g:ExecuteKDbg()
     if exists("g:target")
@@ -406,7 +412,12 @@ endfunction
 " run target without debugging
 function! g:RunTarget()
     if exists("g:target")
-        execute "!".g:target
+        let s:dir=getcwd()
+        if exists("g:workdir")
+            exe "cd ".g:workdir
+        endif
+        execute "!".g:target g:args
+        exe "cd ".s:dir
     else
         echo "No target is defined. Please execute 'let g:target=\"<your target>\"'"
     endif
