@@ -53,10 +53,11 @@ if has("win32")
     let g:clang_complete_loaded = 1
 elseif has("gui_running")
     " gvim
-    set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ Bold\ 12
+    "set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ Bold\ 12
+    set gfn=Hack\ 12
 else
     " console vim in 256 color terminal
-    set t_Co=256
+    "set t_Co=256
 endif
 " use intelligent file completion like in the bash
 set wildmode=longest:full
@@ -93,7 +94,8 @@ elseif cs == "SolarizedLight"
     set background=light
 else
     set background=dark
-    colorscheme gergap
+    "colorscheme gergap
+    colorscheme desert
 endif
 
 nnoremap <leader><F12> :call <sid>togglebackground()<cr>
