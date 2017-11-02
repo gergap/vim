@@ -447,8 +447,8 @@ imap <S-Tab> <C-o><<
 nnoremap <F2> :w<cr>
 inoremap <F2> <esc>:w<cr>i
 " map F3 and SHIFT-F3 to toggle spell checking
-nmap <F3> :setlocal spell spelllang=en<CR>
-imap <F3> <ESC>:setlocal spell spelllang=en<CR>i
+nmap <F3> :setlocal spell spelllang=de,en<CR>:syntax spell toplevel<CR>
+imap <F3> <ESC>:setlocal spell spelllang=en,de<CR>i:syntax spell toplevel<CR>
 nmap <S-F3> :setlocal nospell<CR>
 imap <S-F3> <ESC>:setlocal nospell<CR>i
 " switch between header/source with F4 in C/C++ using a.vim
