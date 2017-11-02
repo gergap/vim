@@ -98,19 +98,26 @@ else
     colorscheme desert
 endif
 
-nnoremap <leader><F12> :call <sid>togglebackground()<cr>
+" disable vim-lldb
+"let g:loaded_lldb=1
+let g:lldb_map_Lbreakpoint = "<f9>"
+let g:lldb_map_Lstep = "<f10>"
+let g:lldb_map_Lnext = "<f11>"
+let g:lldb_map_Lfinish = "<f12>"
+
+nnoremap <S-F12> :call <sid>togglebackground()<cr>
 function! s:togglebackground()
     if &background == "light"
-        let &background = "dark"
+        set background = "dark"
     else
-        let &background = "light"
+        set background = "light"
     endif
 endfunction
 
 "====[ setup my CUPS printer ]===========================================
 " you can simply print using :ha(rdcopy)
 " this also supports an optional range argument, see :h ha
-set pdev=HP_LaserJet_5200
+set pdev=MFC9142CDN
 
 "====[ map leader ]======================================================
 let mapleader="-"
