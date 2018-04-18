@@ -437,11 +437,11 @@ if ! has('gui_running')
 endif
 
 "====[ KDbg launcher ]===================================================
-let g:workdir="/home/gergap/work/devel/embeddedstack-file/bin"
-"let g:target="/home/gergap/work/devel/embeddedstack-file/bin/xml2bin"
+let g:workdir="/home/gergap/work/devel/embeddedstack/bin"
+"let g:target="/home/gergap/work/devel/embeddedstack/bin/xml2bin"
 "let g:args="-i0:ua -o ns0.ua Opc.Ua.NodeSet2.xml"
-let g:target="/home/gergap/work/devel/embeddedstack-file/bin/uaserverhp"
-let g:args="-d254"
+let g:target="/home/gergap/work/devel/embeddedstack/bin/uaserverhp"
+let g:args=""
 
 " run target in debugger
 function! g:ExecuteKDbg()
