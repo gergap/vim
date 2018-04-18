@@ -531,7 +531,7 @@ map <F10> :%s/\s\+$//<CR>
 " run kdbg
 nmap <leader>d :call ExecuteKDbg()<CR>
 nmap <leader>x :call RunTarget()<CR>
-nmap <leader>v :exec("Valgrind ".g:target." ".g_args)<CR>
+nmap <leader>v :exec("Valgrind ".g:target." ".g:args)<CR>
 " goto definition with F12
 map <F12> <C-]>
 " open definition in new split
