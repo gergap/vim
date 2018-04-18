@@ -112,6 +112,7 @@ Plugin 'gergap/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rhysd/vim-grammarous'
 Plugin 'vim-scripts/valgrind.vim'
+Plugin 'vim-scripts/let-modeline.vim'
 call vundle#end()
 
 let g:valgrind_arguments='--leak-check=yes --num-callers=500'
