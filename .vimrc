@@ -68,7 +68,7 @@ set hidden
 set formatprg=par-format\ -w78
 
 " disable clang_complete
-let g:clang_complete_loaded = 1
+"let g:clang_complete_loaded = 1
 " add custom tags files
 "set tags+=/home/gergap/work/devel/uasdkc/.git/tags
 "set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uaclient/uaclientc/tags
@@ -79,9 +79,46 @@ let g:clang_complete_loaded = 1
 "=====[ Allow saving of files with sudo ]================================
 cmap w!! w !sudo tee > /dev/null %
 
+"=====[ enable vundle plugin manager ]===================================
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-speeddating'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-abolish'
+Plugin 'kana/vim-textobj-user'
+Plugin 'kana/vim-textobj-function'
+Plugin 'kana/vim-textobj-line'
+Plugin 'gioele/vim-autoswap'
+Plugin 'gergap/vim-konsole'
+Plugin 'gergap/vim-latexview'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'bling/vim-airline'
+Plugin 'asenac/vim-airline-loclist'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-scripts/taglist.vim'
+"Plugin 'vim-scripts/ShowMarks'
+Plugin 'godlygeek/tabular'
+Plugin 'Townk/vim-autoclose'
+Plugin 'vimwiki/vimwiki'
+Plugin 'vim-scripts/calendar.vim--Matsumoto'
+Plugin 'scrooloose/nerdtree'
+Plugin 'SirVer/ultisnips'
+Plugin 'gergap/vim-snippets'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'rhysd/vim-grammarous'
+Plugin 'vim-scripts/valgrind.vim'
+call vundle#end()
+
+let g:valgrind_arguments='--leak-check=yes --num-callers=500'
+
 "=====[ enable pathogen vim package manager ]============================
-execute pathogen#infect()
-Helptags
+"execute pathogen#infect()
+"Helptags
 
 " configure colorscheme: autodected correct colorscheme depending on env
 " variable that is set in KDE Konsole Profile
