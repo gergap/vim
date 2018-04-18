@@ -174,6 +174,17 @@ ua_nodeid_clear(&id);
 $0
 endsnippet
 
+snippet create "Create Object Instance" b
+ua_nodeid_set_numeric(&id, ${1:nsidx}, ${2:1234});
+node = ua_object_create_instance(&id, type, "${3:BrowseName}", "${4:DisplayName}");
+ua_nodeid_clear(&id);
+if (node == UA_NODE_INVALID) return -1;
+endsnippet
+
+snippet addref "Add Reference" b
+ref = ua_reference_add0(${1:src}, ${2:dst}, ${3:UA_ID_ORGANIZES});
+endsnippet
+
 snippet pthread "Description"
 pthread_create(&thread_id, ${1:&attr}, ${2:thread_routine}, ${3:NULL});
 $0
