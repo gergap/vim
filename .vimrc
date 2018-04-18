@@ -117,12 +117,6 @@ Plugin 'vim-scripts/valgrind.vim'
 Plugin 'vim-scripts/let-modeline.vim'
 call vundle#end()
 
-let g:valgrind_arguments='--leak-check=yes --num-callers=500'
-
-"=====[ enable pathogen vim package manager ]============================
-"execute pathogen#infect()
-"Helptags
-
 " configure colorscheme: autodected correct colorscheme depending on env
 " variable that is set in KDE Konsole Profile
 let cs=$colorscheme
@@ -156,6 +150,9 @@ function! s:togglebackground()
         set background = "light"
     endif
 endfunction
+
+"=====[ valgrind plugin ]============================
+let g:valgrind_arguments='--leak-check=yes --num-callers=500 --show-leak-kinds=all --track-origins=yes'
 
 "====[ setup my CUPS printer ]===========================================
 " you can simply print using :ha(rdcopy)
