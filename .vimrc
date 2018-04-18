@@ -718,6 +718,17 @@ function! ShowSyntaxStack()
 endfunction
 map <leader>s :call ShowSyntaxStack()<cr>
 
+" Open ccmake for current project.
+" This uses b:git_dir from vim-fugitive to find the git directory
+function! CCMake() abort
+    if exists('b:git_dir')
+        execute "!ccmake ".b:git_dir."/../bld"
+    else
+        echom "error: b:git_dir is not set"
+    endif
+endfunction
+map <leader>c :call CCMake()<cr>
+
 " Make views automatic: http://vim.wikia.com/wiki/VimTip991
 augroup MakeViewAutomatic
     autocmd!
