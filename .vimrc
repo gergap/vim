@@ -727,7 +727,7 @@ function! CCMake() abort
         echom "error: b:git_dir is not set"
     endif
 endfunction
-map <leader>c :call CCMake()<cr>
+map <leader>cc :call CCMake()<cr>
 
 " Make views automatic: http://vim.wikia.com/wiki/VimTip991
 augroup MakeViewAutomatic
