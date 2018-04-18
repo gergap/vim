@@ -722,7 +722,8 @@ map <leader>s :call ShowSyntaxStack()<cr>
 " This uses b:git_dir from vim-fugitive to find the git directory
 function! CCMake() abort
     if exists('b:git_dir')
-        execute "!ccmake ".b:git_dir."/../bld"
+        execute "silent !ccmake ".b:git_dir."/../bld"
+        execute "redraw!"
     else
         echom "error: b:git_dir is not set"
     endif
