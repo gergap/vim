@@ -132,7 +132,10 @@ elseif cs == "SolarizedLight"
 else
     set background=dark
     "colorscheme gergap
-    colorscheme desert
+    "colorscheme desert
+    colorscheme PaperColor
+    set background=light
+    "let g:airline_theme='papercolor'
 endif
 
 " disable vim-lldb
