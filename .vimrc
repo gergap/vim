@@ -746,3 +746,21 @@ function! Enum2Array()
 endfunction
 map <leader>e <esc>:call Enum2Array()<cr>
 
+let g:grammarous#hooks = {}
+function! g:grammarous#hooks.on_check(errs) abort
+    nmap <buffer><C-n> <Plug>(grammarous-move-to-next-error)
+    nmap <buffer><C-p> <Plug>(grammarous-move-to-previous-error)
+    nmap <buffer><C-f> <Plug>(grammarous-fixit)
+endfunction
+
+function! g:grammarous#hooks.on_reset(errs) abort
+    nunmap <buffer><C-n>
+    nunmap <buffer><C-p>
+    nunmap <buffer><C-f>
+endfunction
+"let g:grammarous#languagetool_cmd = '/home/gergap/Documents/Latex/detex-languagetool.py'
+
+let g:tex_flavor='latex'
+set grepprg=grep\ -nH\ $*
+
+
