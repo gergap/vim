@@ -443,8 +443,9 @@ let g:args=""
 " run target in debugger
 function! g:ExecuteKDbg()
     if exists("g:target")
-        "execute "!kdbg ".g:target
-        execute "!nemiver ".g:target
+        "execute "silent !kdbg ".g:target
+        execute "silent !nemiver ".g:target
+        execute "redraw!"
     else
         echo "No target is defined. Please execute 'let g:target=\"<your target>\"'"
     endif
