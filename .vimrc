@@ -465,6 +465,20 @@ function! g:RunTarget()
     endif
 endfunction
 
+" run target in valgrind
+function! g:RunValgrind()
+    if exists("g:target")
+        let s:dir=getcwd()
+        if exists("g:workdir")
+            exe "cd ".g:workdir
+        endif
+        execute ":Valgrind ".g:target." ".g:args
+        exe "cd ".s:dir
+    else
+        echo "No target is defined. Please execute 'let g:target=\"<your target>\"'"
+    endif
+endfunction
+
 "====[ fugitive vim plugin ]=============================================
 set laststatus=2
 "set statusline=%{GitBranch()}
@@ -529,7 +543,7 @@ map <F10> :%s/\s\+$//<CR>
 " run kdbg
 nmap <leader>d :call ExecuteKDbg()<CR>
 nmap <leader>x :call RunTarget()<CR>
-nmap <leader>v :exec("Valgrind ".g:target." ".g:args)<CR>
+nmap <leader>v :call RunValgrind()<CR>
 " goto definition with F12
 map <F12> <C-]>
 " open definition in new split
