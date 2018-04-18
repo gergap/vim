@@ -27,7 +27,7 @@ set cindent
 set cinoptions+=:0,g0
 " enable line numbers
 set number
-set relativenumber
+set norelativenumber
 set cursorline
 " enable syntax highlighting
 syntax on
