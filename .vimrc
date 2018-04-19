@@ -116,6 +116,7 @@ Plugin 'rhysd/vim-grammarous'
 Plugin 'vim-scripts/valgrind.vim'
 Plugin 'vim-scripts/let-modeline.vim'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'vim-scripts/refactor'
 call vundle#end()
 
 " configure colorscheme: autodected correct colorscheme depending on env
