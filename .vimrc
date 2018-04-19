@@ -793,4 +793,12 @@ endfunction
 let g:tex_flavor='latex'
 set grepprg=grep\ -nH\ $*
 
+let g:ycm_python_binary_path = '/usr/bin/python3'
+augroup python_files
+    autocmd!
+    autocmd FileType python setlocal noexpandtab
+    autocmd FileType python set tabstop=8
+    autocmd FileType python set shiftwidth=8
+    autocmd FileType python nnoremap <buffer> <F5> :!python3 %<CR>
+augroup END
 
