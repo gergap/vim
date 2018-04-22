@@ -971,3 +971,10 @@ augroup END
 " Show only C #includes...
 nmap <silent> <expr>  zu  FS_FoldAroundTarget('^\s*use\s\+\S.*;',{'context':1})
 
+let g:clang_include_fixer_path = "/usr/bin/clang-include-fixer-3.9"
+let g:clang_include_fixer_maximum_suggested_headers = 3
+let g:clang_include_fixer_increment_num = 5
+let g:clang_include_fixer_jump_to_include = 0
+let g:clang_include_fixer_query_mode = 0
+noremap <leader>cf :py3f /usr/lib/llvm-3.9/share/clang/clang-include-fixer.py<cr>
+
