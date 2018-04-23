@@ -112,6 +112,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'SirVer/ultisnips'
 Plugin 'gergap/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'rhysd/vim-grammarous'
 Plugin 'vim-scripts/valgrind.vim'
 Plugin 'vim-scripts/let-modeline.vim'
@@ -332,6 +333,18 @@ set makeprg=mk
 " It happens so often that I type :Q instead of :q that it makes sense to make
 " :Q just working. :Q is not used anyway by vim.
 command! Q q
+
+"====[ Syntastic plugin ]================================================
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers = ['python', 'pylint']
+let g:syntastic_python_pylint_exec = '/usr/bin/pylint3'
 
 "====[ YCM plugin ]======================================================
 let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
