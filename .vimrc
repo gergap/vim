@@ -413,6 +413,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="horizontal"
 let g:UltiSnipsListSnippets="<c-e>"
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
 "====[ superTab plugin ]=================================================
 " uncomment the next line to disable superTab
