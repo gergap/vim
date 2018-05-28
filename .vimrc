@@ -113,12 +113,14 @@ Plugin 'SirVer/ultisnips'
 Plugin 'gergap/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tenfyzhong/CompleteParameter.vim'
+Plugin 'rust-lang/rust.vim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'rhysd/vim-grammarous'
 Plugin 'vim-scripts/valgrind.vim'
 Plugin 'vim-scripts/let-modeline.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'gergap/refactor'
+Plugin 'kien/ctrlp.vim'
 call vundle#end()
 
 " configure colorscheme: autodected correct colorscheme depending on env
