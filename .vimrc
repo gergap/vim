@@ -398,6 +398,14 @@ augroup mycm
     au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 augroup END
 
+"====[ CompleteParam plugin ]============================================
+inoremap <silent><expr> ( complete_parameter#pre_complete("()")
+smap <leader><tab> <Plug>(complete_parameter#goto_next_parameter)
+imap <leader><tab> <Plug>(complete_parameter#goto_next_parameter)
+smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+let g:complete_parameter_use_ultisnips_mapping = 1
+
 "====[ ShowMarks plugin ]================================================
 " reduce shows marks to I need. The default is
 "let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.'`^<>[]{}()\""
