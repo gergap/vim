@@ -832,3 +832,6 @@ autocmd BufWritePre *.c :%s/\s\+$//e
 autocmd BufWritePre *.h :%s/\s\+$//e
 autocmd BufWritePre *.pl :%s/\s\+$//e
 
+" execute current perl script when pressing F5
+autocmd FileType perl map <buffer> <F5> :!perl %<cr>
+
