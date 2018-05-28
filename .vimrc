@@ -826,4 +826,9 @@ augroup python_files
     autocmd FileType python nnoremap <buffer> <F5> :!python3 %<CR>
 augroup END
 
+" automatic strip trailing whitespace on write
+autocmd BufWritePre *.cpp :%s/\s\+$//e
+autocmd BufWritePre *.c :%s/\s\+$//e
+autocmd BufWritePre *.h :%s/\s\+$//e
+autocmd BufWritePre *.pl :%s/\s\+$//e
 
