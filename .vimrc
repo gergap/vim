@@ -780,11 +780,11 @@ endfunction
 map <leader>cc :call CCMake()<cr>
 
 " Make views automatic: http://vim.wikia.com/wiki/VimTip991
-augroup MakeViewAutomatic
-    autocmd!
-    autocmd BufWinLeave *.* mkview
-    autocmd BufWinEnter *.* silent loadview 
-augroup end
+"augroup MakeViewAutomatic
+"    autocmd!
+"    autocmd BufWinLeave *.* mkview
+"    autocmd BufWinEnter *.* silent loadview 
+"augroup end
 
 function! Enum2Array()
     let l:autoclose=b:AutoCloseOn
