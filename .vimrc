@@ -880,8 +880,8 @@ augroup END
 
 augroup Perl_Setup
     autocmd!
-    autocmd BufNewFile   *.p[lm65],*.t   0r !perl_file_template <afile>
-    autocmd BufNewFile   *.p[lm65],*.t   /^[ \t]*[#].*implementation[ \t]\+here/
+    autocmd BufNewFile   *.p[lm65],*.t,*.h,*.c   0r !file_template <afile>
+    autocmd BufNewFile   *.p[lm65],*.t,*.h,*.c   /^.*implementation[ \t]\+here/
 augroup END
 
 "=====[ Add or subtract comments ]===============================
