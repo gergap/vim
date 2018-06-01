@@ -102,7 +102,8 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'asenac/vim-airline-loclist'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-scripts/taglist.vim'
+"Plugin 'vim-scripts/taglist.vim'
+Plugin 'majutsushi/tagbar'
 Plugin 'gergap/ShowMarks'
 Plugin 'godlygeek/tabular'
 Plugin 'Townk/vim-autoclose'
@@ -444,6 +445,12 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File = 1
 let Tlist_Display_Prototype = 0
 let Tlist_Compact_Format = 1
+
+"====[ Tagbar plugin ]==================================================
+let g:tagbar_autoshowtag = 1
+let g:tagbar_autopreview = 1
+let g:tagbar_silent = 0
+autocmd VimEnter * nested :call tagbar#autoopen(1)
 
 "====[ airline ]=========================================================
 " use powerline fonts to show beautiful symbols
