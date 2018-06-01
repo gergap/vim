@@ -990,3 +990,24 @@ let g:clang_include_fixer_jump_to_include = 0
 let g:clang_include_fixer_query_mode = 0
 noremap <leader>cf :py3f /usr/lib/llvm-3.9/share/clang/clang-include-fixer.py<cr>
 
+" setup
+if has("cscope")
+    set csto=0
+    set cst
+    set nocsverb
+    " add any database in current directory
+    if filereadable("cscope.out")
+    cs add cscope.out
+    " else add database pointed to by environment
+    elseif $CSCOPE_DB != ""
+    cs add $CSCOPE_DB
+    endif
+    set csverb
+endif
+
+" jump to a function declaration
+nmap <silent> <leader>9 :cs find s <C-R>=expand("<cword>")<CR><CR>1<CR><CR>
+" show a list of where function is called
+nmap <silent> <C-_> :cs find c <C-R>=expand("<cword>")<CR><CR>
+
+
