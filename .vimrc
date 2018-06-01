@@ -9,6 +9,7 @@ set tabstop=4       " if there are tabs display them with 4 spaces
 set softtabstop=4   " this way backspace will remove the 'virtual' tab
 set shiftwidth=4    " intend with 4 spaces
 set backspace=2     " make backspace working as expected
+set splitright
 " intend wrapped text and show the ">" symbol. The three spaces intend
 " the text, which often fits text that I write.
 exec "set showbreak=\u21AA\\ \\ \\ "
@@ -477,6 +478,10 @@ let g:target="/home/gergap/work/devel/embeddedstack/bin/uaserverhp"
 let g:args=""
 
 " run target in debugger
+" note on installing VimDebug
+" cpanm Vim::Debug
+" vimdebug-install -d ~/.vimrc
+" see also 'perldoc Vim::Debug'
 function! g:ExecuteKDbg()
     if &ft == "perl"
         exe "VDstart main"
