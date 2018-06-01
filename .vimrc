@@ -478,31 +478,39 @@ let g:args=""
 
 " run target in debugger
 function! g:ExecuteKDbg()
-    if exists("g:target")
-        let s:dir=getcwd()
-        if exists("g:workdir")
-            exe "cd ".g:workdir
-        endif
-        "execute "silent !kdbg ".g:target
-        execute "silent !nemiver ".g:target
-        execute "redraw!"
-        exe "cd ".s:dir
+    if &ft == "perl"
+        exe "VDstart main"
     else
-        echo "No target is defined. Please execute 'let g:target=\"<your target>\"'"
+        if exists("g:target")
+            let s:dir=getcwd()
+            if exists("g:workdir")
+                exe "cd ".g:workdir
+            endif
+            "execute "silent !kdbg ".g:target
+            execute "silent !nemiver ".g:target
+            execute "redraw!"
+            exe "cd ".s:dir
+        else
+            echo "No target is defined. Please execute 'let g:target=\"<your target>\"'"
+        endif
     endif
 endfunction
 
 " run target without debugging
 function! g:RunTarget()
-    if exists("g:target")
-        let s:dir=getcwd()
-        if exists("g:workdir")
-            exe "cd ".g:workdir
-        endif
-        execute "!".g:target g:args
-        exe "cd ".s:dir
+    if &ft == "perl"
+        exe "!perl %"
     else
-        echo "No target is defined. Please execute 'let g:target=\"<your target>\"'"
+        if exists("g:target")
+            let s:dir=getcwd()
+            if exists("g:workdir")
+                exe "cd ".g:workdir
+            endif
+            execute "!".g:target g:args
+            exe "cd ".s:dir
+        else
+            echo "No target is defined. Please execute 'let g:target=\"<your target>\"'"
+        endif
     endif
 endfunction
 
@@ -850,9 +858,6 @@ autocmd BufWritePre *.pl :%s/\s\+$//e
 " avoid pressing enter when leaving man pages
 :nnoremap K K<CR>
 :vnoremap K K<CR>
-
-" execute current perl script when pressing F5
-autocmd FileType perl map <buffer> <F5> :!perl %<cr>
 
 "======[ Magically build interim directories if necessary ]===================
 " This is from Damian Conway.
