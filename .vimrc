@@ -329,11 +329,25 @@ function! s:align_tabular()
   endif
 endfunction
 
-"====[ learn hjkl the hard way ;-) ]=====================================
-"nmap <Left> <Nop>
-"nmap <Right> <Nop>
-"nmap <Up> <Nop>
-"nmap <Down> <Nop>
+"====[ navigation configuration ]=====================================
+" For moving the cursor we use hjkl in Vim, so the cursor keys can be
+" used for special actions which are used more rarely than hjkl.
+" previous buffer
+nmap <Left>     :bp<cr>
+" next buffer
+nmap <Right>    :bn<cr>
+" previous spelling error
+nmap <Up>       :[s<cr>
+" next spelling error
+nmap <Down>     :]s<cr>
+" Vim: M-Up/Down to navigate to prev/next compile error
+"      M-Left/Right to move between tabs
+" VimDiff: M-Up/Down to navigate to prev/next change
+"          M-Left/Right to move changes
+nnoremap <expr> <M-Down>  &diff ? ']c' : ':cn<cr>'
+nnoremap <expr> <M-Up>    &diff ? '[c' : ':cp<cr>'
+nnoremap <expr> <M-Left>  &diff ? 'do' : ':tabp<cr>'
+nnoremap <expr> <M-Right> &diff ? 'dp' : ':tabn<cr>'
 
 "====[ use my own make script ]==========================================
 set makeprg=mk
@@ -609,11 +623,6 @@ map <F12> <C-]>
 map <S-F12> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " prefer vertical diff
 set diffopt+=vertical
-" in diff mode we use the spell check keys for merging
-nnoremap <expr> <M-Down>  &diff ? ']c' : &spell ? ']s' : ':cn<cr>'
-nnoremap <expr> <M-Up>    &diff ? '[c' : &spell ? '[s' : ':cp<cr>'
-nnoremap <expr> <M-Left>  &diff ? 'do' : ':bp<cr>'
-nnoremap <expr> <M-Right> &diff ? 'dp' : ':bn<cr>'
 " spell settings
 "  :setlocal spell spelllang=en
 " set the spellfile - folders must exist
