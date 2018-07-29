@@ -68,6 +68,9 @@ set hidden
 " configur external text formatter
 set formatprg=par-format\ -w78
 
+" enable titlestring to make vim-autoswap working
+set title titlestring=
+
 " disable clang_complete
 "let g:clang_complete_loaded = 1
 " add custom tags files
