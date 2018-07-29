@@ -145,6 +145,8 @@ Plugin 'vim-scripts/let-modeline.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'gergap/refactor'
 Plugin 'kien/ctrlp.vim'
+Plugin 'SidOfc/mkdx'
+Plugin 'dhruvasagar/vim-table-mode'
 call vundle#end()
 
 " configure colorscheme: autodected correct colorscheme depending on env
