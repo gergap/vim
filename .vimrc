@@ -46,19 +46,36 @@ set display+=lastline
 filetype plugin indent on
 " font selection
 if has("win32")
-    " Notes on Windows: You need to install gvim74.exe, python2.7.8 and ctags.
-    " ctags zip contains a pre-built ctags.exe. Just put it into next to
-    " gvim.exe, so it will be found.
-    set gfn=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
+    " this is important for vim-fugitive on windows: git tools need to called
+    " with forward slash. Install git-bash for Windows and register tools in
+    " PATH variable, so that git tools also workin in cmd.exe. This is
+    " necessary for Vim, because it starts external tools this way on Windows.
+    set shellslash
     " disable clang_complete on Windows
     let g:clang_complete_loaded = 1
-elseif has("gui_running")
-    " gvim
-    "set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ Bold\ 12
-    set gfn=Hack\ 12
+    if has("gui_running")
+        " Use the Hack font like on Linux
+        set gfn=Hack:h12:cANSI:qPROOF
+    endif
 else
+    " Unix/Linux
+    if has("gui_running")
+        set gfn=Hack\ 12
+    endif
     " console vim in 256 color terminal
-    "set t_Co=256
+    set t_Co=256
+endif
+
+" Generic GVim settings
+if has("gui_running")
+    " disable all this GUIs nonesense to make it less distracting
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=L
+    set guioptions-=l
+    set guioptions-=R
+    set guioptions-=r
+    set guioptions-=b
 endif
 " use intelligent file completion like in the bash
 set wildmode=longest:full
@@ -104,7 +121,8 @@ Plugin 'gergap/vim-latexview'
 Plugin 'gergap/gergap'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'asenac/vim-airline-loclist'
 Plugin 'airblade/vim-gitgutter'
 "Plugin 'vim-scripts/taglist.vim'
@@ -139,12 +157,11 @@ elseif cs == "SolarizedLight"
     colorscheme solarized
     set background=light
 else
+    " Use PaperColor by default: switching between light/dark can easily be
+    " done using vim-unimpaired 'cob' (change option background)
     set background=dark
-    "colorscheme gergap
-    "colorscheme desert
     colorscheme PaperColor
-    set background=light
-    "let g:airline_theme='papercolor'
+    let g:airline_theme='papercolor'
 endif
 
 " disable vim-lldb
@@ -153,15 +170,6 @@ let g:lldb_map_Lbreakpoint = "<f9>"
 let g:lldb_map_Lstep = "<f10>"
 let g:lldb_map_Lnext = "<f11>"
 let g:lldb_map_Lfinish = "<f12>"
-
-nnoremap <S-F12> :call <sid>togglebackground()<cr>
-function! s:togglebackground()
-    if &background == "light"
-        set background = "dark"
-    else
-        set background = "light"
-    endif
-endfunction
 
 "=====[ valgrind plugin ]============================
 let g:valgrind_arguments='--leak-check=yes --num-callers=500 --show-leak-kinds=all --track-origins=yes'
