@@ -9,7 +9,9 @@ set tabstop=4       " if there are tabs display them with 4 spaces
 set softtabstop=4   " this way backspace will remove the 'virtual' tab
 set shiftwidth=4    " intend with 4 spaces
 set backspace=2     " make backspace working as expected
+set nowrap
 set splitright
+set splitbelow
 " intend wrapped text and show the ">" symbol. The three spaces intend
 " the text, which often fits text that I write.
 exec "set showbreak=\u21AA\\ \\ \\ "
@@ -149,7 +151,17 @@ Plugin 'SidOfc/mkdx'
 Plugin 'dhruvasagar/vim-table-mode'
 call vundle#end()
 
-" configure colorscheme: autodected correct colorscheme depending on env
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default': {
+  \       'transparent_background': 0,
+  \       'allow_bold': 1,
+  \       'allow_italic': 0
+  \     }
+  \   }
+  \ }
+
+" configure colorscheme: autodetected correct colorscheme depending on env
 " variable that is set in KDE Konsole Profile
 let cs=$colorscheme
 if cs == "SolarizedDark"
