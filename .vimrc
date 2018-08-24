@@ -194,8 +194,8 @@ let g:valgrind_arguments='--leak-check=yes --num-callers=500 --show-leak-kinds=a
 set pdev=MFC9142CDN
 
 "====[ map leader ]======================================================
-let mapleader="-"
-let maplocalleader="-"
+let mapleader="\\"
+let maplocalleader="\\"
 
 "====[ hotkey for toggling relative line numbers ]=======================
 function! NumberToggle()
