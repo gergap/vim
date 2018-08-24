@@ -654,7 +654,8 @@ set spellfile=~/.vim/spellfile.add
 set spellfile+=ignore.utf-8.add
 
 "====[ Ctrl-P plugin         ]===========================================
-nnoremap <leader>t :CtrlPTag<cr>
+"nnoremap <leader>t :CtrlPTag<cr>
+nnoremap <leader>t :TagbarToggle<cr>
 
 "====[ NERDTree plugin       ]===========================================
 nnoremap <leader>n :NERDTreeToggle<cr>
