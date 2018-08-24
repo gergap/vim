@@ -1051,4 +1051,22 @@ nmap <silent> <leader>9 :cs find s <C-R>=expand("<cword>")<CR><CR>1<CR><CR>
 " show a list of where function is called
 nmap <silent> <C-_> :cs find c <C-R>=expand("<cword>")<CR><CR>
 
+"====[ unit test execution ]======================================
+function! RunTest(testname)
+    " populate quickfix window with test result
+    cexpr system(a:testname)
+endfunction
+" add error format for unit test output
+set efm+=%-GSTART%.%#
+set efm+=%EFAIL!%.%#:\ %m
+set efm+=%-Z\ \ \ Loc:\ [%f(%l)]
+set efm+=%-C%m
+set efm+=%-GTest\ finished%.%#
+set efm+=%-G%.%#PASSED.
+set efm+=%-G%.%#FAILED.
+set efm+=%-G%.%#SKIPPED.
+set efm+=%-G%.%#Testing\ %.%#...
+set efm+=%-G%.%#Finished\ testing%.%#
+set efm+=%-G%.%#PASS%.%#
+
 
