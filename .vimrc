@@ -1069,4 +1069,7 @@ set efm+=%-G%.%#Testing\ %.%#...
 set efm+=%-G%.%#Finished\ testing%.%#
 set efm+=%-G%.%#PASS%.%#
 
+" load tags file in project root. the ';' is important here. It will search
+" from the current directoru upwards until it find a tags file
+set tags=tags;
 
