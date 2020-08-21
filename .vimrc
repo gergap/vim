@@ -62,7 +62,7 @@ if has("win32")
 else
     " Unix/Linux
     if has("gui_running")
-        set gfn=Hack\ 12
+        set gfn=Hack\ NF\ 10
     endif
     " console vim in 256 color terminal
     set t_Co=256
