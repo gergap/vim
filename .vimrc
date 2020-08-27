@@ -839,7 +839,7 @@ map <leader>cc :call CCMake()<cr>
 "augroup MakeViewAutomatic
 "    autocmd!
 "    autocmd BufWinLeave *.* mkview
-"    autocmd BufWinEnter *.* silent loadview 
+"    autocmd BufWinEnter *.* silent loadview
 "augroup end
 
 function! Enum2Array()
@@ -996,6 +996,50 @@ endfunction
 " Set up the relevant mappings
 nmap <silent> # :call ToggleComment()<CR>j0
 vmap <silent> # :call ToggleBlock()<CR>
+
+" Creates an implementation from a declaration in a header file.
+" It uses the declaration from the current line.
+function! CreateImplementation()
+    " copy current line
+    normal yy
+    " switch to implementation
+    execute "A"
+    " paste new line
+    execute "normal Gp$xa\<CR>{\<CR>}\<ESC>O"
+endfunction
+function! CreateImplementationBlock() range
+    let num_lines = a:lastline - a:firstline
+    let lines = getline(a:firstline, a:lastline)
+
+    " switch to implementation
+    execute "A"
+
+    let startpos = line('$')
+
+    for line in lines
+        let line = substitute(line, ';$', "", 'g')
+        call append(line('$'), line)
+        call append(line('$'), "{")
+        let match = matchstr(line, "^int ")
+        if match != ''
+            call append(line('$'), "    int ret = 0;")
+            call append(line('$'), "")
+            call append(line('$'), "    // TODO")
+            call append(line('$'), "")
+            call append(line('$'), "    return ret;")
+        else
+            call append(line('$'), "    // TODO")
+        endif
+        call append(line('$'), "}")
+        call append(line('$'), "")
+    endfor
+
+    " place cursor in first function implementation body
+    call cursor(startpos, 1)
+    execute "normal /\\/\\/ TODO\<cr>v$\<c-g>"
+endfunction
+nmap <silent> <leader>i :call CreateImplementation()<CR>
+vmap <silent> <leader>i :call CreateImplementationBlock()<CR>
 
 
 "=====[ Search folding ]=====================
