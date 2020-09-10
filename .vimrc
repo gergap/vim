@@ -553,7 +553,8 @@ let g:DoxygenToolkit_interCommentTag = "* "
 imap <S-Tab> <C-o><<
 " use F2 for saving
 nnoremap <F2> :w<cr>
-inoremap <F2> <esc>:w<cr>i
+" save and leave insert mode
+inoremap <F2> <esc>:w<cr>
 " map F3 and SHIFT-F3 to toggle spell checking
 nmap <F3> :setlocal spell spelllang=de,en<CR>:syntax spell toplevel<CR>
 imap <F3> <ESC>:setlocal spell spelllang=en,de<CR>i:syntax spell toplevel<CR>
