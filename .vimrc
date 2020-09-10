@@ -972,6 +972,11 @@ function! CreateImplementationBlock() range
     let startpos = line('$')
 
     for line in lines
+        " skip empty lines
+        if match(line, "^\s*$") != -1
+            continue
+        endif
+        " remove semicolon at end of line
         let line = substitute(line, ';$', "", 'g')
         call append(line('$'), line)
         call append(line('$'), "{")
