@@ -118,16 +118,17 @@ Plugin 'kana/vim-textobj-user'
 Plugin 'kana/vim-textobj-function'
 Plugin 'kana/vim-textobj-line'
 Plugin 'gioele/vim-autoswap'
-Plugin 'gergap/vim-konsole'
+Plugin 'benmills/vimux'
+"Plugin 'gergap/vim-konsole'
 Plugin 'gergap/vim-latexview'
-Plugin 'gergap/gergap'
+Plugin 'gergap/vim-cmake-build'
+"Plugin 'gergap/gergap'
 Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'asenac/vim-airline-loclist'
 Plugin 'airblade/vim-gitgutter'
-"Plugin 'vim-scripts/taglist.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'gergap/ShowMarks'
 Plugin 'godlygeek/tabular'
@@ -149,6 +150,8 @@ Plugin 'gergap/refactor'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'SidOfc/mkdx'
 Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'rhysd/vim-clang-format'
+Plugin 'dhulihan/vim-rfc'
 call vundle#end()
 
 let g:PaperColor_Theme_Options = {
@@ -517,61 +520,16 @@ let g:workdir="/home/gergap/work/devel/embeddedstack/bin"
 let g:target="/home/gergap/work/devel/embeddedstack/bin/uaserverhp"
 let g:args=""
 
-" run target in debugger
-" note on installing VimDebug
-" cpanm Vim::Debug
-" vimdebug-install -d ~/.vimrc
-" see also 'perldoc Vim::Debug'
-function! g:ExecuteKDbg()
-    if &ft == "perl"
-        exe "VDstart main"
-    else
-        if exists("g:target")
-            let s:dir=getcwd()
-            if exists("g:workdir")
-                exe "cd ".g:workdir
-            endif
-            "execute "silent !kdbg ".g:target
-            execute "silent !nemiver ".g:target
-            execute "redraw!"
-            exe "cd ".s:dir
-        else
-            echo "No target is defined. Please execute 'let g:target=\"<your target>\"'"
-        endif
-    endif
-endfunction
+"====[ vim-cmake-build ]======================================
+nmap <leader>d :CMakeDebug<CR>
+nmap <leader>x :CMakeExecute<CR>
+nmap <leader>v :CMakeValgrind<CR>
+let g:debugger = 'cgdb'
+let g:perl_debugger = 'ddd'
 
-" run target without debugging
-function! g:RunTarget()
-    if &ft == "perl"
-        exe "!perl %"
-    else
-        if exists("g:target")
-            let s:dir=getcwd()
-            if exists("g:workdir")
-                exe "cd ".g:workdir
-            endif
-            execute "!".g:target g:args
-            exe "cd ".s:dir
-        else
-            echo "No target is defined. Please execute 'let g:target=\"<your target>\"'"
-        endif
-    endif
-endfunction
-
-" run target in valgrind
-function! g:RunValgrind()
-    if exists("g:target")
-        let s:dir=getcwd()
-        if exists("g:workdir")
-            exe "cd ".g:workdir
-        endif
-        execute ":Valgrind ".g:target." ".g:args
-        exe "cd ".s:dir
-    else
-        echo "No target is defined. Please execute 'let g:target=\"<your target>\"'"
-    endif
-endfunction
+"====[ vimux ]================================================
+let g:VimuxHeight = "40"
+let g:VimuxOrientation = "h"
 
 "====[ fugitive vim plugin ]=============================================
 set laststatus=2
@@ -634,10 +592,6 @@ noremap <F8> :call <sid>Hexify()<CR>
 map <F9> :YcmCompleter FixIt<CR>
 " remove trailing spaces
 map <F10> :%s/\s\+$//<CR>
-" run kdbg
-nmap <leader>d :call ExecuteKDbg()<CR>
-nmap <leader>x :call RunTarget()<CR>
-nmap <leader>v :call RunValgrind()<CR>
 " goto definition with F12
 map <F12> <C-]>
 " open definition in new split
