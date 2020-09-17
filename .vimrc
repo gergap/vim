@@ -10,6 +10,7 @@ set softtabstop=4   " this way backspace will remove the 'virtual' tab
 set shiftwidth=4    " intend with 4 spaces
 set backspace=2     " make backspace working as expected
 set nowrap
+set nojoinspaces    " avoid double space after dot when joining lines
 set splitright
 set splitbelow
 " intend wrapped text and show the ">" symbol. The three spaces intend
