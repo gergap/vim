@@ -397,6 +397,15 @@ let g:syntastic_perl_checkers = ['perl']
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_python_checkers = ['python', 'pylint']
 let g:syntastic_python_pylint_exec = '/usr/bin/pylint3'
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_style_error_symbol = '✠'
+let g:syntastic_warning_symbol = '∆'
+let g:syntastic_style_warning_symbol = '≈'
+let g:syntastic_enable_balloons = 1
+
+"====[ Git Gutter plugin ]======================================================
+" Use lower prio than YCM errors
+let g:gitgutter_sign_priority = 5
 
 "====[ YCM plugin ]======================================================
 nmap <leader><leader>c :YcmCompleter GoToReferences expand("<cword>")<CR>
