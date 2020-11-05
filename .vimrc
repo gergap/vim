@@ -399,6 +399,10 @@ let g:syntastic_python_checkers = ['python', 'pylint']
 let g:syntastic_python_pylint_exec = '/usr/bin/pylint3'
 
 "====[ YCM plugin ]======================================================
+nmap <leader><leader>c :YcmCompleter GoToReferences expand("<cword>")<CR>
+nmap <leader><leader>d :YcmCompleter GoToDefinition expand("<cword>")<CR>
+nmap <leader><leader>g :YcmCompleter GoTo expand("<cword>")<CR>
+
 let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-Tab>', '<Up>']
 "let g:SuperTabDefaultCompletionType = '<C-Tab>'
