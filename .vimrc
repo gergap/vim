@@ -22,6 +22,7 @@ set fenc=utf-8
 set termencoding=utf-8
 " disable vi compatibility (emulation of old bugs)
 set nocompatible
+set modelines=10
 " use indentation of previous line
 set autoindent
 " use intelligent indentation for C
