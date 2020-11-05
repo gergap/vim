@@ -230,12 +230,12 @@ set list
 " Trick from Damian Conway: highlight 81 columns,
 " but only for lines that are too long.
 " this is less intrusive than showing it for all lines
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+highlight ColorColumn ctermbg=235
+"call matchadd('ColorColumn', '\%81v', 100)
 " I also find this highlight bubbles distracting, so I now use another trick.
 " I use a complete color area with just a slightly different background color.
 " The color is configured in my wombat256 color scheme.
-"execute "set colorcolumn=" . join(range(81,180), ',')
+execute "set colorcolumn=" . join(range(81,180), ',')
 
 "====[ enable higlight search ]==========================================
 set incsearch
