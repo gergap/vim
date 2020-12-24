@@ -154,6 +154,7 @@ Plugin 'SidOfc/mkdx'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'dhulihan/vim-rfc'
+Plugin 'powerman/vim-plugin-AnsiEsc'
 call vundle#end()
 
 let g:PaperColor_Theme_Options = {
