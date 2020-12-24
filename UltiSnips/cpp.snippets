@@ -2,8 +2,8 @@ snippet class "Class frame" b
 class ${1:name}
 {
     // disable copy
-    Foo(const $1 &copy);
-    Foo& operator=(const $1 &copy);
+    $1(const $1 &copy);
+    $1& operator=(const $1 &copy);
 public:
     $1();
     virtual ~$1();
@@ -96,3 +96,11 @@ int main(int argc, char *argv[])
 }
 endsnippet
 
+
+snippet externc "UA_BEGIN_EXTERN_C" b
+UA_BEGIN_EXTERN_C
+
+${VISUAL}
+
+UA_END_EXTERN_C
+endsnippet
