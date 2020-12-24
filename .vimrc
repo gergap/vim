@@ -981,6 +981,13 @@ function! CreateImplementationBlock() range
     let num_lines = a:lastline - a:firstline
     let lines = getline(a:firstline, a:lastline)
 
+    " try to figure out class name
+    if (&ft == "cpp")
+        let lineno = search("^class", "b")
+        let line = getline(lineno)
+        let classname = substitute(line, 'class \(\w\+\).*', "\\1", '')
+    endif
+
     " switch to implementation
     execute "A"
 
@@ -993,6 +1000,14 @@ function! CreateImplementationBlock() range
         endif
         " remove semicolon at end of line
         let line = substitute(line, ';$', "", 'g')
+        if (&ft == "cpp")
+            " CPP code needs more work
+            let line = substitute(line, '^ \+', '', 'g') " remove leading spaces
+            let line = substitute(line, ' = \w\+', '', 'g') " remove default values and pure virtual definition
+            let line = substitute(line, 'virtual ', '', 'g') " remove virtual keyword
+            " lets insert classname
+            let line = substitute(line, '\([a-zA-Z0-9_~]\+\)(', classname."::\\1(", '')
+        endif
         call append(line('$'), line)
         call append(line('$'), "{")
         let match = matchstr(line, "^int ")
