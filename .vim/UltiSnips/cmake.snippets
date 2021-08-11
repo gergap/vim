@@ -1,0 +1,66 @@
+snippet project "CMake C project" !b
+project(${1:name} C)
+cmake_minimum_required(VERSION 2.8)
+
+add_executable($1 main.c)
+
+$0
+endsnippet
+
+snippet cppproject "CMake C++ project" !b
+project(${1:name})
+cmake_minimum_required(VERSION 2.8)
+
+add_executable($1 main.cpp)
+
+$0
+endsnippet
+
+snippet qtproj "CMake Qt project" b
+project(${1:name})
+cmake_minimum_required(VERSION 2.8)
+
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+# Instruct CMake to run moc automatically when needed.
+set(CMAKE_AUTOMOC ON)
+
+# Find the QtWidgets library
+find_package(Qt5Widgets)
+
+# Create Qt executable
+add_executable($1 main.cpp)
+# Link Qt libraries
+target_link_libraries($1 Qt5::Widgets)
+
+$0
+endsnippet
+
+snippet exe "CMake add_executable" b
+add_executable(${1:${PROJECT_NAME}} ${2:sources})
+endsnippet
+
+snippet lib "CMake add_library" b
+add_library(${1:${PROJECT_NAME}} ${2:sources})
+endsnippet
+
+snippet link "CMake target_link_libraries" b
+target_link_libraries(${1:${PROJECT_NAME}} ${2:libs})
+endsnippet
+
+snippet sub "CMake add_subdirectory" b
+add_subdirectory(${1:directory})
+endsnippet
+
+snippet inc "CMake include_directories" b
+include_directories(${1:directory})
+endsnippet
+
+snippet msg "Print Message" b
+message(STATUS "${1:message}")
+endsnippet
+
+snippet var "Print Variable" b
+message(STATUS "${1:var}=${$1}")
+endsnippet
+

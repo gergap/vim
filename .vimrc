@@ -1,11 +1,10 @@
 "====[ gergap's Vim Configuration ]======================================
-" note, that I'm working on German keyboard
 " change this to your needs
 "========================================================================
 
 "====[ some basic editor settings ]======================================
 set expandtab       " always use spaces instead of tabs
-set tabstop=4       " if there are tabs display them with 4 spaces
+set tabstop=8       " if there are tabs display them with 8 spaces
 set softtabstop=4   " this way backspace will remove the 'virtual' tab
 set shiftwidth=4    " intend with 4 spaces
 set backspace=2     " make backspace working as expected
@@ -32,7 +31,7 @@ set cindent
 set cinoptions+=:0,g0
 " enable line numbers
 set number
-set norelativenumber
+set relativenumber
 set cursorline
 " enable syntax highlighting
 syntax on
@@ -64,10 +63,12 @@ if has("win32")
 else
     " Unix/Linux
     if has("gui_running")
-        set gfn=Hack\ NF\ 10
+        set gfn=Hack\ NF\ 12
+        set gfn=Fantasque\ Sans\ Mono\ 16
+    else
+        " console vim in 256 color terminal
+        set t_Co=256
     endif
-    " console vim in 256 color terminal
-    set t_Co=256
 endif
 
 " Generic GVim settings
@@ -84,7 +85,7 @@ endif
 " use intelligent file completion like in the bash
 set wildmode=longest:full
 set wildmenu
-" allow changeing buffers without saving them
+" allow changing buffers without saving them
 set hidden
 " configur external text formatter
 set formatprg=par-format\ -w78
@@ -92,113 +93,11 @@ set formatprg=par-format\ -w78
 " enable titlestring to make vim-autoswap working
 set title titlestring=
 
-" disable clang_complete
-"let g:clang_complete_loaded = 1
-" add custom tags files
-"set tags+=/home/gergap/work/devel/uasdkc/.git/tags
-"set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uaclient/uaclientc/tags
-"set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uastack/tags
-"set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uabase/uabasec/tags
-"set tags+=/home/gergap/work/devel/uasdkc/.git/modules/src/uaserver/uaserverc/tags
-
-"=====[ Allow saving of files with sudo ]================================
-cmap w!! w !sudo tee > /dev/null %
-
-"=====[ enable vundle plugin manager ]===================================
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'kana/vim-textobj-user'
-Plugin 'kana/vim-textobj-function'
-Plugin 'kana/vim-textobj-line'
-Plugin 'gioele/vim-autoswap'
-Plugin 'benmills/vimux'
-"Plugin 'gergap/vim-konsole'
-Plugin 'gergap/vim-latexview'
-Plugin 'gergap/vim-cmake-build'
-"Plugin 'gergap/gergap'
-Plugin 'NLKNguyen/papercolor-theme'
-"Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'asenac/vim-airline-loclist'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'majutsushi/tagbar'
-"Plugin 'gergap/ShowMarks'
-Plugin 'godlygeek/tabular'
-"Plugin 'Townk/vim-autoclose'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'vimwiki/vimwiki'
-Plugin 'vim-scripts/calendar.vim--Matsumoto'
-Plugin 'scrooloose/nerdtree'
-Plugin 'SirVer/ultisnips'
-Plugin 'gergap/vim-snippets'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'tenfyzhong/CompleteParameter.vim'
-Plugin 'rust-lang/rust.vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'rhysd/vim-grammarous'
-Plugin 'vim-scripts/valgrind.vim'
-Plugin 'vim-scripts/let-modeline.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'gergap/refactor'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'SidOfc/mkdx'
-Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'rhysd/vim-clang-format'
-Plugin 'dhulihan/vim-rfc'
-Plugin 'powerman/vim-plugin-AnsiEsc'
-call vundle#end()
-
-let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default': {
-  \       'transparent_background': 0,
-  \       'allow_bold': 1,
-  \       'allow_italic': 0
-  \     }
-  \   }
-  \ }
-
-" configure colorscheme: autodetected correct colorscheme depending on env
-" variable that is set in KDE Konsole Profile
-let cs=$colorscheme
-if cs == "SolarizedDark"
-    colorscheme solarized
-    set background=dark
-elseif cs == "SolarizedLight"
-    colorscheme solarized
-    set background=light
-else
-    " Use PaperColor by default: switching between light/dark can easily be
-    " done using vim-unimpaired 'cob' (change option background)
-    set background=dark
-    colorscheme PaperColor
-    let g:airline_theme='papercolor'
-endif
-
-" disable vim-lldb
-"let g:loaded_lldb=1
-let g:lldb_map_Lbreakpoint = "<f9>"
-let g:lldb_map_Lstep = "<f10>"
-let g:lldb_map_Lnext = "<f11>"
-let g:lldb_map_Lfinish = "<f12>"
-
-"=====[ valgrind plugin ]============================
-let g:valgrind_arguments='--leak-check=yes --num-callers=500 --show-leak-kinds=all --track-origins=yes'
-
 "====[ setup my CUPS printer ]===========================================
 " you can simply print using :ha(rdcopy)
 " this also supports an optional range argument, see :h ha
-set pdev=MFC9142CDN
+" use `lpstat -p -d to list printers`
+set pdev=HP_LaserJet_5200
 
 "====[ map leader ]======================================================
 let mapleader="\\"
@@ -214,8 +113,8 @@ function! NumberToggle()
 endfunc
 nnoremap <leader>r :call NumberToggle()<cr>
 
-"====[ make edit vim config easys ]======================================
-nnoremap <leader>ev :split $MYVIMRC<cr>
+"====[ make edit vim config easy ]======================================
+nnoremap <leader>ev :edit $MYVIMRC<cr>
 " auto reload when config has changed
 augroup VimReload
     autocmd!
@@ -223,8 +122,11 @@ augroup VimReload
 augroup END
 
 "====[ make naughty characters visible ]=================================
-exec "set listchars=tab:\u25B6\\ ,trail:\uB7,nbsp:~"
-set list
+" exec "set listchars=tab:\u25B6\\ ,trail:\uB7,nbsp:~"
+" set list
+
+"=====[ Allow saving of files with sudo ]================================
+cmap w!! w !sudo tee > /dev/null %
 
 "====[ highlight 81 column ]=============================================
 " the normal Vim way is to use ColorColumn
@@ -237,7 +139,7 @@ highlight ColorColumn ctermbg=235
 " I also find this highlight bubbles distracting, so I now use another trick.
 " I use a complete color area with just a slightly different background color.
 " The color is configured in my wombat256 color scheme.
-execute "set colorcolumn=" . join(range(81,180), ',')
+execute "set colorcolumn=" . join(range(121,220), ',')
 
 "====[ enable higlight search ]==========================================
 set incsearch
@@ -258,26 +160,138 @@ function! HLNext (blinktime)
     redraw
 endfunction
 
-"====[ Esc insert mode by pressing jk ]==================================
-" this avoids moving my left hand to the esc key which is far away.
-" jk is not used normally in english or german language and I key leave my
-" hand on the navigation keys.
-:inoremap jk <esc>
+"====[ Plugin Manager ]=================================
+call plug#begin()
+" Basic plugins that everybody should use
+" ---------------------------------------
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-unimpaired'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-function'
+Plug 'kana/vim-textobj-line'
+" Basic plugins end
+" ---------------------------------------
+" handle swap files in a smart way (Damian Convay)
+Plug 'gioele/vim-autoswap'
+" interact with tmux (used by cmake-build)
+Plug 'benmills/vimux'
+" effortless navigation between vim and tmux panes
+Plug 'christoomey/vim-tmux-navigator'
+" Wiki plugin
+Plug 'vimwiki/vimwiki'
+"Plug 'Yggdroot/indentLine'
+" ---------------------------------------
+" color schemes
+"Plug 'gergap/gergap'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'asenac/vim-airline-loclist'
+" ---------------------------------------
+" autoclose plugins
+"Plug 'Townk/vim-autoclose'
+"Plug 'jiangmiao/auto-pairs'
+Plug 'Raimondi/delimitMate'
+" ---------------------------------------
+" Grammer check using languagetool
+Plug 'rhysd/vim-grammarous'
+" extend modelines to set custom variables
+Plug 'vim-scripts/let-modeline.vim'
+" Download show show RFCs
+Plug 'dhulihan/vim-rfc'
+" handle ASNI escapes from log fils
+Plug 'powerman/vim-plugin-AnsiEsc'
+" Quick move to different locations
+Plug 'easymotion/vim-easymotion'
+" General editing
+Plug 'godlygeek/tabular'
+" HTML+JS+CSS+SVG editing
+Plug 'othree/html5.vim'
+" LaTeX editing
+Plug 'gergap/vim-latexview'
+" Markdown editing
+Plug 'SidOfc/mkdx'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'iamcco/markdown-preview.nvim'
+" C/C++ development stuff
+Plug 'gergap/vim-cmake-build'
+Plug 'rhysd/vim-clang-format'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'majutsushi/tagbar'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'SirVer/ultisnips'
+Plug 'gergap/vim-snippets'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'vim-scripts/valgrind.vim'
+Plug 'vim-scripts/a.vim'
+Plug 'vim-syntastic/syntastic'
+Plug 'airblade/vim-gitgutter'
+"Plug 'LucHermitte/lh-vim-lib'
+"Plug 'LucHermitte/lh-tags'
+"Plug 'LucHermitte/lh-dev'
+"Plug 'LucHermitte/lh-style'
+"Plug 'LucHermitte/lh-brackets'
+"Plug 'LucHermitte/vim-refactor'
+"Plug 'puremourning/vimspector'
+" Rust Developement
+Plug 'rust-lang/rust.vim'
+" Python Developement
+Plug 'davidhalter/jedi-vim'
+" obsolete stuff, just for reference
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'tenfyzhong/CompleteParameter.vim'
+Plug 'gergap/ShowMarks'
+" change konsole title
+"Plug 'gergap/vim-konsole'
+"Plug 'vim-scripts/calendar.vim--Matsumoto'
+call plug#end()
 
-"====[ surround word with quotes ]=======================================
-:nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+"=====[ color scheme ]============================
+colorscheme solarized8_flat
+"colorscheme solarized
+let g:airline_theme='bubblegum'
 
-"====[ map Y to y$ ]=====================================================
-" from the help: If you like "Y" to work from the cursor to the end of line
-" (which is more logical, but not Vi-compatible) use ":map Y y$".
-:nnoremap Y y$
+"=====[ valgrind plugin ]============================
+let g:valgrind_arguments='--leak-check=yes --num-callers=500 --show-leak-kinds=all --track-origins=yes'
 
-"====[ comment out current line ]========================================
-augroup Comment
-    autocmd!
-    autocmd FileType vim nnoremap <buffer> <localleader>c I"<esc>
-    autocmd FileType c nnoremap <buffer> <localleader>c I//<esc>
-augroup END
+"====[ vim-cmake-build ]======================================
+nmap <leader>d :CMakeDebug<CR>
+nmap <leader>x :CMakeExecute<CR>
+nmap <leader>v :CMakeValgrind<CR>
+let g:debugger = 'cgdb'
+let g:perl_debugger = 'ddd'
+let g:workdir='bin'
+let g:args=''
+
+"====[ vimux plugin ]================================================
+let g:VimuxHeight = "40"
+let g:VimuxOrientation = "h"
+
+"====[ fugitive vim plugin ]=============================================
+set laststatus=2
+"set statusline=%{GitBranch()}
+
+"====[ DoxygenToolKit ]==================================================
+" Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
+let g:DoxygenToolkit_briefTag_pre=""
+let g:DoxygenToolkit_paramTag_pre="@param "
+let g:DoxygenToolkit_returnTag="@return "
+let g:DoxygenToolkit_startCommentTag = "/**"
+let g:DoxygenToolkit_startCommentBlock = "/*"
+"let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
+"let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
+let g:DoxygenToolkit_authorName="Gerhard Gappmeier <gerhard.gappmeier@ascolab.com>"
+"let g:DoxygenToolkit_licenseTag="My own license"
+let g:DoxygenToolkit_interCommentTag = "* "
 
 "====[ Damian Convay's vmath plugin ]====================================
 vnoremap <expr> ++  VMATH_YankAndAnalyse()
@@ -358,145 +372,29 @@ function! s:align_tabular()
   endif
 endfunction
 
-"====[ navigation configuration ]=====================================
-" For moving the cursor we use hjkl in Vim, so the cursor keys can be
-" used for special actions which are used more rarely than hjkl.
-" previous buffer
-nmap <Left>     :bp<cr>
-" next buffer
-nmap <Right>    :bn<cr>
-" previous spelling error
-nmap <Up>       :[s<cr>
-" next spelling error
-nmap <Down>     :]s<cr>
-" Vim: M-Up/Down to navigate to prev/next compile error
-"      M-Left/Right to move between tabs
-" VimDiff: M-Up/Down to navigate to prev/next change
-"          M-Left/Right to move changes
-nnoremap <expr> <M-Down>  &diff ? ']c' : ':cn<cr>'
-nnoremap <expr> <M-Up>    &diff ? '[c' : ':cp<cr>'
-nnoremap <expr> <M-Left>  &diff ? 'do' : ':tabp<cr>'
-nnoremap <expr> <M-Right> &diff ? 'dp' : ':tabn<cr>'
-
-"====[ use my own make script ]==========================================
-set makeprg=mk
-
-"====[ map :Q to :q ]====================================================
-" It happens so often that I type :Q instead of :q that it makes sense to make
-" :Q just working. :Q is not used anyway by vim.
-command! Q q
-
-"====[ Syntastic plugin ]================================================
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_perl_checkers = ['perl']
-let g:syntastic_enable_perl_checker = 1
-let g:syntastic_python_checkers = ['python', 'pylint']
-let g:syntastic_python_pylint_exec = '/usr/bin/pylint3'
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_style_error_symbol = '✠'
-let g:syntastic_warning_symbol = '∆'
-let g:syntastic_style_warning_symbol = '≈'
-let g:syntastic_enable_balloons = 1
-
-"====[ Git Gutter plugin ]======================================================
-" Use lower prio than YCM errors
-let g:gitgutter_sign_priority = 5
-
-"====[ YCM plugin ]======================================================
-nmap <leader><leader>c :YcmCompleter GoToReferences expand("<cword>")<CR>
-nmap <leader><leader>d :YcmCompleter GoToDefinition expand("<cword>")<CR>
-nmap <leader><leader>g :YcmCompleter GoTo expand("<cword>")<CR>
-
-let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-Tab>', '<Up>']
-"let g:SuperTabDefaultCompletionType = '<C-Tab>'
-" use ctags files
-let g:ycm_collect_identifiers_from_tags_files = 1
-" When set to 1, the OmniSharp server will be automatically started (once per
-" Vim session) when you open a C# file.
-let g:ycm_auto_start_csharp_server = 0
-" only show popup when hitting (super)tab, this is less intrusive
-let g:ycm_auto_trigger = 1
-" disable confirmation for loading extra conf
-let g:ycm_confirm_extra_conf = 0
-" always populate location list
-let g:ycm_always_populate_location_list = 1
-" debug output
-"let g:ycm_server_keep_logfiles = 1
-"let g:ycm_server_log_level = 'debug'
-"let g:ycm_server_use_vim_stdout = 1
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
-    endif
-    return ""
+"====[ Grammarous Plugin ]=====================================================
+let g:grammarous#hooks = {}
+function! g:grammarous#hooks.on_check(errs) abort
+    nmap <buffer><C-n> <Plug>(grammarous-move-to-next-error)
+    nmap <buffer><C-p> <Plug>(grammarous-move-to-previous-error)
+    nmap <buffer><C-f> <Plug>(grammarous-fixit)
+    nmap <buffer><C-r> <Plug>(grammarous-reset)
 endfunction
-function! g:UltiSnips_Reverse()
-  call UltiSnips#JumpBackwards()
-  if g:ulti_jump_backwards_res == 0
-    return "\<C-P>"
-  endif
 
-  return ""
+function! g:grammarous#hooks.on_reset(errs) abort
+    nunmap <buffer><C-n>
+    nunmap <buffer><C-p>
+    nunmap <buffer><C-f>
+    nunmap <buffer><C-r>
 endfunction
-augroup mycm
-    au!
-    au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-    au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
-augroup END
 
-"====[ CompleteParam plugin ]============================================
-inoremap <silent><expr> ( complete_parameter#pre_complete("()")
-smap <leader><tab> <Plug>(complete_parameter#goto_next_parameter)
-imap <leader><tab> <Plug>(complete_parameter#goto_next_parameter)
-smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-let g:complete_parameter_use_ultisnips_mapping = 1
+"====[ Ctrl-P plugin         ]===========================================
+"nnoremap <leader>t :CtrlPTag<cr>
+nnoremap <leader>t :TagbarToggle<cr>
 
-"====[ ShowMarks plugin ]================================================
-" reduce shows marks to I need. The default is
-"let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.'`^<>[]{}()\""
-let g:showmarks_include="abcdefghijklmnopqrstuvwxyz.[]<>"
-
-"====[ Autoclose plugin ]================================================
-" fix issue of autoclose with YCM. See
-" https://github.com/Valloric/YouCompleteMe/issues/9
-let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
-" Disable expand space, I don't need it and this would overload <SPACE>
-" which conflicts with Vim abbreviation
-let g:AutoCloseExpandSpace = 0
-
-"====[ UltiSnips plugin ]================================================
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsEditSplit="horizontal"
-let g:UltiSnipsListSnippets="<c-e>"
-let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
-
-"====[ superTab plugin ]=================================================
-" uncomment the next line to disable superTab
-"let loaded_supertab = 1
-"set completeopt=menu,longest
-"let g:SuperTabDefaultCompletionType = 'context'
-"let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-"let g:SuperTabLongestHighlight=1
-"let g:SuperTabLongestEnhanced=1
+"====[ NERDTree plugin       ]===========================================
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
 
 "====[ Taglist plugin ]==================================================
 let Tlist_WinWidth = 40
@@ -530,112 +428,94 @@ if ! has('gui_running')
   augroup END
 endif
 
-"====[ KDbg launcher ]===================================================
-let g:workdir="/home/gergap/work/devel/embeddedstack/bin"
-"let g:target="/home/gergap/work/devel/embeddedstack/bin/xml2bin"
-"let g:args="-i0:ua -o ns0.ua Opc.Ua.NodeSet2.xml"
-let g:target="/home/gergap/work/devel/embeddedstack/bin/uaserverhp"
-let g:args=""
+"====[ use my own make script ]==========================================
+set makeprg=mk
 
-"====[ vim-cmake-build ]======================================
-nmap <leader>d :CMakeDebug<CR>
-nmap <leader>x :CMakeExecute<CR>
-nmap <leader>v :CMakeValgrind<CR>
-let g:debugger = 'cgdb'
-let g:perl_debugger = 'ddd'
+"====[ map :Q to :q ]====================================================
+" It happens so often that I type :Q instead of :q that it makes sense to make
+" :Q just working. :Q is not used anyway by vim.
+command! Q q
+command! Qw qw
 
-"====[ vimux ]================================================
-let g:VimuxHeight = "40"
-let g:VimuxOrientation = "h"
+"====[ Syntastic plugin ]================================================
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-"====[ fugitive vim plugin ]=============================================
-set laststatus=2
-"set statusline=%{GitBranch()}
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_perl_checkers = ['perl']
+let g:syntastic_enable_perl_checker = 1
+let g:syntastic_python_checkers = ['python', 'pylint']
+let g:syntastic_python_pylint_exec = '/usr/bin/pylint3'
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_style_error_symbol = '✠'
+let g:syntastic_warning_symbol = '∆'
+let g:syntastic_style_warning_symbol = '≈'
+let g:syntastic_enable_balloons = 1
 
-"====[ DoxygenToolKit ]==================================================
-" Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
-let g:DoxygenToolkit_briefTag_pre=""
-let g:DoxygenToolkit_paramTag_pre="@param "
-let g:DoxygenToolkit_returnTag="@return "
-let g:DoxygenToolkit_startCommentTag = "/**"
-let g:DoxygenToolkit_startCommentBlock = "/*"
-"let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
-"let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
-let g:DoxygenToolkit_authorName="Gerhard Gappmeier <gerhard.gappmeier@ascolab.com>"
-"let g:DoxygenToolkit_licenseTag="My own license"
-let g:DoxygenToolkit_interCommentTag = "* "
+"====[ Git Gutter plugin ]======================================================
+" Use lower prio than YCM errors
+let g:gitgutter_sign_priority = 5
 
-"====[ make use of F-keys ]==============================================
-" unindent with Shift-Tab
-imap <S-Tab> <C-o><<
-" use F2 for saving
-nnoremap <F2> :w<cr>
-" save and leave insert mode
-inoremap <F2> <esc>:w<cr>
-" map F3 and SHIFT-F3 to toggle spell checking
-nmap <F3> :setlocal spell spelllang=de,en<CR>:syntax spell toplevel<CR>
-imap <F3> <ESC>:setlocal spell spelllang=en,de<CR>i:syntax spell toplevel<CR>
-nmap <S-F3> :setlocal nospell<CR>
-imap <S-F3> <ESC>:setlocal nospell<CR>i
-" switch between header/source with F4 in C/C++ using a.vim
-nmap <F4> :A<CR>
-imap <F4> <ESC>:A<CR>i
-" currently S-F4 does not work in KDE konsole. Don't know why.
-nmap <S-F4> :AV<CR>
-imap <S-F4> <ESC>:AV<CR>i
-" recreate tags file with F5
-map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-" create doxygen comment
-map <F6> :Dox<CR>
-function! Build()
-    if &modified == 1
-        " save current changed buffer
-        normal :w<CR>
+"====[ ShowMarks plugin ]================================================
+" reduce shows marks to I need. The default is
+"let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.'`^<>[]{}()\""
+let g:showmarks_include="abcdefghijklmnopqrstuvwxyz.[]<>"
+
+"====[ Autoclose plugin ]================================================
+" fix issue of autoclose with YCM. See
+" https://github.com/Valloric/YouCompleteMe/issues/9
+let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
+" Disable expand space, I don't need it and this would overload <SPACE>
+" which conflicts with Vim abbreviation
+let g:AutoCloseExpandSpace = 0
+
+"====[ UltiSnips plugin ]================================================
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+let g:UltiSnipsEditSplit="horizontal"
+let g:UltiSnipsListSnippets="<c-e>"
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+
+function! g:UltiSnips_Complete()
+  call UltiSnips#ExpandSnippet()
+  if g:ulti_expand_res == 0
+    if pumvisible()
+      return "\<C-n>"
+    else
+      call UltiSnips#JumpForwards()
+      if g:ulti_jump_forwards_res == 0
+        return "\<TAB>"
+      endif
     endif
-    "execute "make clean"
-    execute "make all"
+  endif
+  return ""
 endfunction
 
-"nnoremap <F7> :silent :wa<cr>:make<cr>
-nnoremap <F7> :call Build()<CR>
-" build using makeprg with <F7>
-"nmap <F7> :w<CR>:make<CR>
-nmap <F7> :call Build()<CR>
-imap <F7> <ESC>:w<CR>:make<CR>
-" clean build using makeprg with <S-F7>
-map <S-F7> :make clean all<CR>
-" Simple hexify/unhexify
-noremap <F8> :call <sid>Hexify()<CR>
-" Apply YCM FixIt
-map <F9> :YcmCompleter FixIt<CR>
-" remove trailing spaces
-map <F10> :%s/\s\+$//<CR>
-" goto definition with F12
-map <F12> <C-]>
-" open definition in new split
-"map <S-F12> <C-W> <C-]>
-map <S-F12> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
-" prefer vertical diff
-set diffopt+=vertical
-" spell settings
-"  :setlocal spell spelllang=en
-" set the spellfile - folders must exist
-" global wordlist, press zg to add a word to the list
-set spellfile=~/.vim/spellfile.add
-" project specific ignore list, press 2zg to add a word to this ignore list
-set spellfile+=ignore.utf-8.add
+function! g:UltiSnips_Reverse()
+  call UltiSnips#JumpBackwards()
+  if g:ulti_jump_backwards_res == 0
+    return "\<C-P>"
+  endif
 
-"====[ Ctrl-P plugin         ]===========================================
-"nnoremap <leader>t :CtrlPTag<cr>
-nnoremap <leader>t :TagbarToggle<cr>
+  return ""
+endfunction
 
-"====[ NERDTree plugin       ]===========================================
-nnoremap <leader>n :NERDTreeToggle<cr>
 
-"====[ indentLines plugin    ]===========================================
-let g:indentLine_enabled = 0
-let g:indentLine_color_term = 239
-let g:indentLine_char = '┆'
+if !exists("g:UltiSnipsJumpForwardTrigger")
+  let g:UltiSnipsJumpForwardTrigger = "<tab>"
+endif
+
+if !exists("g:UltiSnipsJumpBackwardTrigger")
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+endif
+
+au InsertEnter * exec "inoremap <silent> ".g:UltiSnipsExpandTrigger." <C-R>=g:UltiSnips_Complete()<cr>"
+au InsertEnter * exec "inoremap <silent> ".g:UltiSnipsJumpBackwardTrigger." <C-R>=g:UltiSnips_Reverse()<cr>"
 
 "====[ resize split windows ]============================================
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
@@ -671,210 +551,101 @@ function! s:Hexify()
         let $in_hex=1
     endif
 endfunc
-function! EscapeText(text)
 
-    let l:escaped_text = a:text
-
-    " Map characters to named C backslash escapes. Normally, single-quoted
-    " strings don't require double-backslashing, but these are necessary
-    " to make the substitute() call below work properly.
-    "
-    let l:charmap = {
-    \   '"'     : '\\"',
-    \   "'"     : '\\''',
-    \   "\n"    : '\\n',
-    \   "\r"    : '\\r',
-    \   "\b"    : '\\b',
-    \   "\t"    : '\\t',
-    \   "\x07"  : '\\a',
-    \   "\x0B"  : '\\v',
-    \   "\f"    : '\\f',
-    \   }
-
-    " Escape any existing backslashes in the text first, before
-    " generating new ones. (Vim dictionaries iterate in arbitrary order,
-    " so this step can't be combined with the items() loop below.)
-    "
-    let l:escaped_text = substitute(l:escaped_text, "\\", '\\\', 'g')
-
-    " Replace actual returns, newlines, tabs, etc., with their escaped
-    " representations.
-    "
-    for [original, escaped] in items(charmap)
-        let l:escaped_text = substitute(l:escaped_text, original, escaped, 'g')
-    endfor
-
-    " Replace any other character that isn't a letter, number,
-    " punctuation, or space with a 3-digit octal escape sequence. (Octal
-    " is used instead of hex, since octal escapes terminate after 3
-    " digits. C allows hex escapes of any length, so it's possible for
-    " them to run up against subsequent characters that might be valid
-    " hex digits.)
-    "
-    let l:escaped_text = substitute(l:escaped_text,
-    \   '\([^[:alnum:][:punct:] ]\)',
-    \   '\="\\o" . printf("%03o",char2nr(submatch(1)))',
-    \   'g')
-
-    return l:escaped_text
-
+"====[ Coc Plugin ]=====================================================
+" Requirements: sudo apt install npm
+" - npm install esbuild
+" - cd ~/.vim/plugged/coc.nvim/
+" - npm run build
+" In Vim:
+" - :CocInstall coc-clangd
+" - :CocCommand clangd.install (if not using system clangd)
+" - :CocConfig
+"   {
+"       "clangd.path": "/home/gergap/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin/clangd",
+"       "clangd.semanticHighlighting": true
+"   }
+" Ensure you have a compile_commands.json in your project dir
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! PasteEscapedRegister(where)
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
-    " Remember current register name, contents, and type,
-    " so they can be restored once we're done.
-    "
-    let l:save_reg_name     = v:register
-    let l:save_reg_contents = getreg(l:save_reg_name, 1)
-    let l:save_reg_type     = getregtype(l:save_reg_name)
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-    echo "register: [" . l:save_reg_name . "] type: [" . l:save_reg_type . "]"
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-    " Replace the contents of the register with the escaped text, and set the
-    " type to characterwise (so pasting into an existing double-quoted string,
-    " for example, will work as expected).
-    "
-    call setreg(l:save_reg_name, EscapeText(getreg(l:save_reg_name)), "c")
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-    " Build the appropriate normal-mode paste command.
-    "
-    let l:cmd = 'normal "' . l:save_reg_name . (a:where == "before" ? "P" : "p")
-
-    " Insert the escaped register contents.
-    "
-    exec l:cmd
-
-    " Restore the register to its original value and type.
-    "
-    call setreg(l:save_reg_name, l:save_reg_contents, l:save_reg_type)
-
-endfunction
-" Define keymaps to paste escaped text before or after the cursor.
-"
-nmap <Leader>P :call PasteEscapedRegister("before")<cr>
-nmap <Leader>p :call PasteEscapedRegister("after")<cr>
-
-function! KeyLoggerEnable()
-    augroup logger
-        autocmd!
-        autocmd VimEnter * :call system('$HOME/vim/enable_logger')
-        autocmd VimLeave * :call system('$HOME/vim/disable_logger')
-        autocmd InsertEnter * :call system('$HOME/vim/insert_enter')
-        autocmd InsertLeave * :call system('$HOME/vim/insert_leave')
-    augroup END
+" Use <leader>D to show documentation in preview window.
+" The default on Coc website uses K, which is the key to display man pages.
+nnoremap <silent> <leader>D :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
 endfunction
 
-function! KeyLoggerDisable()
-    augroup logger
-        autocmd!
-    augroup END
-endfunction
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" change cursor shape in KDE4 konsole
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+" Refactor selection
+vmap <silent> <leader>rf <Plug>(coc-codeaction-selected)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Append modeline after last line in buffer.
-" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
-" files.
-function! AppendModeline()
-  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
-        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
-  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
-  call append(line("$"), l:modeline)
-endfunction
-nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
-
-" Syntax highlight debugging: this function is from the Vim Manual
-function! ShowSyntaxStack()
-    for id in synstack(line("."), col("."))
-        echo synIDattr(id, "name")
-    endfor
-endfunction
-map <leader>s :call ShowSyntaxStack()<cr>
-
-" Open ccmake for current project.
-" This uses b:git_dir from vim-fugitive to find the git directory
-function! CCMake() abort
-    if exists('b:git_dir')
-        execute "silent !ccmake ".b:git_dir."/../bld"
-        execute "redraw!"
-    else
-        echom "error: b:git_dir is not set"
-    endif
-endfunction
-map <leader>cc :call CCMake()<cr>
-
-" Make views automatic: http://vim.wikia.com/wiki/VimTip991
-"augroup MakeViewAutomatic
-"    autocmd!
-"    autocmd BufWinLeave *.* mkview
-"    autocmd BufWinEnter *.* silent loadview
-"augroup end
-
-function! Enum2Array()
-    let l:autoclose=b:AutoCloseOn
-    " disable autoclose
-    let b:AutoCloseOn=0
-    exe "normal! :'<,'>g/^\\s*$/d\n"
-    exe "normal! :'<,'>s/\\(\\s*\\)\\([[:alnum:]_]*\\).*/\\1[\\2] = \"\\2\",/\n"
-    normal `>
-    exe "normal a\n};\n"
-    normal ==
-    normal `<
-    exe "normal iconst char *[] =\n{\n"
-    " try some indentation
-    exe ":'<,'>normal =="
-    normal `>j==
-    " set the cursor at the top
-    normal `<
-    " restore autoclose
-    let b:AutoCloseOn=l:autoclose
-    normal f[
-endfunction
-map <leader>e <esc>:call Enum2Array()<cr>
-
-let g:grammarous#hooks = {}
-function! g:grammarous#hooks.on_check(errs) abort
-    nmap <buffer><C-n> <Plug>(grammarous-move-to-next-error)
-    nmap <buffer><C-p> <Plug>(grammarous-move-to-previous-error)
-    nmap <buffer><C-f> <Plug>(grammarous-fixit)
-endfunction
-
-function! g:grammarous#hooks.on_reset(errs) abort
-    nunmap <buffer><C-n>
-    nunmap <buffer><C-p>
-    nunmap <buffer><C-f>
-endfunction
-"let g:grammarous#languagetool_cmd = '/home/gergap/Documents/Latex/detex-languagetool.py'
-
-let g:tex_flavor='latex'
-set grepprg=grep\ -nH\ $*
-
-let g:ycm_python_binary_path = '/usr/bin/python3'
-augroup python_files
-    autocmd!
-    autocmd FileType python setlocal noexpandtab
-    autocmd FileType python set tabstop=8
-    autocmd FileType python set shiftwidth=8
-    autocmd FileType python nnoremap <buffer> <F5> :!python3 %<CR>
-augroup END
-
-" automatic strip trailing whitespace on write
-autocmd BufWritePre *.cpp :%s/\s\+$//e
-autocmd BufWritePre *.c :%s/\s\+$//e
-autocmd BufWritePre *.h :%s/\s\+$//e
-autocmd BufWritePre *.pl :%s/\s\+$//e
-
-" avoid pressing enter when leaving man pages
-:nnoremap K K<CR>
-:vnoremap K K<CR>
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
 
 "======[ Magically build interim directories if necessary ]===================
 " This is from Damian Conway.
-
 function! AskQuit (msg, options, quit_option)
     if confirm(a:msg, a:options) == a:quit_option
         exit
@@ -886,7 +657,6 @@ function! EnsureDirExists ()
     if !isdirectory(required_dir)
         call AskQuit("Parent directory '" . required_dir . "' doesn't exist.",
              \       "&Create it\nor &Quit?", 2)
-
         try
             call mkdir( required_dir, 'p' )
         catch
@@ -902,14 +672,13 @@ augroup AutoMkdir
 augroup END
 
 "=====[ Auto-setup for Perl scripts and modules and test files ]===========
-
 augroup Perl_Setup
     autocmd!
     autocmd BufNewFile   *.p[lm65],*.t,*.h,*.c,*.hpp,*.cpp   0r !file_template <afile>
     autocmd BufNewFile   *.p[lm65],*.t,*.h,*.c,*.hpp,*.cpp   /^.*implementation[ \t]\+here/
 augroup END
 
-"=====[ Add or subtract comments ]===============================
+"=====[ Comfortably comment out lines ]===============================
 
 " Work out what the comment character is, by filetype...
 autocmd FileType             *sh,awk,python,perl,perl6,ruby    let b:cmt = exists('b:cmt') ? b:cmt : '#'
@@ -969,8 +738,11 @@ endfunction
 nmap <silent> # :call ToggleComment()<CR>j0
 vmap <silent> # :call ToggleBlock()<CR>
 
+"====[ My solution to create implementations from declarations ]==============================================
 " Creates an implementation from a declaration in a header file.
-" It uses the declaration from the current line.
+" This requires A.vim to switch between headers and sources
+
+" This uses the declaration from the current line
 function! CreateImplementation()
     " copy current line
     normal yy
@@ -979,6 +751,9 @@ function! CreateImplementation()
     " paste new line
     execute "normal Gp$xa\<CR>{\<CR>}\<ESC>O"
 endfunction
+
+" This works on lines in the visual selection
+" The selection can contain empty lines, which will be ignored.
 function! CreateImplementationBlock() range
     let num_lines = a:lastline - a:firstline
     let lines = getline(a:firstline, a:lastline)
@@ -1000,8 +775,8 @@ function! CreateImplementationBlock() range
         if match(line, "^\s*$") != -1
             continue
         endif
-        " remove semicolon at end of line
-        let line = substitute(line, ';$', "", 'g')
+        " remove semicolon at end of line (including optional attributes)
+        let line = substitute(line, ')[A-Za-z0-9_() ]*;$', ")", 'g')
         if (&ft == "cpp")
             " CPP code needs more work
             let line = substitute(line, '^ \+', '', 'g') " remove leading spaces
@@ -1010,11 +785,13 @@ function! CreateImplementationBlock() range
             " lets insert classname
             let line = substitute(line, '\([a-zA-Z0-9_~]\+\)(', classname."::\\1(", '')
         endif
+        let line = substitute(line, '\w\+EXPORT ', '', 'g') " remove EXPORT macros
         call append(line('$'), line)
         call append(line('$'), "{")
-        let match = matchstr(line, "^int ")
+        let match = matchstr(line, '\v^(bool|(unsigned)? int|float|double) ')
         if match != ''
-            call append(line('$'), "    int ret = 0;")
+            let dt = substitute(match, '\v.{-}(bool|(unsigned)? int|float|double).*', '\1', '')
+            call append(line('$'), "    ".dt." ret = 0;")
             call append(line('$'), "")
             call append(line('$'), "    // TODO")
             call append(line('$'), "")
@@ -1028,19 +805,154 @@ function! CreateImplementationBlock() range
 
     " place cursor in first function implementation body
     call cursor(startpos, 1)
-    execute "normal /\\/\\/ TODO\<cr>v$\<c-g>"
+    "execute "normal /\\/\\/ TODO\<cr>v$\<c-g>"
 endfunction
 nmap <silent> <leader>i :call CreateImplementation()<CR>
 vmap <silent> <leader>i :call CreateImplementationBlock()<CR>
 
+"====[ F-key mappings ]==============================================
+" unindent with Shift-Tab
+imap <S-Tab> <C-o><<
+" use F2 for saving
+nnoremap <F2> :w<cr>
+" save and leave insert mode
+inoremap <F2> <esc>:w<cr>
+" map F3 and SHIFT-F3 to toggle spell checking
+nmap <F3> :setlocal spell spelllang=de,en<CR>:syntax spell toplevel<CR>
+imap <F3> <ESC>:setlocal spell spelllang=en,de<CR>i:syntax spell toplevel<CR>
+nmap <S-F3> :setlocal nospell<CR>
+imap <S-F3> <ESC>:setlocal nospell<CR>i
+" switch between header/source with F4 in C/C++ using a.vim
+nmap <F4> :A<CR>
+imap <F4> <ESC>:A<CR>i
+" currently S-F4 does not work in KDE konsole. Don't know why.
+nmap <S-F4> :AV<CR>
+imap <S-F4> <ESC>:AV<CR>i
+" recreate tags file with F5
+"map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+map <F5> :!git ctags<CR>
+" create doxygen comment
+map <F6> :Dox<CR>
+" build using makeprg with <F7>
+function! Build()
+    if &modified == 1
+        " save current changed buffer
+        normal :w<CR>
+    endif
+    "execute "make clean"
+    execute "make all"
+endfunction
+nnoremap <F7> :call Build()<CR>
+nmap <F7> :call Build()<CR>
+imap <F7> <ESC>:w<CR>:make<CR>
+" clean build using makeprg with <S-F7>
+" build using makeprg with <F7>
+function! CleanBuild()
+    if &modified == 1
+        " save current changed buffer
+        normal :w<CR>
+    endif
+    " ninja does not support 'clean all' in one step
+    execute "make clean"
+    execute "make all"
+endfunction
+map <S-F7> :call CleanBuild()<CR>
+" Simple hexify/unhexify
+noremap <F8> :call <sid>Hexify()<CR>
+" Apply CoC FixIt
+map <F9> :CocFix<CR>
+" remove trailing spaces
+map <F10> :%s/\s\+$//<CR>
+" goto definition with F12
+map <F12> <C-]>
+" open definition in new split
+"map <S-F12> <C-W> <C-]>
+map <S-F12> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+"====[ navigation configuration ]=====================================
+" For moving the cursor we use hjkl in Vim, so the cursor keys can be
+" used for special actions which are used more rarely than hjkl.
+" previous buffer
+nmap <Left>     :bp<cr>
+" next buffer
+nmap <Right>    :bn<cr>
+" previous spelling error
+nmap <Up>       :[s<cr>
+" next spelling error
+nmap <Down>     :]s<cr>
+" Vim: M-Up/Down to navigate to prev/next compile error
+"      M-Left/Right to move between tabs
+" VimDiff: M-Up/Down to navigate to prev/next change
+"          M-Left/Right to move changes
+nnoremap <expr> <M-Down>  &diff ? ']c' : ':cn<cr>'
+nnoremap <expr> <M-Up>    &diff ? '[c' : ':cp<cr>'
+nnoremap <expr> <M-Left>  &diff ? 'do' : ':tabp<cr>'
+nnoremap <expr> <M-Right> &diff ? 'dp' : ':tabn<cr>'
+
+"====[ Esc insert mode by pressing jk ]==================================
+" this avoids moving my left hand to the esc key which is far away.
+" jk is not used normally in english or german language and I key leave my
+" hand on the navigation keys.
+:inoremap jk <esc>
+
+"====[ surround word with quotes ]=======================================
+:nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+
+"====[ map Y to y$ ]=====================================================
+" from the help: If you like "Y" to work from the cursor to the end of line
+" (which is more logical, but not Vi-compatible) use ":map Y y$".
+:nnoremap Y y$
+
+"====[ convert enum to string array ]=====================================================
+function! Enum2Array()
+    let l:autoclose=b:AutoCloseOn
+    " disable autoclose
+    let b:AutoCloseOn=0
+    exe "normal! :'<,'>g/^\\s*$/d\n"
+    exe "normal! :'<,'>s/\\(\\s*\\)\\([[:alnum:]_]*\\).*/\\1[\\2] = \"\\2\",/\n"
+    normal `>
+    exe "normal a\n};\n"
+    normal ==
+    normal `<
+    exe "normal iconst char *[] =\n{\n"
+    " try some indentation
+    exe ":'<,'>normal =="
+    normal `>j==
+    " set the cursor at the top
+    normal `<
+    " restore autoclose
+    let b:AutoCloseOn=l:autoclose
+    normal f[
+endfunction
+map <leader>e <esc>:call Enum2Array()<cr>
+
+"====[ python configuration ]=====================================================
+let g:ycm_python_binary_path = '/usr/bin/python3'
+augroup python_files
+    autocmd!
+    autocmd FileType python setlocal noexpandtab
+    autocmd FileType python set tabstop=8
+    autocmd FileType python set shiftwidth=8
+    autocmd FileType python nnoremap <buffer> <F5> :!python3 %<CR>
+augroup END
+
+"====[ automatic strip trailing whitespace on write ]=====================================================
+autocmd BufWritePre *.cpp :%s/\s\+$//e
+autocmd BufWritePre *.c :%s/\s\+$//e
+autocmd BufWritePre *.h :%s/\s\+$//e
+autocmd BufWritePre *.pl :%s/\s\+$//e
+
+" avoid pressing enter when leaving man pages
+:nnoremap K K<CR>
+:vnoremap K K<CR>
 
 "=====[ Search folding ]=====================
-
 " Don't start new buffers folded
 set foldlevelstart=99
 
 " Highlight folds
-highlight Folded  ctermfg=cyan ctermbg=black
+"highlight Folded  ctermfg=cyan ctermbg=black
+hi! link Folded VisualNOS
 
 " Toggle on and off...
 nmap <silent> <expr>  zz  FS_ToggleFoldAroundSearch({'context':2})
@@ -1059,95 +971,4 @@ augroup END
 
 " Show only C #includes...
 nmap <silent> <expr>  zu  FS_FoldAroundTarget('^\s*use\s\+\S.*;',{'context':1})
-
-let g:clang_include_fixer_path = "/usr/bin/clang-include-fixer-3.9"
-let g:clang_include_fixer_maximum_suggested_headers = 3
-let g:clang_include_fixer_increment_num = 5
-let g:clang_include_fixer_jump_to_include = 0
-let g:clang_include_fixer_query_mode = 0
-noremap <leader>cf :py3f /usr/lib/llvm-3.9/share/clang/clang-include-fixer.py<cr>
-
-" setup
-if has("cscope")
-    " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
-    set cscopetag
-    " search ctags first
-    set csto=1
-    set nocsverb
-    " add any database in current directory
-    if filereadable("cscope.out")
-    cs add cscope.out
-    " else add database pointed to by environment
-    elseif $CSCOPE_DB != ""
-    cs add $CSCOPE_DB
-    endif
-    " show msg when any other cscope db is added
-    set csverb
-endif
-
-" To do the first type of search, hit 'CTRL-\', followed by one of the
-" cscope search types above (s,g,c,t,e,f,i,d).  The result of your cscope
-" search will be displayed in the current window.  You can use CTRL-T to
-" go back to where you were before the search.  
-"
-nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
-nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
-
-" Using 'CTRL-spacebar' (intepreted as CTRL-@ by vim) then a search type
-" makes the vim window split horizontally, with search result displayed in
-" the new window.
-"
-" (Note: earlier versions of vim may not have the :scs command, but it
-" can be simulated roughly via:
-"    nmap <C-@>s <C-W><C-S> :cs find s <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>	
-nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>	
-
-" Hitting CTRL-space *twice* before the search type does a vertical 
-" split instead of a horizontal one (vim 6 and up only)
-"
-" (Note: you may wish to put a 'set splitright' in your .vimrc
-" if you prefer the new window on the right instead of the left
-nmap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@><C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@><C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@><C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>	
-nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
-
-"====[ unit test execution ]======================================
-function! RunTest(testname)
-    " populate quickfix window with test result
-    cexpr system(a:testname)
-endfunction
-" add error format for unit test output
-set efm+=%-GSTART%.%#
-set efm+=%EFAIL!%.%#:\ %m
-set efm+=%-Z\ \ \ Loc:\ [%f(%l)]
-set efm+=%-C%m
-set efm+=%-GTest\ finished%.%#
-set efm+=%-G%.%#PASSED.
-set efm+=%-G%.%#FAILED.
-set efm+=%-G%.%#SKIPPED.
-set efm+=%-G%.%#Testing\ %.%#...
-set efm+=%-G%.%#Finished\ testing%.%#
-set efm+=%-G%.%#PASS%.%#
-
-" load tags file in project root. the ';' is important here. It will search
-" from the current directoru upwards until it find a tags file
-set tags=tags;
 

@@ -1,0 +1,111 @@
+snippet class "Class frame" b
+class ${1:name}
+{
+    // disable copy
+    $1(const $1 &copy);
+    $1& operator=(const $1 &copy);
+public:
+    $1();
+    virtual ~$1();
+private:
+    ${0:int m_member;}
+};
+endsnippet
+
+snippet enc "Encoder template" b
+/*****************************************************************************
+ *                                                                           *
+ * Copyright (c) 2006-2016 Unified Automation GmbH. All rights reserved.     *
+ *                                                                           *
+ * Software License Agreement ("SLA") Version 2.6                            *
+ *                                                                           *
+ * Unless explicitly acquired and licensed from Licensor under another       *
+ * license, the contents of this file are subject to the Software License    *
+ * Agreement ("SLA") Version 2.6, or subsequent versions as allowed by the   *
+ * SLA, and You may not copy or use this file in either source code or       *
+ * executable form, except in compliance with the terms and conditions of    *
+ * the SLA.                                                                  *
+ *                                                                           *
+ * All software distributed under the SLA is provided strictly on an "AS     *
+ * IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,       *
+ * AND LICENSOR HEREBY DISCLAIMS ALL SUCH WARRANTIES, INCLUDING WITHOUT      *
+ * LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR   *
+ * PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the SLA for specific   *
+ * language governing rights and limitations under the SLA.                  *
+ *                                                                           *
+ * The complete license agreement can be found here:                         *
+ * http://unifiedautomation.com/License/SLA/2.6/                             *
+ *                                                                           *
+ *****************************************************************************/
+
+#ifndef _UAENCODER_`!p snip.rv = t[1].upper()`_H_
+#define _UAENCODER_`!p snip.rv = t[1].upper()`_H_
+
+#include <stdint.h>
+#ifndef HAVE_ENCODER_TABLE
+#include <uaencoder/binary/$1.h>
+#endif
+
+/* forward declarations */
+struct ua_encoder_context;
+struct ua_decoder_context;
+struct ua_buffer;
+
+static inline int ua_encode_${1:type}(struct ua_encoder_context *ctx, const char *fieldname, const ${2:type} *val)
+{
+#ifdef HAVE_ENCODER_TABLE
+    return ctx->calltable->fct_$1.encode(ctx, fieldname, val);
+#else
+    return ua_encode_binary_$1(ctx, fieldname, val);
+#endif /* HAVE_ENCODER_TABLE */
+}
+
+static inline int ua_decode_$1(struct ua_decoder_context *ctx, const char *fieldname, $2 *val)
+{
+#ifdef HAVE_ENCODER_TABLE
+    return ctx->calltable->fct_$1.decode(ctx, fieldname, val);
+#else
+    return ua_decode_binary_$1(ctx, fieldname, val);
+#endif /* HAVE_ENCODER_TABLE */
+}
+
+static inline int ua_decode_$1_skip(struct ua_decoder_context *ctx, const char *fieldname)
+{
+#ifdef HAVE_ENCODER_TABLE
+    return ctx->calltable->fct_$1.skip(ctx, fieldname, val);
+#else
+    return ua_decode_binary_$1_skip(ctx, fieldname);
+#endif /* HAVE_ENCODER_TABLE */
+}
+
+#endif /* _UAENCODER_`!p snip.rv = t[1].upper()`_H_*/
+endsnippet
+
+snippet qtmain "Qt main" b
+#include <QApplication>
+#include <QPushButton>
+
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+    QPushButton button(QPushButton::tr("Hello World"));
+
+    button.show();
+
+    return app.exec();
+}
+endsnippet
+
+
+snippet externc "UA_BEGIN_EXTERN_C" b
+UA_BEGIN_EXTERN_C
+
+${VISUAL}
+
+UA_END_EXTERN_C
+endsnippet
+
+snippet strncpy "strncpy" b
+strncpy(${1:dest}, ${2:src}, sizeof($1));
+endsnippet
+

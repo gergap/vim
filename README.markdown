@@ -7,20 +7,20 @@ gergap's Vim Configuration
      \___  / \___  >__|  \___  (____  /   __/____  >    \___/   |__|__|_|  /
     /_____/      \/     /_____/     \/|__|       \/                      \/
 
+Vim is a versatile editor that I use for C/C++ development, writing bash or perl scripts,
+LaTeX documentation, Markdown, actually everything.
+Using SSH and TMux you can work remotely, keep sessions running when disconnecting and
+resume on later.
 
-With vim you can really do everything. I'm using it for C/C++ development,
-writing BASH scripts, and for all kinds of administration tasks. TMux and SSH are
-your best friends ;-)
-
-I'm using vim on Gentoo Linux running in Konsole (KDE's awesome terminal application).
-My config may work on other systems too, but I've not tested it.
+Currently I'm working on Debian using Suckless' DWM and the st terminal.
+But my config should work on other systems too.
 Anyway my .vimrc may contain some nice features that you can integrate into yours.
 
 You can use my config as-is, or better read my .vimrc, understand it, and as
 Bruce Lee would say: "Absorb what is useful, discard what is not."
 
 And this is what my config looks like:
-![gergap's Vim example screenshot][vim-gergap]
+![gergap's Vim Demo][vim-demo]
 
 Important shortctus
 -------------------
@@ -30,7 +30,7 @@ Important shortctus
 * S-F3: Disables spellcheck.
 * F4: Switches between header and corresponding source file.
 * S-F4: Like F4, but opens the counterpart in a vertical split.
-* F5: Creates/updates ctags file in the current directory.
+* F5: Creates/updates ctags (use git ctags, see https://tbaggery.com/2011/08/08/effortless-ctags-with-git.html)
 * F6: Creates doxygen comment for the current function.
 * F7: Builds using :make
 * S-F7: Clean build using :make clean all
@@ -39,6 +39,11 @@ Important shortctus
 * S-F12: Opens definition in vertical split view.
 * M-Down: Next typo (spellchecking)
 * M-Up:   Previous typo (spellchecking)
+
+Note, that I've changed a while ago from a German keyboard to US keyboard,
+simply because all programming characters like e.g. `[]{}/\'"` are easily accessisble.
+This also means that I don't need F12 anymore, because Vim's default `CTRL-]` is more handy.
+I just kept it, because I have no other use for it at the moment.
 
 Special keys in vimdiff mode
 ----------------------------
@@ -51,19 +56,26 @@ Special keys in vimdiff mode
 Plugins
 -------
 
-My config makes use of some great vim plugins for coders. Just call the `install_plugins.sh` script to install 'em
-all.
+Vim should be only extended in Vim's way like the great plugins from Tim Pope.
+It makes no sense to install plugins for tasks which Vim can do out of the box.
+One example is the multiple-cursors plugin, Vim has Ctrl-V, there is no need for such a plugin.
 
-* YouCompletMe: Smart completion support including semantic C/C++ completion using clang
-* UltiSnips: Awesome snippts support. This is a must have!
-* SuperTabs: Use <tab> to complete various things (vim <c-p>, `clang_complete`, ...)
-* vim-fugitve: Git support
-* vim-airline: Powerline based on vim-script (no python)
-* Autoclose: Closes corresponding brackets ("()", "[]", "{}") without getting annoyed.
-* NerdTree: File tree for accessing files interactively
-* CtrlP: Fuzzy file open support
-* TagList: List functions, variable and macros of the current file.
+My config makes use of some great vim plugins for coders. Use `:PlugInstall` to install them.
+Vimplug as the plugin manager.
 
+An incomplete list of the most important plugins
+* Tim Pope's `vim-fugitive`, `vim-surround`, `vim-unimpaired`, `vim-commentary`, and more
+* Some new text objects: `kana/vim-text-function`, `kana/vim-text-line`
+* `neoclide/coc.nvim`: This replaces YCM, and provides clang based auto-completion and more
+* `sirver/ultisnips`: Awesome snippets support. This is a must have!
+* `vim-airline`: Powerline based on vim-script (no python)
+* `Raimondi/delimitMate`: another autoclose plugin
+* `scrooloose/nerdtree`: File tree for accessing files interactively
+* `ctrlpvim/ctrlp.vim`: Fuzzy file open support
+* `majutsushi/tagbar`: List functions, variable and macros of the current file.
+* `rhysd/vim-clang-format`: Integration of clang-format to automatically reformat code
+* `gergap/vim-cmake-build`: My own plugin to work with CMake based projects (run cmake, compile, debug and more)
+* ... much more
 
 Requirements
 ------------
@@ -73,8 +85,8 @@ Requirements
 
 Now some optional parts:
 
-* clang - for clang_complete plugin (See https://github.com/Rip-Rip/clang_complete/wiki)
-* python - for some plugins like clang_complete
+* clang-format - for clang-format plugin (See https://github.com/Rip-Rip/clang_complete/wiki)
+* npm - required for Coc
 * powerline fonts - for vim-airline to display nice symbols (See https://github.com/Lokaltog/powerline-fonts)
 
 Installation
@@ -88,17 +100,15 @@ Installation
     # Note: backup any existing vim configuration before you remove your .vim folder and .vimrc file.
     rm -rf .vim .vimrc
     # symlink your new config
-    ln -s vim .vim
-    ln -s .vim/.vimrc
-    # install used plugins
-    cd vim/.vim
-    ./install_plugins.sh
+    ln -s vim/.vim
+    ln -s vim/.vimrc
     # Now enjoy the best editor on earth - vim :-)
 
 Known Issues
 ------------
 
-* S-F4 mapping does not work. I believe this is intercepted by KDE or Konsole, It may work in other terminals.
+* Some key mappings like S-F4 may not work in some terminals, because the terminal intercepts it.
 
-[vim-gergap]: https://raw.github.com/gergap/vim/master/vim-gergap.png
+[vim-demo]: https://raw.github.com/gergap/vim/master/vim-demo.gif
+[vim-demo-video]: https://raw.github.com/gergap/vim/master/vim-demo.mkv
 
