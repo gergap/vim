@@ -904,10 +904,13 @@ nnoremap <expr> <M-Right> &diff ? 'dp' : ':tabn<cr>'
 :nnoremap Y y$
 
 "====[ convert enum to string array ]=====================================================
-function! Enum2Array()
+" This uses array designators, which is C99 only
+function! Enum2ArrayC99()
     let l:autoclose=b:AutoCloseOn
     " disable autoclose
     let b:AutoCloseOn=0
+    " disable delimitMate
+    exe "DelimitMateOff"
     exe "normal! :'<,'>g/^\\s*$/d\n"
     exe "normal! :'<,'>s/\\(\\s*\\)\\([[:alnum:]_]*\\).*/\\1[\\2] = \"\\2\",/\n"
     normal `>
@@ -922,9 +925,38 @@ function! Enum2Array()
     normal `<
     " restore autoclose
     let b:AutoCloseOn=l:autoclose
+    " enable delimitMate
+    exe "DelimitMateOn"
     normal f[
 endfunction
-map <leader>e <esc>:call Enum2Array()<cr>
+
+" This does the some without array designators
+function! Enum2Array()
+    let l:autoclose=b:AutoCloseOn
+    " disable autoclose
+    let b:AutoCloseOn=0
+    " disable delimitMate
+    exe "DelimitMateOff"
+    exe "normal! :'<,'>g/^\\s*$/d\n"
+    exe "normal! :'<,'>s/\\(\\s*\\)\\([[:alnum:]_]*\\).*/\"\\2\",/\n"
+    normal `>
+    exe "normal a\n};\n"
+    normal ==
+    normal `<
+    exe "normal iconst char *[] =\n{\n"
+    " try some indentation
+    exe ":'<,'>normal =="
+    normal `>j==
+    " set the cursor at the top
+    normal `<
+    " restore autoclose
+    let b:AutoCloseOn=l:autoclose
+    " enable delimitMate
+    exe "DelimitMateOn"
+    normal f[
+endfunction
+map <leader>e <esc>:call Enum2Array()<cr>ienum_strings<esc>viw<C-G>
+map <leader>E <esc>:call Enum2ArrayC99()<cr>ienum_strings<esc>viw<C-G>
 
 "====[ python configuration ]=====================================================
 let g:ycm_python_binary_path = '/usr/bin/python3'
