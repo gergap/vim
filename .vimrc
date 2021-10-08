@@ -1011,6 +1011,19 @@ autocmd BufWritePre *.pl :%s/\s\+$//e
 :nnoremap K K<CR>
 :vnoremap K K<CR>
 
+"=====[ CCMake integration ]=====================
+" Open ccmake for current project.
+" This uses b:git_dir from vim-fugitive to find the git directory
+function! CCMake() abort
+    if exists('b:git_dir')
+        execute "silent !ccmake ".b:git_dir."/../bld"
+        execute "redraw!"
+    else
+        echom "error: b:git_dir is not set"
+    endif
+endfunction
+map <leader>cc :call CCMake()<cr>
+
 "=====[ Search folding ]=====================
 " Don't start new buffers folded
 set foldlevelstart=99
