@@ -229,7 +229,8 @@ Plug 'majutsushi/tagbar'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'SirVer/ultisnips'
 Plug 'gergap/vim-snippets'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" install yarn using `sudo npm install --global yarn`
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'yarn install --frozen-lockfile'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'vim-scripts/valgrind.vim'
 Plug 'vim-scripts/a.vim'
