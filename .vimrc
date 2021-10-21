@@ -1004,6 +1004,10 @@ augroup END
 " Show only C #includes...
 nmap <silent> <expr>  zu  FS_FoldAroundTarget('^\s*use\s\+\S.*;',{'context':1})
 
+" Load Mutt alias completion when writing mails
+au BufRead /var/tmp/mutt-* source ~/.mutt/mutt-aliases.vim
+let g:mutt_aliases_file="~/.mutt/aliases.generated"
+
 "=====[ Vimspector ]=====================
 "nmap <F5> <Plug>VimspectorContinue
 "nmap <S-F5> <Plug>VimspectorReset
