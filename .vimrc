@@ -10,8 +10,8 @@ set shiftwidth=4    " intend with 4 spaces
 set backspace=2     " make backspace working as expected
 set nowrap
 set nojoinspaces    " avoid double space after dot when joining lines
-set splitright
 set splitbelow
+set splitright
 " intend wrapped text and show the ">" symbol. The three spaces intend
 " the text, which often fits text that I write.
 exec "set showbreak=\u21AA\\ \\ \\ "
@@ -31,7 +31,7 @@ set cindent
 set cinoptions+=:0,g0
 " enable line numbers
 set number
-set relativenumber
+"set relativenumber
 set cursorline
 " enable syntax highlighting
 syntax on
@@ -1020,7 +1020,7 @@ set foldlevelstart=99
 hi! link Folded VisualNOS
 
 " Toggle on and off...
-nmap <silent> <expr>  zz  FS_ToggleFoldAroundSearch({'context':2})
+nmap <silent> <expr>  ff  FS_ToggleFoldAroundSearch({'context':2})
 
 " Show only sub defns (and maybe comments)...
 let perl_sub_pat = '^\s*\%(sub\|func\|method\|package\)\s\+\k\+'
@@ -1124,3 +1124,32 @@ nmap <leader>rn <Plug>(coc-rename)
 "" for visual mode, the visually selected text
 "xmap <Leader>di <Plug>VimspectorBalloonEval
 "
+
+function! FindTagsFile()
+    let tagsfile = findfile("tags", ".;")
+    if (!empty(tagsfile))
+        exec "set tags+=".tagsfile
+    endif
+endfunction
+exec FindTagsFile()
+
+function! SetupPerlTestCaseHighlights()
+    exe "syntax match TestCaseName /Name:/ containedin=perlComment"
+    exe "syntax match TestCaseDescription /Description:/ containedin=perlComment"
+    exe "syntax match TestCaseExpectedResult /Expected Result:/ containedin=perlComment"
+    exe "syntax match TestCaseTestItem /Test Item:/ containedin=perlComment"
+    exe "syntax match TestCasePrerequisites /Prerequisites:/ containedin=perlComment"
+    exe "syntax match TestCaseRequirements /Requirements:/ containedin=perlComment"
+    exe "highlight TestCaseKeyword ctermfg=magenta cterm=bold,italic"
+    exe "hi link TestCaseName TestCaseKeyword"
+    exe "hi link TestCaseDescription TestCaseKeyword"
+    exe "hi link TestCaseExpectedResult TestCaseKeyword"
+    exe "hi link TestCaseTestItem TestCaseKeyword"
+    exe "hi link TestCasePrerequisites TestCaseKeyword"
+    exe "hi link TestCaseRequirements TestCaseKeyword"
+endfunction
+augroup MyCommentMarkers
+    autocmd!
+    autocmd BufNewFile,BufRead *.pl,*.t call SetupPerlTestCaseHighlights()
+augroup END
+
