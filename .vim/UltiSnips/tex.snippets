@@ -189,3 +189,21 @@ responses for this service.
 % subsection $1 (end)
 endsnippet
 
+snippet testcase "add new testcase"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Test Case %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\testcase
+\begin{centering}
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+Test Name:        & $1 \\\\
+Test Items:       & $2 \\\\
+Description:      & $3 \\\\
+Requirements:     & ${4:Source or Eval SDK} \\\\
+Prerequisites:    & $5\\\\
+Test Type:        & ${6:Automatic} \\\\
+Expected Results: & $7 \\\\
+\hline
+\end{tabularx}
+\end{centering}
+$0
+endsnippet
