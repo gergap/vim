@@ -1,6 +1,7 @@
 {
     "clangd.enabled": true,
     "clangd.path": "/usr/bin/clangd",
-    "clangd.semanticHighlighting": true
+    "clangd.semanticHighlighting": true,
+    "clangd.compilationDatabaseCandidates": [ "bld" ]
 }
 
