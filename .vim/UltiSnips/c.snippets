@@ -114,9 +114,13 @@ snippet uatypedef "UA datatype definition header file" !b
 #ifndef _UABASE_${1/.*/\U$0\E/g}_H_
 #define _UABASE_${1/.*/\U$0\E/g}_H_
 
+#include <platform/platform.h>
+
 struct ua_${1:typename} {
     $0
 };
+
+UA_BEGIN_EXTERN_C
 
 void ua_$1_init(struct ua_$1 *${2:t});
 void ua_$1_clear(struct ua_$1 *$2);
@@ -124,21 +128,24 @@ void ua_$1_clear(struct ua_$1 *$2);
 int ua_$1_compare(const struct ua_$1 *a, const struct ua_$1 *b);
 int ua_$1_copy(const struct ua_$1 *dst, const struct ua_$1 *src);
 
+UA_END_EXTERN_C
+
 #endif /* _UABASE_${1/.*/\U$0\E/g}_H_ */
 endsnippet
 
 snippet uatypeimpl "UA datatype definition implementation" !b
 #include "$1.h"
-#include <string.h>
+#include <platform/memory.h>
 
 void ua_${1:typename}_init(struct ua_$1 *${2:t})
 {
-    memset($2, 0, sizeof(*$2));
+    ua_memset($2, 0, sizeof(*$2));
 }
 
 void ua_$1_clear(struct ua_$1 *$2)
 {
     ${0:/* TODO */}
+    ua_memset($2, 0, sizeof(*$2));
 }
 
 int ua_$1_compare(const struct ua_$1 *a, const struct ua_$1 *b)
