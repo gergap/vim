@@ -419,13 +419,13 @@ function! g:grammarous#hooks.on_reset(errs) abort
     nunmap <buffer><C-r>
 endfunction
 
-"====[ Ctrl-P plugin         ]===========================================
-"nnoremap <leader>t :CtrlPTag<cr>
+"====[ Tarbar plugin         ]===========================================
 nnoremap <leader>t :TagbarToggle<cr>
+nnoremap <c-p> :FZF<cr>
 
 "====[ NERDTree plugin       ]===========================================
 nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
+nnoremap <leader>o :NERDTreeFind<CR>
 
 "====[ Taglist plugin ]==================================================
 let Tlist_WinWidth = 40
