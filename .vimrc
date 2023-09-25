@@ -1,7 +1,7 @@
 "====[ gergap's Vim Configuration ]======================================
 " change this to your needs
 "========================================================================
-
+source $VIMRUNTIME/vimrc_example.vim
 "====[ some basic editor settings ]======================================
 set expandtab       " always use spaces instead of tabs
 set tabstop=8       " if there are tabs display them with 8 spaces
