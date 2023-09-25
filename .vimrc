@@ -714,6 +714,14 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
+augroup mygroup
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder.
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup END
+
 "======[ Magically build interim directories if necessary ]===================
 " This is from Damian Conway.
 function! AskQuit (msg, options, quit_option)
@@ -751,13 +759,15 @@ augroup END
 "=====[ Comfortably comment out lines ]===============================
 
 " Work out what the comment character is, by filetype...
-autocmd FileType             *sh,awk,python,perl,perl6,ruby    let b:cmt = exists('b:cmt') ? b:cmt : '#'
-autocmd FileType             vim                               let b:cmt = exists('b:cmt') ? b:cmt : '"'
-autocmd BufNewFile,BufRead   *.vim,.vimrc                      let b:cmt = exists('b:cmt') ? b:cmt : '"'
-autocmd BufNewFile,BufRead   *                                 let b:cmt = exists('b:cmt') ? b:cmt : '#'
-autocmd BufNewFile,BufRead   *.p[lm],.t                        let b:cmt = exists('b:cmt') ? b:cmt : '#'
-autocmd FileType perl setlocal iskeyword+=$
-
+augroup comments
+    autocmd!
+    autocmd FileType             *sh,awk,python,perl,perl6,ruby    let b:cmt = exists('b:cmt') ? b:cmt : '#'
+    autocmd FileType             vim                               let b:cmt = exists('b:cmt') ? b:cmt : '"'
+    autocmd BufNewFile,BufRead   *.vim,.vimrc                      let b:cmt = exists('b:cmt') ? b:cmt : '"'
+    autocmd BufNewFile,BufRead   *                                 let b:cmt = exists('b:cmt') ? b:cmt : '#'
+    autocmd BufNewFile,BufRead   *.p[lm],.t                        let b:cmt = exists('b:cmt') ? b:cmt : '#'
+    autocmd FileType perl setlocal iskeyword+=$
+augroup END
 
 " Work out whether the line has a comment then reverse that condition...
 function! ToggleComment ()
@@ -1042,10 +1052,13 @@ augroup python_files
 augroup END
 
 "====[ automatic strip trailing whitespace on write ]=====================================================
-autocmd BufWritePre *.cpp :%s/\s\+$//e
-autocmd BufWritePre *.c :%s/\s\+$//e
-autocmd BufWritePre *.h :%s/\s\+$//e
-autocmd BufWritePre *.pl :%s/\s\+$//e
+augroup strip_tailing_whitespace
+    autocmd!
+    autocmd BufWritePre *.cpp :%s/\s\+$//e
+    autocmd BufWritePre *.c :%s/\s\+$//e
+    autocmd BufWritePre *.h :%s/\s\+$//e
+    autocmd BufWritePre *.pl :%s/\s\+$//e
+augroup END
 
 " avoid pressing enter when leaving man pages
 :nnoremap K K<CR>
