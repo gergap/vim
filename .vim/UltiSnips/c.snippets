@@ -197,6 +197,87 @@ pthread_create(&thread_id, ${1:&attr}, ${2:thread_routine}, ${3:NULL});
 $0
 endsnippet
 
+snippet service "Service wrapper"
+int uasession_${1:name}(struct ua_requestheader *head, struct ua_$1request *req, struct uasession_msg_ctxt *ctxt)
+{
+    int ret = UA_EBAD;
+    struct uaprovider_$1_ctx *ctx;
+    struct ua_$1response *res;
+    int32_t i;
+
+    TRACE_DEBUG(TRACE_FAC_SESSION, "%s\n", __func__);
+
+    ctxt->req_head = head;
+    ctxt->req_clear = (req_clear_func_t) ua_$1request_clear;
+    ctxt->res_clear = (res_clear_func_t) ua_$1response_clear;
+
+    /* check if there is anything to do */
+    if (req->num_nodes <= 0) {
+        ctxt->res_head->service_result = UA_SCBADNOTHINGTODO;
+        goto out1;
+    }
+    /* check operation limits */
+    if (uaserver_check_operation_limit(UASERVER_OPLIMIT_MAX_NODES_PER_READ, req->num_nodes)) {
+        ctxt->res_head->service_result = UA_SCBADTOOMANYOPERATIONS;
+        goto out1;
+    }
+
+    /* check if timestamptoreturn is valid */
+    if (req->ts != UA_TIMESTAMPSTORETURN_BOTH &&
+        req->ts != UA_TIMESTAMPSTORETURN_SERVER &&
+        req->ts != UA_TIMESTAMPSTORETURN_SOURCE &&
+        req->ts != UA_TIMESTAMPSTORETURN_NEITHER) {
+        ctxt->res_head->service_result = UA_SCBADTIMESTAMPSTORETURNINVALID;
+        goto out1;
+    }
+
+    /* check if max age is valid */
+    if (req->max_age < 0) {
+        ctxt->res_head->service_result = UA_SCBADMAXAGEINVALID;
+        goto out1;
+    }
+
+    /* create $1 response */
+    ctxt->res = res = IPC_ALLOC(res);
+    if (res == NULL) {
+        ctxt->res_head->service_result = UA_SCBADOUTOFMEMORY;
+        goto out1;
+    }
+    ua_$1response_init(res);
+
+    /* create result array */
+    res->results = IPC_ALLOC_ARRAY(res->results, req->num_nodes);
+    if (res->results == NULL) {
+        IPC_CLEANUP_MEM(ctxt->res);
+        ctxt->res_head->service_result = UA_SCBADOUTOFMEMORY;
+        goto out1;
+    }
+    res->num_results = req->num_nodes;
+    IPC_MEMSET_ARRAY(res->results, 0, res->num_results);
+
+    /* initialize results with badnodeidunknown in case no provider handles it */
+    for (i = 0; i < res->num_results; i++) {
+        res->results[i].status = UA_SCBADNODEIDUNKNOWN;
+    }
+
+    /* create $1 context */
+    ctx = uaprovider_$1_ctx_init(ctxt);
+    /* store $1 request */
+    ctx->req = req;
+
+    /* call all providers */
+    uaprovider_$1(ctx);
+
+    return 0;
+
+out1:
+    ua_$1request_clear(req);
+    IPC_FREE(req);
+    return ret;
+}
+endsnippet
+
+# Unit test snippets
 global !p
 def find_and_add_test(name):
     vim.command(':echom "name='+name+'"')
