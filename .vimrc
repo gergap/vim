@@ -63,8 +63,8 @@ if has("win32")
 else
     " Unix/Linux
     if has("gui_running")
-        set gfn=Hack\ NF\ 12
-        set gfn=Fantasque\ Sans\ Mono\ 16
+        set gfn=Hack\ 12
+        set gfn=FiraCode\ Medium\ 13
     else
         " console vim in 256 color terminal
         set t_Co=256
@@ -120,6 +120,22 @@ augroup VimReload
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
+
+" easymotion
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+"s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 "====[ make naughty characters visible ]=================================
 " exec "set listchars=tab:\u25B6\\ ,trail:\uB7,nbsp:~"
@@ -220,6 +236,7 @@ Plug 'gergap/vim-latexview'
 Plug 'SidOfc/mkdx'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+"Plug 'prurigro/vim-markdown-concealed'
 " C/C++ development stuff
 Plug 'gergap/vim-cmake-build'
 Plug 'rhysd/vim-clang-format'
@@ -254,6 +271,8 @@ Plug 'gergap/ShowMarks'
 " change konsole title
 "Plug 'gergap/vim-konsole'
 "Plug 'vim-scripts/calendar.vim--Matsumoto'
+Plug 'pprovost/vim-ps1'
+Plug 'OmniSharp/omnisharp-vim'
 call plug#end()
 
 "=====[ color scheme ]============================
@@ -444,7 +463,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_perl_checkers = ['perl']
@@ -475,12 +494,13 @@ let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
 let g:AutoCloseExpandSpace = 0
 
 "====[ UltiSnips plugin ]================================================
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-let g:UltiSnipsEditSplit="horizontal"
-let g:UltiSnipsListSnippets="<c-e>"
-let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', '~/.vim/plugged/vim-snippets', 'UltiSnips']
+let g:UltiSnipsExpandTrigger       = "<tab>"
+let g:UltiSnipsListSnippets        = "<c-tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
+let g:UltiSnipsEditSplit           = "horizontal"
+let g:UltiSnipsSnippetDirectories  = ['~/.vim/UltiSnips', 'UltiSnips']
+inoremap <c-x><c-k> <c-x><c-k>
 
 function! g:UltiSnips_Complete()
   call UltiSnips#ExpandSnippet()
@@ -507,16 +527,17 @@ function! g:UltiSnips_Reverse()
 endfunction
 
 
-if !exists("g:UltiSnipsJumpForwardTrigger")
-  let g:UltiSnipsJumpForwardTrigger = "<tab>"
-endif
+"if !exists("g:UltiSnipsJumpForwardTrigger")
+"  let g:UltiSnipsJumpForwardTrigger = "<tab>"
+"endif
+"
+"if !exists("g:UltiSnipsJumpBackwardTrigger")
+"  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"endif
+"
+"au InsertEnter * exec "inoremap <silent> ".g:UltiSnipsExpandTrigger." <C-R>=g:UltiSnips_Complete()<cr>"
+"au InsertEnter * exec "inoremap <silent> ".g:UltiSnipsJumpBackwardTrigger." <C-R>=g:UltiSnips_Reverse()<cr>"
 
-if !exists("g:UltiSnipsJumpBackwardTrigger")
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-endif
-
-au InsertEnter * exec "inoremap <silent> ".g:UltiSnipsExpandTrigger." <C-R>=g:UltiSnips_Complete()<cr>"
-au InsertEnter * exec "inoremap <silent> ".g:UltiSnipsJumpBackwardTrigger." <C-R>=g:UltiSnips_Reverse()<cr>"
 
 "====[ resize split windows ]============================================
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
@@ -538,6 +559,8 @@ function! Header2()
 endfunction
 nnoremap <silent> <Leader>U :call Header1()<CR>
 nnoremap <silent> <Leader>u :call Header2()<CR>
+syntax keyword Underscore    _    contained
+syntax match   Escaped "\\?"  contains=Underscore
 
 "====[ markdown-preview ]================
 "let g:mkdp_path_to_chrome = "/usr/bin/google-chrome"
@@ -603,6 +626,9 @@ endfunc
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
@@ -720,6 +746,8 @@ autocmd FileType             vim                               let b:cmt = exist
 autocmd BufNewFile,BufRead   *.vim,.vimrc                      let b:cmt = exists('b:cmt') ? b:cmt : '"'
 autocmd BufNewFile,BufRead   *                                 let b:cmt = exists('b:cmt') ? b:cmt : '#'
 autocmd BufNewFile,BufRead   *.p[lm],.t                        let b:cmt = exists('b:cmt') ? b:cmt : '#'
+autocmd FileType perl setlocal iskeyword+=$
+
 
 " Work out whether the line has a comment then reverse that condition...
 function! ToggleComment ()
@@ -894,7 +922,8 @@ map <leader><F7> :call CleanBuild()<CR>
 " Simple hexify/unhexify
 noremap <F8> :call <sid>Hexify()<CR>
 " Apply CoC FixIt
-map <F9> :CocFix<CR>
+map <F9> <Plug>(coc-fix-current)
+"map <F9> :make run<CR>
 " remove trailing spaces
 map <F10> :%s/\s\+$//<CR>
 " goto definition with F12
@@ -1137,7 +1166,6 @@ nmap <leader>rn <Plug>(coc-rename)
 "nmap <Leader>di <Plug>VimspectorBalloonEval
 "" for visual mode, the visually selected text
 "xmap <Leader>di <Plug>VimspectorBalloonEval
-"
 
 function! FindTagsFile()
     let tagsfile = findfile("tags", ".;")
@@ -1167,3 +1195,22 @@ augroup MyCommentMarkers
     autocmd BufNewFile,BufRead *.pl,*.t call SetupPerlTestCaseHighlights()
 augroup END
 
+function! LoadLogFile()
+    set background=dark
+    exe ":AnsiEsc"
+endfunction
+
+augroup VimAutoAnsiEsc
+    autocmd!
+    autocmd BufRead *.log call LoadLogFile()
+    autocmd BufRead log.txt call LoadLogFile()
+augroup END
+
+" name: Function name to add
+function! RegisterTest(name)
+    let save_pos = getpos(".")
+    call search("register_tests")
+    normal! j%
+    exe ":normal! OUREGISTER_TEST(test_".a:name.");"
+    call setpos(".", save_pos)
+endfunction
