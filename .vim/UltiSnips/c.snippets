@@ -196,3 +196,50 @@ snippet pthread "Description"
 pthread_create(&thread_id, ${1:&attr}, ${2:thread_routine}, ${3:NULL});
 $0
 endsnippet
+
+global !p
+def find_and_add_test(name):
+    vim.command(':echom "name='+name+'"')
+    vim.command(':au cursorhold <buffer> ++once call RegisterTest("'+name+'")')
+endglobal
+
+post_jump "if snip.tabstop == 0: find_and_add_test(snip.tabstops[1].current_text)"
+snippet test "test function" bA
+void test_${1:name}(void)
+{
+    $0
+}
+endsnippet
+
+snippet utest "unit test main template" b
+#include <testlib.h>
+
+$0
+
+void test_init(void)
+{
+    ${2:// TODO}
+}
+
+void test_cleanup(void)
+{
+    ${3:// TODO}
+}
+
+void register_tests(void)
+{
+    UREGISTER_NAME("${1:testname}");
+    UREGISTER_INIT(test_init);
+    UREGISTER_CLEANUP(test_cleanup);
+}
+
+UTEST_MAIN()
+endsnippet
+
+snippet Inc "system include" bA
+#include <${1:stdio}.h>
+endsnippet
+
+snippet inc "local include" bA
+#include "${1:`!p snip.rv = snip.basename`.h}"
+endsnippet
