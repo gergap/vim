@@ -431,8 +431,12 @@ let Tlist_Compact_Format = 1
 "====[ Tagbar plugin ]==================================================
 let g:tagbar_autoshowtag = 1
 let g:tagbar_autopreview = 0
-let g:tagbar_silent = 0
-autocmd VimEnter * nested :call tagbar#autoopen(1)
+let g:tagbar_silent = 1
+"let g:tagbar_ctags_options = ['./ctag-options']
+augroup Tagbar_group
+    autocmd!
+    autocmd VimEnter * nested :call tagbar#autoopen(1)
+augroup END
 
 "====[ airline ]=========================================================
 " use powerline fonts to show beautiful symbols
