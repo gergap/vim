@@ -263,8 +263,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'yarn install --frozen-loc
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'vim-scripts/valgrind.vim'
 Plug 'vim-scripts/a.vim'
-Plug 'vim-syntastic/syntastic'
-Plug 'airblade/vim-gitgutter'
+"Plug 'vim-syntastic/syntastic'
+"Plug 'airblade/vim-gitgutter'
 " Rust Developement
 Plug 'rust-lang/rust.vim'
 " Python Developement
@@ -461,23 +461,23 @@ command! Q q
 command! Qw qw
 
 "====[ Syntastic plugin ]================================================
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_perl_checkers = ['perl']
-let g:syntastic_enable_perl_checker = 1
-let g:syntastic_python_checkers = ['python', 'pylint']
-let g:syntastic_python_pylint_exec = '/usr/bin/pylint3'
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_style_error_symbol = '✠'
-let g:syntastic_warning_symbol = '∆'
-let g:syntastic_style_warning_symbol = '≈'
-let g:syntastic_enable_balloons = 1
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_perl_checkers = ['perl']
+"let g:syntastic_enable_perl_checker = 1
+"let g:syntastic_python_checkers = ['python', 'pylint']
+"let g:syntastic_python_pylint_exec = '/usr/bin/pylint3'
+"let g:syntastic_error_symbol = '✗'
+"let g:syntastic_style_error_symbol = '✠'
+"let g:syntastic_warning_symbol = '∆'
+"let g:syntastic_style_warning_symbol = '≈'
+"let g:syntastic_enable_balloons = 1
 
 "====[ Git Gutter plugin ]======================================================
 " Use lower prio than YCM errors
