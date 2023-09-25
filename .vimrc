@@ -210,6 +210,8 @@ Plug 'christoomey/vim-tmux-navigator'
 " Wiki plugin
 Plug 'vimwiki/vimwiki'
 "Plug 'Yggdroot/indentLine'
+" faster search using ripgrep
+Plug 'jremmen/vim-ripgrep'
 " ---------------------------------------
 " color schemes
 "Plug 'gergap/gergap'
