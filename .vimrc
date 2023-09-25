@@ -77,13 +77,13 @@ endif
 " Generic GVim settings
 if has("gui_running")
     " disable all this GUIs nonesense to make it less distracting
-    set guioptions-=m
-    set guioptions-=T
-    set guioptions-=L
-    set guioptions-=l
-    set guioptions-=R
-    set guioptions-=r
-    set guioptions-=b
+    set guioptions-=m " no menubar
+    set guioptions-=T " no toolbar
+    set guioptions-=L " no left-hand scrollbar when there is a vertically split
+    set guioptions-=l " no left-hand scrollbar is always present
+    set guioptions-=R " no right-hand scrollbar when there is a vertically split window
+    set guioptions-=r " no right-hand scrollbar is always present
+    set guioptions-=b " no bottom scrollbar
 endif
 " use intelligent file completion like in the bash
 set wildmode=longest:full
