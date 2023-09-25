@@ -146,8 +146,9 @@ map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 "====[ make naughty characters visible ]=================================
-" exec "set listchars=tab:\u25B6\\ ,trail:\uB7,nbsp:~"
-" set list
+exec "set listchars=tab:\u25B6\\ ,trail:\uB7,nbsp:~"
+set list
+match SpecialChar /\t/
 
 "=====[ Allow saving of files with sudo ]================================
 cmap w!! w !sudo tee > /dev/null %
