@@ -1106,19 +1106,6 @@ nmap <silent> <expr>  zu  FS_FoldAroundTarget('^\s*use\s\+\S.*;',{'context':1})
 au BufRead /var/tmp/mutt-* source ~/.mutt/mutt-aliases.vim
 let g:mutt_aliases_file="~/.mutt/aliases.generated"
 
-"=====[ Vimspector ]=====================
-"nmap <F5> <Plug>VimspectorContinue
-"nmap <S-F5> <Plug>VimspectorReset
-"nmap <leader><F5> <Plug>VimspectorRunToCursor
-"nmap <F9> <Plug>VimspectorToggleBreakpoint
-"nmap <F10> <Plug>VimspectorStepOver
-"nmap <F11> <Plug>VimspectorStepInto
-"nmap <F12> <Plug>VimspectorStepOut
-"" for normal mode - the word under the cursor
-"nmap <Leader>di <Plug>VimspectorBalloonEval
-"" for visual mode, the visually selected text
-"xmap <Leader>di <Plug>VimspectorBalloonEval
-
 function! FindTagsFile()
     let tagsfile = findfile("tags", ".;")
     if (!empty(tagsfile))
@@ -1166,3 +1153,10 @@ function! RegisterTest(name)
     exe ":normal! OUREGISTER_TEST(test_".a:name.");"
     call setpos(".", save_pos)
 endfunction
+
+packadd termdebug
+nmap <F9> :Break<cr>
+nmap <F10> :Over<cr>
+nmap <F11> :Step<cr>
+nmap <F12> :Finish<cr>
+nmap <S-F12> :Until<cr>
