@@ -1154,6 +1154,11 @@ function! RegisterTest(name)
     call setpos(".", save_pos)
 endfunction
 
+augroup MyTT2
+    autocmd!
+    autocmd BufNewFile,BufRead *.tt2 set filetype=tt2
+augroup END
+
 packadd termdebug
 nmap <F9> :Break<cr>
 nmap <F10> :Over<cr>
