@@ -1154,6 +1154,15 @@ function! RegisterTest(name)
     call setpos(".", save_pos)
 endfunction
 
+" name: Function name to add
+function! RegisterDTTest(name)
+    let save_pos = getpos(".")
+    call search("register_tests")
+    normal! j%
+    exe ":normal! OUREGISTER_DATADRIVEN_TEST(test_".a:name.", test_".a:name."_data);"
+    call setpos(".", save_pos)
+endfunction
+
 augroup MyTT2
     autocmd!
     autocmd BufNewFile,BufRead *.tt2 set filetype=tt2

@@ -277,21 +277,57 @@ out1:
 }
 endsnippet
 
+snippet Inc "system include" bA
+#include <${1:stdio}.h>
+endsnippet
+
+snippet inc "local include" bA
+#include "${1:`!p snip.rv = snip.basename`.h}"
+endsnippet
+
+########################
 # Unit test snippets
 global !p
 def find_and_add_test(name):
-    vim.command(':echom "name='+name+'"')
     vim.command(':au cursorhold <buffer> ++once call RegisterTest("'+name+'")')
 endglobal
 
+global !p
+def find_and_add_dttest(name):
+    vim.command(':au cursorhold <buffer> ++once call RegisterDTTest("'+name+'")')
+endglobal
+
+# Regular unit test function
 post_jump "if snip.tabstop == 0: find_and_add_test(snip.tabstops[1].current_text)"
-snippet test "test function" bA
+snippet test "Test Function" b
 void test_${1:name}(void)
 {
     $0
 }
 endsnippet
 
+# datadriven unit test function
+post_jump "if snip.tabstop == 0: find_and_add_dttest(snip.tabstops[1].current_text)"
+snippet dttest "Data Driven Test Function" b
+void test_${1:name}_data(void)
+{
+    /* defines columns of datasets */
+    testlib_add_column("${2:col1}", "%s");
+    testlib_add_column("${3:col2}", "%i");
+
+    /* define test vectors */
+    testlib_add_row("dataset1", "foo", 0);
+    testlib_add_row("dataset2", "bar", 1);
+}
+
+void test_$1(void)
+{
+    const char * $2 = testlib_fetch("$2");
+    int $3 = testlib_fetch_int("$3");
+
+    $0
+}
+endsnippet
 snippet utest "unit test main template" b
 #include <testlib.h>
 
@@ -317,10 +353,3 @@ void register_tests(void)
 UTEST_MAIN()
 endsnippet
 
-snippet Inc "system include" bA
-#include <${1:stdio}.h>
-endsnippet
-
-snippet inc "local include" bA
-#include "${1:`!p snip.rv = snip.basename`.h}"
-endsnippet
