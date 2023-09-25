@@ -264,20 +264,11 @@ Plug 'vim-scripts/valgrind.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'airblade/vim-gitgutter'
-"Plug 'LucHermitte/lh-vim-lib'
-"Plug 'LucHermitte/lh-tags'
-"Plug 'LucHermitte/lh-dev'
-"Plug 'LucHermitte/lh-style'
-"Plug 'LucHermitte/lh-brackets'
-"Plug 'LucHermitte/vim-refactor'
-"Plug 'puremourning/vimspector'
 " Rust Developement
 Plug 'rust-lang/rust.vim'
 " Python Developement
 Plug 'davidhalter/jedi-vim'
 " obsolete stuff, just for reference
-"Plug 'Valloric/YouCompleteMe'
-"Plug 'tenfyzhong/CompleteParameter.vim'
 Plug 'gergap/ShowMarks'
 " change konsole title
 "Plug 'gergap/vim-konsole'
