@@ -204,7 +204,7 @@ Plug 'kana/vim-textobj-line'
 " handle swap files in a smart way (Damian Convay)
 Plug 'gioele/vim-autoswap'
 " interact with tmux (used by cmake-build)
-Plug 'benmills/vimux'
+Plug 'preservim/vimux'
 " effortless navigation between vim and tmux panes
 Plug 'christoomey/vim-tmux-navigator'
 " Wiki plugin
