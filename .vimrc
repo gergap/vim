@@ -97,10 +97,15 @@ set formatprg=par-format\ -w78
 set title titlestring=
 
 "====[ setup my CUPS printer ]===========================================
+let hostname = substitute(system('hostname'), '\n', '', '')
 " you can simply print using :ha(rdcopy)
 " this also supports an optional range argument, see :h ha
 " use `lpstat -p -d to list printers`
-set pdev=HP_LaserJet_5200
+if hostname == 'ws-gergap'
+    set pdev=Brother_MFC_9142CDN
+else
+    set pdev=HP_LaserJet_5200
+endif
 
 "====[ map leader ]======================================================
 let mapleader="\\"
