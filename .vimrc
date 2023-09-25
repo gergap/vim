@@ -63,12 +63,15 @@ if has("win32")
 else
     " Unix/Linux
     if has("gui_running")
-        set gfn=Hack\ 12
-        set gfn=FiraCode\ Medium\ 13
+        "set gfn=Hack\ 11
+        "set gfn=Hack\ for\ Powerline\ 11
+        set gfn=FiraCode\ 12
+        set guiligatures=!\"#$%&()*+-./:<=>?@[]^_{\|~
     else
         " console vim in 256 color terminal
         set t_Co=256
     endif
+    set mouse=n
 endif
 
 " Generic GVim settings
