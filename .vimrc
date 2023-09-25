@@ -331,7 +331,7 @@ set noshowmode
 " disable betterdigraph
 "let loaded_betterdigraphs = 1
 "inoremap <expr>  <C-K>   HUDG_GetDigraph()
-inoremap <expr>  <C-K>   BDG_GetDigraph()
+"inoremap <expr>  <C-K>   BDG_GetDigraph()
 
 "=====[ Make arrow keys move visual blocks around ]======================
 runtime plugin/dragvisuals.vim
