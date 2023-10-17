@@ -1170,6 +1170,8 @@ augroup MyTT2
     autocmd BufNewFile,BufRead *.tt2 set filetype=tt2
 augroup END
 
+nmap <leader>ff :Rg<CR>
+
 packadd termdebug
 nmap <F9> :Break<cr>
 nmap <F10> :Over<cr>
