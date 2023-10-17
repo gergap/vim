@@ -200,6 +200,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-function'
 Plug 'kana/vim-textobj-line'
+Plug 'editorconfig/editorconfig-vim'
 " Basic plugins end
 " ---------------------------------------
 " handle swap files in a smart way (Damian Convay)
