@@ -317,7 +317,7 @@ let g:VimuxOrientation = "h"
 
 "====[ fugitive vim plugin ]=============================================
 set laststatus=2
-"set statusline=%{GitBranch()}
+command! GStatus Git status
 
 "====[ DoxygenToolKit ]==================================================
 " Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
