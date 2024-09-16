@@ -1182,3 +1182,5 @@ let g:ollama_fim_prefix = '<｜fim▁begin｜>'
 let g:ollama_fim_suffix = '<｜fim▁hole｜>'
 let g:ollama_fim_middle = '<｜fim▁end｜>'
 
+" toggle inlayhint
+command! ToggleHints CocCommand document.toggleInlayHint
