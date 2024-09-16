@@ -13,6 +13,7 @@ set nojoinspaces    " avoid double space after dot when joining lines
 set splitbelow
 set splitright
 set noundofile
+set clipboard=unnamedplus " use system clipboard by default
 " intend wrapped text and show the ">" symbol. The three spaces intend
 " the text, which often fits text that I write.
 exec "set showbreak=\u21AA\\ \\ \\ "
