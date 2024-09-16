@@ -217,9 +217,11 @@ Plug 'jremmen/vim-ripgrep'
 " ---------------------------------------
 " color schemes
 "Plug 'gergap/gergap'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'altercation/vim-colors-solarized'
-Plug 'lifepillar/vim-solarized8'
+"Plug 'NLKNguyen/papercolor-theme'
+"Plug 'sainnhe/everforest'
+Plug 'gergap/vim-monokai'
+"Plug 'altercation/vim-colors-solarized'
+"Plug 'lifepillar/vim-solarized8'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'asenac/vim-airline-loclist'
@@ -281,9 +283,18 @@ Plug 'OmniSharp/omnisharp-vim'
 call plug#end()
 
 "=====[ color scheme ]============================
-colorscheme solarized8_flat
-"colorscheme solarized
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+set signcolumn=no " disable for now
 let g:airline_theme='bubblegum'
+"colorscheme solarized8_flat
+colorscheme monokai
 
 "=====[ valgrind plugin ]============================
 let g:valgrind_arguments='--leak-check=yes --num-callers=500 --show-leak-kinds=all --track-origins=yes'
