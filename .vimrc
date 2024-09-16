@@ -260,11 +260,11 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'majutsushi/tagbar'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'SirVer/ultisnips'
 Plug 'gergap/vim-snippets'
 " install yarn using `sudo npm install --global yarn`
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'yarn install --frozen-lockfile'}
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'yarn install --frozen-lockfile'}
+"Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'vim-scripts/valgrind.vim'
 Plug 'vim-scripts/a.vim'
 "Plug 'vim-syntastic/syntastic'
@@ -513,51 +513,36 @@ let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
 " which conflicts with Vim abbreviation
 let g:AutoCloseExpandSpace = 0
 
-"====[ UltiSnips plugin ]================================================
-let g:UltiSnipsExpandTrigger       = "<tab>"
-let g:UltiSnipsListSnippets        = "<c-tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
-let g:UltiSnipsEditSplit           = "horizontal"
-let g:UltiSnipsSnippetDirectories  = ['~/.vim/UltiSnips', 'UltiSnips']
-inoremap <c-x><c-k> <c-x><c-k>
+"====[ coc-snippets plugin ]================================================
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
 
-function! g:UltiSnips_Complete()
-  call UltiSnips#ExpandSnippet()
-  if g:ulti_expand_res == 0
-    if pumvisible()
-      return "\<C-n>"
-    else
-      call UltiSnips#JumpForwards()
-      if g:ulti_jump_forwards_res == 0
-        return "\<TAB>"
-      endif
-    endif
-  endif
-  return ""
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-function! g:UltiSnips_Reverse()
-  call UltiSnips#JumpBackwards()
-  if g:ulti_jump_backwards_res == 0
-    return "\<C-P>"
-  endif
-
-  return ""
-endfunction
-
-
-"if !exists("g:UltiSnipsJumpForwardTrigger")
-"  let g:UltiSnipsJumpForwardTrigger = "<tab>"
-"endif
-"
-"if !exists("g:UltiSnipsJumpBackwardTrigger")
-"  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-"endif
-"
-"au InsertEnter * exec "inoremap <silent> ".g:UltiSnipsExpandTrigger." <C-R>=g:UltiSnips_Complete()<cr>"
-"au InsertEnter * exec "inoremap <silent> ".g:UltiSnipsJumpBackwardTrigger." <C-R>=g:UltiSnips_Reverse()<cr>"
-
+let g:coc_snippet_next = '<tab>'
 
 "====[ resize split windows ]============================================
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
@@ -651,27 +636,17 @@ set nowritebackup
 set updatetime=300
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+"inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+"inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+"                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -679,11 +654,6 @@ if has('nvim')
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -710,10 +680,10 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-augroup coc_highlight
-    autocmd!
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-augroup END
+"augroup coc_highlight
+"    autocmd!
+"    autocmd CursorHold * silent call CocActionAsync('highlight')
+"augroup END
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)

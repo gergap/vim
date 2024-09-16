@@ -1,7 +1,19 @@
 {
+    "suggest.minTriggerInputLength": 4,
     "clangd.enabled": true,
     "clangd.path": "/usr/bin/clangd",
-    "clangd.semanticHighlighting": true,
-    "clangd.compilationDatabaseCandidates": [ "bld" ]
+    "clangd.semanticHighlighting": false,
+    "inlayHint.enable": true,
+    "clangd.compilationDatabaseCandidates": [ "bld" ],
+    "languageserver": {
+        "suricata": {
+            "command": "suricata-language-server",
+            "filetypes": ["suricata","hog"]
+        }
+    },
+    "snippets.ultisnips.directories": [
+        "UltiSnips",
+        ".vim/UltiSnips"
+    ]
 }
 
