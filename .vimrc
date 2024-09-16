@@ -1164,12 +1164,14 @@ augroup END
 
 nmap <leader>ff :Rg<CR>
 
-packadd termdebug
-nmap <F9> :Break<cr>
-nmap <F10> :Over<cr>
-nmap <F11> :Step<cr>
-nmap <F12> :Finish<cr>
-nmap <S-F12> :Until<cr>
+"=====[ termdebug Configuration ]=====================
+"packadd termdebug
+"nmap <F9> :Break<cr>
+"nmap <F10> :Over<cr>
+"nmap <F11> :Step<cr>
+"nmap <F12> :Finish<cr>
+"nmap <S-F12> :Until<cr>
+
 "=====[ Vim-Ollama Configuration ]=====================
 let g:ollama_enabled = 1
 " default chat model
