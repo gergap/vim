@@ -280,6 +280,8 @@ Plug 'gergap/ShowMarks'
 "Plug 'vim-scripts/calendar.vim--Matsumoto'
 Plug 'pprovost/vim-ps1'
 Plug 'OmniSharp/omnisharp-vim'
+" LLMs
+Plug 'gergap/vim-ollama'
 call plug#end()
 
 "=====[ color scheme ]============================
@@ -1159,3 +1161,23 @@ nmap <F10> :Over<cr>
 nmap <F11> :Step<cr>
 nmap <F12> :Finish<cr>
 nmap <S-F12> :Until<cr>
+"=====[ Vim-Ollama Configuration ]=====================
+let g:ollama_enabled = 1
+" default chat model
+let g:ollama_chat_model = 'llama3'
+"let g:ollama_chat_model = 'deepseek-coder-v2:16b'
+" default code completion model (Codellama)
+let g:ollama_model = 'codellama:13b-code'
+let g:ollama_model = 'codellama:7b-code'
+"let g:ollama_model = 'codellama:code'
+" Codegemma (small and fast)
+let g:ollama_model = 'codegemma:2b'
+let g:ollama_fim_prefix = '<|fim_prefix|>'
+let g:ollama_fim_middle = '<|fim_middle|>'
+let g:ollama_fim_suffix = '<|fim_suffix|>'
+" Deepseek-coder-v2
+let g:ollama_model = 'deepseek-coder-v2:16b-lite-base-q4_0'
+let g:ollama_fim_prefix = '<｜fim▁begin｜>'
+let g:ollama_fim_suffix = '<｜fim▁hole｜>'
+let g:ollama_fim_middle = '<｜fim▁end｜>'
+
