@@ -840,7 +840,15 @@ function! CreateImplementationBlock() range
 
     for line in lines
         " skip empty lines
-        if match(line, "^\s*$") != -1
+        if match(line, '^\s*$') != -1
+            continue
+        endif
+        " skip comments
+        if match(line, '\v^\s*(//|/\*)') != -1
+            continue
+        endif
+        " skip scopes
+        if match(line, '\v^\s*(protected|private|public|signals|(protected |private )?slots):') != -1
             continue
         endif
         " remove semicolon at end of line (including optional attributes)
