@@ -1038,9 +1038,9 @@ map <leader>E <esc>:call Enum2ArrayC99()<cr>ienum_strings<esc>viw<C-G>
 let g:ycm_python_binary_path = '/usr/bin/python3'
 augroup python_files
     autocmd!
-    autocmd FileType python setlocal noexpandtab
-    autocmd FileType python set tabstop=8
-    autocmd FileType python set shiftwidth=8
+    autocmd FileType python setlocal expandtab
+    autocmd FileType python set tabstop=4
+    autocmd FileType python set shiftwidth=4
     autocmd FileType python nnoremap <buffer> <F5> :!python3 %<CR>
 augroup END
 
