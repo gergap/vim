@@ -295,7 +295,7 @@ else
   set signcolumn=yes
 endif
 set signcolumn=no " disable for now
-let g:airline_theme='bubblegum'
+let g:airline_theme='base16_monokai'
 "colorscheme solarized8_flat
 colorscheme monokai
 
@@ -1173,6 +1173,7 @@ nmap <leader>ff :Rg<CR>
 "nmap <S-F12> :Until<cr>
 
 "=====[ Vim-Ollama Configuration ]=====================
+let g:ollama_host = 'http://tux:11434'
 let g:ollama_enabled = 1
 " default chat model
 let g:ollama_chat_model = 'llama3'
