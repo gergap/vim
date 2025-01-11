@@ -274,7 +274,7 @@ Plug 'vim-scripts/a.vim'
 " Rust Developement
 Plug 'rust-lang/rust.vim'
 " Python Developement
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 " obsolete stuff, just for reference
 Plug 'gergap/ShowMarks'
 " change konsole title
