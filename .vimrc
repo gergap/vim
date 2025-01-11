@@ -67,7 +67,7 @@ else
     if has("gui_running")
         "set gfn=Hack\ 11
         "set gfn=Hack\ for\ Powerline\ 11
-        set gfn=FiraCode\ 12
+        set gfn=Hack\ 13
         set guiligatures=!\"#$%&()*+-./:<=>?@[]^_{\|~
     else
         " console vim in 256 color terminal
@@ -161,12 +161,12 @@ cmap w!! w !sudo tee > /dev/null %
 " Trick from Damian Conway: highlight 81 columns,
 " but only for lines that are too long.
 " this is less intrusive than showing it for all lines
-highlight ColorColumn ctermbg=235
+"highlight ColorColumn ctermbg=235
 "call matchadd('ColorColumn', '\%81v', 100)
 " I also find this highlight bubbles distracting, so I now use another trick.
 " I use a complete color area with just a slightly different background color.
 " The color is configured in my wombat256 color scheme.
-execute "set colorcolumn=" . join(range(121,220), ',')
+"execute "set colorcolumn=" . join(range(121,250), ',')
 
 "====[ enable higlight search ]==========================================
 set incsearch
@@ -218,11 +218,11 @@ Plug 'jremmen/vim-ripgrep'
 " ---------------------------------------
 " color schemes
 "Plug 'gergap/gergap'
-"Plug 'NLKNguyen/papercolor-theme'
+Plug 'NLKNguyen/papercolor-theme'
 "Plug 'sainnhe/everforest'
 Plug 'gergap/vim-monokai'
 "Plug 'altercation/vim-colors-solarized'
-"Plug 'lifepillar/vim-solarized8'
+Plug 'lifepillar/vim-solarized8'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'asenac/vim-airline-loclist'
@@ -258,6 +258,7 @@ Plug 'gergap/vim-cmake-build'
 Plug 'rhysd/vim-clang-format'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
 Plug 'majutsushi/tagbar'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -294,10 +295,25 @@ if has("nvim-0.5.0") || has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
-set signcolumn=no " disable for now
+"set signcolumn=no " disable for now
+set signcolumn=yes
 let g:airline_theme='base16_monokai'
-"colorscheme solarized8_flat
-colorscheme monokai
+"colorscheme PaperColor
+if has("gui_running")
+    colorscheme solarized8
+    set background=light
+    let g:airline_theme='sol'
+else
+"    colorscheme monokai
+"    set background=dark
+    colorscheme solarized8_flat
+    set background=light
+    let g:airline_theme='sol'
+endif
+" Customize the style of the vertical split
+set fillchars=vert:\│,fold:-,eob:~,lastline:@
+hi VertSplit ctermfg=6 ctermbg=NONE
+hi TagbarSignature ctermfg=106 ctermbg=NONE cterm=NONE
 
 "=====[ valgrind plugin ]============================
 let g:valgrind_arguments='--leak-check=yes --num-callers=500 --show-leak-kinds=all --track-origins=yes'
