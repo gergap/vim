@@ -450,6 +450,11 @@ nnoremap <c-p> :FZF<cr>
 "====[ NERDTree plugin       ]===========================================
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>o :NERDTreeFind<CR>
+" Open NERDTree automatically
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
+" Close when NERDTree is last window
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "====[ Taglist plugin ]==================================================
 let Tlist_WinWidth = 40
