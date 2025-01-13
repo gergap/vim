@@ -1,6 +1,6 @@
 snippet project "CMake C project" !b
 project(${1:name} C)
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
 add_executable($1 main.c)
 
@@ -9,7 +9,7 @@ endsnippet
 
 snippet cppproject "CMake C++ project" !b
 project(${1:name})
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
 add_executable($1 main.cpp)
 
@@ -18,7 +18,7 @@ endsnippet
 
 snippet qtproj "CMake Qt project" b
 project(${1:name})
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

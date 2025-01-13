@@ -207,3 +207,30 @@ Expected Results: & $7 \\\\
 \end{centering}
 $0
 endsnippet
+
+snippet brief "LaTeX DIN-Brief"
+\documentclass[12pt,a4paper]{dinbrief}
+\usepackage{ngerman}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+\begin{document}
+\subject{Betreff}
+
+\signature{${1:Max Mustermann}}
+\backaddress{$1 $\bullet$ ${2:Straße} $\bullet$ ${3:PLZ} ${4:Stadt}}}
+\Datum{\today}
+
+\begin{letter}{${6:Firma} \\\\ ${7:Straße} \\\\ ${8:PLZ} ${9:Stadt}}}
+
+\nowindowrules
+
+\opening{Sehr geehrte Damen und Herren,}
+
+$0
+
+\closing{Mit freundlichen Grüßen}
+\end{letter}
+\end{document}
+endsnippet
