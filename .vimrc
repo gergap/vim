@@ -373,16 +373,13 @@ vmap  <expr>  <C-D>    DVB_Duplicate()
 let g:DVB_TrimWS = 1
 
 "=====[ tabularize plugin ]==============================================
-"if exists(":Tabularize")
-if 1
+if exists('g:tabular_loaded')
     nnoremap <leader>a= :Tabularize /=<cr>
     vnoremap <leader>a= :Tabularize /=<cr>
     nnoremap <leader>a: :Tabularize /:\zs<cr>
     vnoremap <leader>a: :Tabularize /:\zs=<cr>
     nnoremap <leader>a& :Tabularize /&<cr>
     vnoremap <leader>a& :Tabularize /&<cr>
-else
-    echom "Tabularize not available"
 endif
 
 " automatically invoke s:align when | is typed
