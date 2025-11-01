@@ -448,8 +448,8 @@ nnoremap <c-p> :FZF<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>o :NERDTreeFind<CR>
 " Open NERDTree automatically
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
+"autocmd VimEnter * NERDTree
+"autocmd VimEnter * wincmd p
 " Close when NERDTree is last window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -467,10 +467,10 @@ let g:tagbar_autoshowtag = 1
 let g:tagbar_autopreview = 0
 let g:tagbar_silent = 1
 "let g:tagbar_ctags_options = ['./ctag-options']
-augroup Tagbar_group
-    autocmd!
-    autocmd VimEnter * nested :call tagbar#autoopen(1)
-augroup END
+"augroup Tagbar_group
+"    autocmd!
+"    autocmd VimEnter * nested :call tagbar#autoopen(1)
+"augroup END
 
 "====[ airline ]=========================================================
 " use powerline fonts to show beautiful symbols
