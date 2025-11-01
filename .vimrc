@@ -1084,12 +1084,10 @@ augroup END
 " Open ccmake for current project.
 " This uses b:git_dir from vim-fugitive to find the git directory
 function! CCMake() abort
-    if exists('b:git_dir')
-        execute "silent !ccmake ".b:git_dir."/../bld"
-        execute "redraw!"
-    else
-        echom "error: b:git_dir is not set"
-    endif
+    let l:gitdir = FugitiveGitDir()
+    echo "l:gitdir="..l:gitdir
+    execute "silent !ccmake "..l:gitdir.."/../bld"
+    execute "redraw!"
 endfunction
 map <leader>cc :call CCMake()<cr>
 
