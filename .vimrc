@@ -525,6 +525,11 @@ command! Qw qw
 let g:gitgutter_sign_priority = 5
 
 "====[ ShowMarks plugin ]================================================
+" Verlinke ShowMarks Highlightgruppen auf sinnvolle Theme-Gruppen
+highlight! link ShowMarksHLl SignColumn
+highlight! link ShowMarksHLu SignColumn
+highlight! link ShowMarksHLo SignColumn
+highlight! link ShowMarksHLm SignColumn
 " reduce shows marks to I need. The default is
 "let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.'`^<>[]{}()\""
 let g:showmarks_include="abcdefghijklmnopqrstuvwxyz.[]<>"
