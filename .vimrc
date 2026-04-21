@@ -1216,3 +1216,18 @@ let g:ollama_fim_middle = '<｜fim▁end｜>'
 
 " toggle inlayhint
 command! ToggleHints CocCommand document.toggleInlayHint
+
+nmap <F9> <Plug>(coc-fix-current)
+
+" syntax aware spell checking
+syntax enable
+set spell
+set spelllang=en_us
+autocmd FileType c,cpp,java,python setlocal spell spellcapcheck=
+autocmd FileType c,cpp,java,python syntax spell toplevel
+syntax spell toplevel
+set spellcapcheck=
+" enable nice undercurl also in terminal (alacritty)
+hi SpellBad guisp=Red gui=undercurl ctermfg=Red cterm=undercurl
+let &t_Cs = "\e[4:3m"  " Start undercurl
+let &t_Ce = "\e[4:0m"  " Cancel underline
